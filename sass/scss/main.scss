@@ -1,0 +1,1002 @@
+@import "compass/css3";
+@import "compass/css3/user-interface";
+@import "rcm-utils";
+
+$accentColor: #ED1C24;
+$slideBColor: hsla(0, 0%, 13%, 1);
+
+html {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+}
+
+body {
+	height: 100%;
+	line-height: 1.42857143;
+	padding: 0;
+	width: 100%;
+
+	*, *:after, *:before {
+		@include box-sizing(border-box);
+	}
+}
+
+.clc-main {
+	@include display-flex;
+	@include flex-direction(column);
+	@include rcm-fill;
+}
+
+.clc-slide {
+	@include flex(0 0 auto);
+
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+
+	&-image-descriptor {
+		@include display-flex;
+		@include flex-direction(column);
+
+		border: 2px dashed;
+		bottom: 12px;
+		left: 12px;
+		padding: 12px;
+		position: absolute;
+		width: calc(100% - 24px);
+
+		&-title, &-message {
+			@include flex(0 0 auto);
+
+			position: relative;
+			width: 100%;
+		}
+
+		&-title {
+			font-family: 'proxima-nova', sans-serif;
+			font-size: 14px;
+			font-weight: 500;
+			letter-spacing: 2px;
+			text-transform: uppercase;
+		}
+
+		&-message{
+			font-family: 'proxima-nova', sans-serif;
+			font-size: 16px;
+		}
+	}
+}
+
+.clc-slide-a {
+	$footerHeight: 68px;
+	$coverColor: darken(desaturate($accentColor, 24%), 4%);
+
+	@include display-flex;
+	@include flex-direction(column);
+
+	&-content {
+		@include rcm-flex-center;
+		@include flex(1 1 auto);
+
+		height: 100%;
+		position: relative;
+		width: 100%;
+		z-index: 5;
+
+		&-background {
+			@include rcm-fill;
+
+			background-position: center;
+			background-size: cover;
+			z-index: 0;
+
+			&-video {
+				bottom: -9999px;
+				left: -9999px;
+				margin: auto;
+				min-height: 100%;
+				min-width: 100%;
+				opacity: .125;
+				position: absolute;
+				right: -9999px;
+				top: -9999px;
+			}
+		}
+	}
+
+	&-logo, &-cover-a-logo, &-cover-b-logo {
+		margin-bottom: .5vw;
+		position: relative;
+		width: calc(42px + 28%);
+		z-index: 5;
+	}
+
+	&-logo {
+		&-c, &-r, &-u {
+			fill: $slideBColor;
+		}
+
+		&-x {
+			fill: $accentColor;
+		}
+	}
+
+	&-tagline {
+		color: $slideBColor;
+		cursor: pointer;
+		font-family: 'futura-pt', sans-serif;
+		font-size: 1.5vw;
+		font-weight: 700;
+		height: 4vw;
+		left: 0;
+		letter-spacing: .48vw;
+		line-height: 1.5vw;
+		margin: auto;
+		position: absolute;
+		right: 0;
+		text-align: center;
+		text-transform: uppercase;
+		top: calc(50% + 4.75vw);
+		user-select: none;
+		width: 31.25%;
+
+		&-item {
+			@include rcm-fill;
+
+			pointer-events: none;
+			user-select: none;
+		}
+	}
+
+	&-signin-button, &-signup-button {
+		cursor: pointer;
+		position: absolute;
+		top: 12px;
+		height: 44px;
+		width: 170px;
+
+		&-text {
+			@include rcm-flex-center;
+			@include rcm-fill;
+
+			color: hsla(0, 0%, 54%, 1);
+			font-family: 'azo-sans-web', sans-serif;
+			font-size: 14px;
+			font-weight: 500;
+			letter-spacing: 1.5px;
+			z-index: 5;
+
+			&-hovered {
+				color: #FFF;
+			}
+		}
+
+		&-background {
+			@include rcm-fill;
+
+			opacity: 0;
+			z-index: 4;
+		}
+
+		&-outline {
+			@include rcm-fill;
+
+			z-index: 0;
+
+			&-line {
+				fill: none;
+				stroke-width: 1px;
+			}
+		}
+	}
+
+	&-signin-button {
+		right: 194px;
+
+		&-background {
+			background-color: hsla(0, 0%, 68%, 1);
+		}
+
+		&-outline-line {
+			stroke: hsla(0, 0%, 68%, 1);
+		}
+	}
+
+	&-signup-button {
+		right: 12px;
+
+		&-text {
+			color: $accentColor;
+		
+			&-hovered {
+				color: #FFF;
+			}
+		}
+
+		&-background {
+			background-color: $accentColor;
+		}
+
+		&-outline-line {
+			stroke: $accentColor;
+		}
+	}
+
+	&-footer {
+		@include flex(0 0 auto);
+		@include display-flex;
+		@include align-items(center);
+
+		background-color: $slideBColor;
+		height: $footerHeight;
+		padding: 12px;
+		position: relative;
+		width: 100%;
+		z-index: 8;
+
+		&-button {
+			$buttonColor: desaturate(darken($accentColor, 0%), 8%);
+
+			@include display-flex;
+			@include flex-direction(column);
+			@include flex(0 0 auto);
+
+			background-color: $buttonColor;
+			color: #FFF;
+			cursor: pointer;
+			height: 100%;
+			margin-left: auto;
+
+			&-text {
+				@include flex(1 1 auto);
+				@include display-flex;
+				@include align-items(center);
+
+				font-family: 'azo-sans-web', sans-serif;
+				font-size: 14px;
+				font-weight: 500;
+				letter-spacing: 1.5px;
+				padding: 0 24px;
+				position: relative;
+
+				i {
+					font-size: 18px;
+					margin-right: 4px;
+					margin-left: -6px;
+				}
+			}
+
+			&-hovered {
+				background-color: #FFF;
+				color: $buttonColor;
+			}
+
+			&-edge {
+				@include flex(0 0 auto);
+
+				background-color: darken(desaturate($buttonColor, 12%), 12%);
+				height: 3px;
+				position: relative;
+				width: 100%;
+
+				&-hovered {
+					background-color: hsla(0, 0%, 78%, 1);
+				}
+			}
+		}
+	}
+
+	&-cover-a {
+		@include rcm-fill;
+		@include rcm-flex-center;
+
+		background-color: $coverColor; 
+		overflow: hidden;
+		z-index: 10;
+
+		&-content {
+			@include rcm-fill;
+			@include rcm-flex-center;
+		}
+
+		&-spotter {
+			@include border-radius(50%);
+
+			background-color: #000;
+			height: 8px;
+			left: -4px;
+			position: absolute;
+			top: -4px;
+			width: 8px;
+			z-index: 10;
+		}
+
+		&-lines {
+			@include rcm-fill;
+
+			z-index: 7;
+
+			path {
+				stroke: #FFF;
+				fill: none;
+			}
+		}
+
+		&-logo {
+			margin-bottom: $footerHeight;
+
+			&-x {
+				fill: #FFF;
+
+				&-a, &-b {
+					opacity: 0;
+				}
+			}
+		}
+	}
+
+	&-cover-b {
+		@include rcm-fill;
+		@include rcm-flex-center;
+
+		background-color: $slideBColor; 
+		overflow: hidden;
+		z-index: 6;
+
+		&-content {
+			@include rcm-fill;
+			@include rcm-flex-center;
+		}
+
+		&-logo {
+			margin-bottom: $footerHeight;
+
+			&-c, &-r, &-u {
+				fill: #FFF;
+			}
+
+			&-x {
+				fill: $coverColor;
+			}
+		}
+	}
+}
+
+.clc-slide-b {
+	@include rcm-flex-center;
+
+	background-color: $slideBColor;
+
+	&-cloud {
+		margin: auto;
+		position: absolute;
+
+		&-body {
+			fill: #F5F5F5;
+		}
+
+		&-shading {
+			fill: #EDEDED;
+		}
+
+		&-a {
+			right: calc(16px + 6%);
+			top: 20px;
+			bottom: 0;
+			height: calc(8px + 3.5%);
+		}
+
+		&-b {
+			bottom: 0;
+			height: calc(8px + 5.5%);
+			right: calc(16px + 26%);
+			top: calc(32% + 16px);
+		}
+
+		&-c {
+			bottom: 0;
+			height: calc(8px + 10%);
+			right: calc(12px + 4%);
+			top: calc(76% + 16px);
+			z-index: 6;
+		}
+	}
+
+	&-graphic {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		height: calc(96px + 55%);
+		z-index: 4;
+
+		&-mountain {
+			fill: hsl(218, 1%, 36%);
+
+			&-shading {
+				fill: hsl(218, 2%, 30%);
+			}
+		}
+
+		&-rock {
+			$rockColor: $accentColor;
+
+			fill: $rockColor;
+
+			&-shading {
+				fill: desaturate(darken($rockColor, 12%), 12%);
+			}
+		}
+
+		&-man {
+			fill: hsla(218, 6%, 38%, 1);
+
+			&-shading {
+				fill: hsla(218, 4%, 28%, 1);
+			}
+
+			&-shoes {
+				fill: hsla(218, 6%, 36%, 1);
+			}
+
+			&-hands {
+				fill: hsla(24, 54%, 82%, 1);
+			}
+
+			&-head {
+				fill: hsla(24, 54%, 82%, 1);
+			}
+
+			&-nose {
+				fill: hsla(24, 18%, 36%, 1);
+			}
+
+			&-hair {
+				fill: hsla(32, 48%, 34%, 1);
+			}
+
+			&-tie {
+				fill: #FFF;
+			}
+		}
+	}
+
+	&-message {
+		color: hsla(0, 0%, 60%, 1);
+		font-family: 'futura-pt', sans-serif;
+		font-size: 5.25vw;
+		font-weight: 500;
+		padding: 36px;
+		z-index: 5;
+	}
+}
+
+.clc-slide-c {
+	$slideColor: lighten(desaturate($accentColor, 28%), 4%);
+
+	@include rcm-flex-center;
+
+	background-color: $slideColor;
+
+	&-heart {
+		$heartColor: desaturate(darken($slideColor, 8%), 10%);
+
+		bottom: 0;
+		left: 0;
+		margin: auto;
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: calc(16px + 42%);
+
+		&-body {
+			fill: $heartColor
+		}
+
+		&-shading {
+			fill: desaturate(darken($heartColor, 2%), 1%);
+		}
+
+		&-wrapper {
+			@include rcm-fill;
+			@include rcm-flex-center;
+		}
+	}
+
+	&-message {
+		color: #FFF;
+		font-family: 'futura-pt', sans-serif;
+		font-size: 5.25vw;
+		font-weight: 500;
+		padding: 36px;
+		text-align: center;
+		z-index: 5;
+
+		&-soft {
+			display: inline;
+			color: desaturate(lighten($slideColor, 32%), 6%);
+		}
+	}
+}
+
+.clc-slide-d {
+	$slideColor: lighten(desaturate($accentColor, 28%), 4%);
+
+	@include rcm-flex-center;
+
+	background-color: hsla(0, 0%, 94%, 1);
+
+	&-background {
+		height: 100%;
+		left: -9999px;
+		margin: auto;
+		position: absolute;
+		right: -9999px;
+		top: 0;
+		z-index: 0;
+
+		&-box {
+			fill: hsla(0, 0%, 91.5%, 1);
+		}
+
+		&-light {
+			fill: hsla(176, 30%, 98%, 1);
+			opacity: 0;
+		}
+	}
+
+	&-slouch {
+		$tableColor: darken(desaturate($accentColor, 18%), 6%);
+		$skinColor: hsla(26, 54%, 82%, 1);
+		$hairColor: hsla(32, 48%, 34%, 1);
+		$suitColor: hsla(218, 6%, 38%, 1);
+
+		bottom: calc(-2px - .2%);
+		height: calc(42px + 62%);
+		left: calc(6px + 5%);
+		position: absolute;
+		z-index: 4;
+
+		&-laptop-screen {
+			fill: hsla(0, 0%, 32%, 1);
+		}
+
+		&-laptop-board {
+			fill: hsla(0, 0%, 52%, 1);
+		}
+
+		&-laptop-light {
+			opacity: 0;
+		}
+
+		&-head {
+			fill: $skinColor;
+
+			&-shading {
+				fill: desaturate(darken($skinColor, 8%), 8%);
+			}
+		}
+
+		&-neck {
+				fill: desaturate(darken($skinColor, 16%), 8%);
+
+		}
+
+		&-hair {
+			fill: $hairColor;
+
+			&-shading {
+				fill: desaturate(darken($hairColor, 8%), 8%);
+			}
+		}
+
+		&-hand-a, &-hand-b {
+			fill: $skinColor;
+		}
+
+		&-suit {
+				fill: desaturate(darken($suitColor, 8%), 8%);
+
+			&-shading {
+			fill: $suitColor;
+			}
+		}
+
+		&-table {
+			fill: $tableColor;
+
+			&-legs {
+				fill: desaturate(darken($tableColor, 8%), 12%);
+			}
+		}
+
+		&-chair {
+			fill: $tableColor;
+
+			&-legs {
+				fill: desaturate(darken($tableColor, 10%), 8%);
+			}
+		}
+	}
+
+	&-message {
+		color: hsla(0, 0%, 32%, 1);
+		font-family: 'futura-pt', sans-serif;
+		font-size: 5.25vw;
+		font-weight: 500;
+		padding: 36px;
+		text-align: center;
+		z-index: 5;
+	}
+}
+
+.clc-slide-e {
+	@include rcm-flex-center;
+
+	background-color: hsla(192, 92%, 92%, 1);
+
+	&-message {
+		color: hsla(232, 14%, 44%, 1);
+		font-family: 'futura-pt', sans-serif;
+		font-size: 3.5vw;
+		font-weight: 500;
+		left: 0;
+		line-height: 2.5vw;
+		padding: calc(4.5% + 12px);
+		position: absolute;
+		text-align: center;
+		top: 0;
+		z-index: 5;
+	}
+
+	.clc-slide-image-descriptor {
+		border-color: hsla(191, 32%, 74%, 1);
+
+		&-title {
+			color: hsla(204, 30%, 64%, 1);
+		}
+
+		&-message{
+			color: hsla(204, 20%, 36%, 1);
+		}
+	}
+}
+
+.clc-slide-f {
+	@include rcm-flex-center;
+
+	background-color: hsla(232, 18%, 24%, 1);
+
+	&-message {
+		bottom: -.75vw;
+		color: hsla(232, 6%, 86%, 1);
+		font-family: 'futura-pt', sans-serif;
+		font-size: 3.5vw;
+		font-weight: 500;
+		line-height: 4.75vw;
+		padding: calc(4.5% + 12px);
+		position: absolute;
+		right: 0;
+		text-align: right;
+		z-index: 5;
+	}
+
+	.clc-slide-image-descriptor {
+		bottom: auto;
+		top: 12px;
+		border-color: hsla(232, 12%, 46%, 1);
+
+		&-title {
+			color: hsla(232, 14%, 56%, 1);
+		}
+
+		&-message{
+			color: hsla(232, 18%, 84%, 1);
+		}
+	}
+}
+
+.clc-slide-g {
+	background-color: hsla(132, 26%, 46%, 1);
+
+	&-message {
+		@include display-flex;
+		@include align-items(center);
+
+		font-family: 'futura-pt', sans-serif;
+		font-size: 4.75vw;
+		line-height: 5.75vw;
+		font-weight: 500;
+		color: #FFF;
+		width: 30%;
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 100%;
+		padding: calc(2% + 12px);
+		z-index: 5;
+	}
+
+	.clc-slide-image-descriptor {
+		border-color: hsla(132, 22%, 68%, 1);
+
+		&-title {
+			color: hsla(132, 22%, 78%, 1);
+		}
+
+		&-message{
+			color: hsla(132, 28%, 92%, 1);
+		}
+	}
+}
+
+// .clc-slide-h {
+// 	background-color: hsla(218, 32%, 44%, 1);
+
+// 	&-message {
+// 		@include display-flex;
+// 		@include align-items(center);
+
+// 		color: #FFF;
+// 		font-family: 'futura-pt', sans-serif;
+// 		font-size: 4.75vw;
+// 		font-weight: 500;
+// 		height: 100%;
+// 		line-height: 5.75vw;
+// 		padding: calc(2% + 12px);
+// 		position: absolute;
+// 		right: 0;
+// 		text-align: right;
+// 		top: 0;
+// 		width: 30%;
+// 		z-index: 5;
+// 	}
+
+	// .clc-slide-image-descriptor {
+	// 	border-color: hsla(218, 34%, 68%, 1);
+	// 	width: 54%;
+
+	// 	&-title {
+	// 		color: hsla(218, 34%, 82%, 1);
+	// 	}
+
+	// 	&-message{
+	// 		color: hsla(218, 34%, 94%, 1);
+	// 	}
+// 	}
+// }
+
+.clc-slide-h {
+	$slideColor: hsla(218, 3%, 14%, 1);
+
+	@include rcm-flex-center;
+
+	background-color: $slideColor;
+	background-color: hsla(218, 32%, 44%, 1);
+
+	&-message {
+		// color: hsla(218, 32%, 44%, 1);
+		color: #FFF;
+		font-family: 'futura-pt', sans-serif;
+		font-size: 4.25vw;
+		line-height: 5vw;
+		font-weight: 500;
+		padding: 36px;
+		text-align: center;
+		z-index: 5;
+	}
+
+	.clc-slide-image-descriptor {
+		border-color: hsla(218, 34%, 68%, 1);
+		width: 54%;
+
+		&-title {
+			color: hsla(218, 34%, 82%, 1);
+		}
+
+		&-message{
+			color: hsla(218, 34%, 94%, 1);
+		}
+	}
+}
+
+.clc-slide-i {
+	@include flex-direction(column);
+	@include rcm-flex-center;
+
+	background-color: #FFF; 
+	// background-color: hsla(0, 0%, 12%, 1);
+
+	&-background {
+		@include rcm-fill;
+
+		background-image: url(../img/slide-j-background-tile.svg);
+		background-position: center;
+		background-size: 20% auto;
+		opacity: .035;
+		background-repeat: repeat;
+		z-index: 0;
+	}
+
+	&-content {
+		@include flex(0 0 auto);
+		@include display-flex;
+		@include align-items(center);
+
+		position: relative;
+	
+		&-message {
+			@include flex(0 0 auto);
+
+			// color: hsl(33, 14%, 34%);
+			color: hsla(0, 0%, 32%, 1);
+			text-align: right;
+			font-family: 'futura-pt', sans-serif;
+			font-size: 4vw;
+			line-height: 4.75vw;
+			z-index: 5;
+
+			&-word {
+				display: inline;
+			}
+
+			&-highlight {
+				color: $accentColor;
+				display: inline;
+				font-weight: 500;
+			}
+		}
+
+		&-divider {
+			@include flex(0 0 auto);
+
+			height: 100%;
+			width: .3vw;
+			height: 8.5vw;
+			margin: 0 1.5vw;
+			background-color: hsla(0, 0%, 32%, 1);
+			position: relative;
+		}
+
+		&-form {
+			@include display-flex;
+
+			height: 3vw;
+			width: 40vw;
+
+			&-input, &-button {
+				height: 100%;
+				position: relative;
+			}
+
+			&-input {
+				@include flex(1 1 auto);
+				
+				border: .3vw solid hsla(0, 0%, 32%, 1);
+				border-right-width: 0vw;
+
+				&-input, &-placeholder {
+					@include rcm-fill;
+
+					padding: 0 .65vw;
+					font-family: 'proxima-nova', sans-serif;
+					font-size: 1.35vw;
+					font-weight: 400;
+				}
+
+				&-input {
+					border: none;
+					color: hsla(0, 0%, 32%, 1);
+					outline: none;
+					z-index: 5;
+				}
+
+				&-placeholder {
+					@include display-flex;
+					@include align-items(center);
+
+					color: hsla(0, 0%, 32%, .5);
+					pointer-events: none;
+					z-index: 6;
+				}
+			}
+
+			&-button {
+				@include align-items(center);
+				@include display-flex;
+
+				background-color: $accentColor;
+				color: #FFF;
+				cursor: pointer;
+				font-family: 'proxima-nova', sans-serif;
+				font-size: .9vw;
+				font-weight: 600;
+				letter-spacing: .2vw;
+				padding: 0 1.5vw;
+
+				&-hovered {
+					background-color: hsla(0, 0%, 32%, 1);
+					color: $accentColor;
+				}
+			}
+		}
+	}
+}
+
+.clc-slide-footer {
+	@include flex(0 0 auto);
+	@include display-flex;
+	@include align-items(center);
+
+	padding: calc(12px + 1.5%);
+	height: 8vw;
+	background-color: hsla(0, 0%, 20%, 1);
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+
+	&-pointed-section {
+
+	}
+
+	// add a pointer
+	&-left {
+		@include display-flex;
+		@include flex(1 1 auto);
+		@include flex-direction(column);
+		@include justify-content(space-between);
+		
+		height: calc(100% + 6px);
+		position: relative;
+	}
+
+	&-social, &-message {
+		@include flex(0 0 auto);
+
+		position: relative;
+		width: 100%;
+	}
+
+	&-social {
+		@include display-flex;
+		@include align-items(center);
+		@include flex-wrap(nowrap);
+
+		height: 1.5vw;
+
+		&-button {
+			@include flex(0 0 auto);
+
+			color: #FFF;
+			display: block;
+			font-size: 2.25vw;
+			margin-right: 2.25vw;
+			opacity: .75;
+			position: relative;
+		}
+	}
+
+	&-message {
+		color: #FFF;
+		font-family: 'futura-pt', sans-serif;
+		font-size: 1.15vw;
+		line-height: 1.15vw;
+	}
+
+	&-logo {
+		@include flex(0 0 auto);
+
+		position: relative;
+		height: 100%;
+
+		&-letters {
+			fill: hsla(0, 0%, 100%, .98);
+		}
+
+		&-x {
+			fill: $accentColor;
+		}
+	}
+}
+

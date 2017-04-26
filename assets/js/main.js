@@ -108,17 +108,32 @@ $(document).ready(function() {
 				},
 			},
 			slideC: {
-				heart: {
-					element: $(".clc-slide-c-heart"),
+				headache: {
+					element: $(".clc-slide-c-headache"),
 					wrapper: {
-						element: $(".clc-slide-c-heart-wrapper"),
+						element: $(".clc-slide-c-headache-wrapper"),
 					},
-					pieceA: {
-						element: $(".clc-slide-c-heart-piece-a"),
+					head: {
+						element: $(".clc-slide-c-headache-head"),
 					},
-					pieceB: {
-						element: $(".clc-slide-c-heart-piece-b"),
-					}
+					earShading: {
+						element: $(".clc-slide-c-headache-ear-shading"),
+					},
+					noseShading: {
+						element: $(".clc-slide-c-headache-nose-shading"),
+					},
+					lipShading: {
+						element: $(".clc-slide-c-headache-lip-shading"),
+					},
+					boltA: {
+						element: $(".clc-slide-c-headache-bolt-a"),
+					},
+					boltB: {
+						element: $(".clc-slide-c-headache-bolt-b"),
+					},
+					boltC: {
+						element: $(".clc-slide-c-headache-bolt-c"),
+					},
 				}
 			},
 			slideD: {
@@ -132,6 +147,78 @@ $(document).ready(function() {
 					laptopLight: {
 						element: $(".clc-slide-d-slouch-laptop-light")
 					},
+				}
+			},
+			slideE: {
+				fog: {
+					fill: {element: $(".clc-slide-e-fog-fill")},
+					cloud: {
+						a: {element: $(".clc-slide-e-fog-cloud-a")},
+						b: {element: $(".clc-slide-e-fog-cloud-b")},
+						c: {element: $(".clc-slide-e-fog-cloud-c")},
+						e: {element: $(".clc-slide-e-fog-cloud-e")},
+						d: {element: $(".clc-slide-e-fog-cloud-d")},
+						e: {element: $(".clc-slide-e-fog-cloud-e")},
+						f: {element: $(".clc-slide-e-fog-cloud-f")},
+						g: {element: $(".clc-slide-e-fog-cloud-g")},
+						h: {element: $(".clc-slide-e-fog-cloud-h")},
+						i: {element: $(".clc-slide-e-fog-cloud-i")},
+						j: {element: $(".clc-slide-e-fog-cloud-j")},
+						k: {element: $(".clc-slide-e-fog-cloud-k")},
+						l: {element: $(".clc-slide-e-fog-cloud-l")},
+						m: {element: $(".clc-slide-e-fog-cloud-m")},
+						n: {element: $(".clc-slide-e-fog-cloud-n")},
+					}
+				},
+				city: {
+					wrapper: {
+						element: $(".clc-slide-e-city-wrapper"),
+					}, 
+					complete: {
+						element: $(".clc-slide-e-city-complete"),
+					},
+					reflection: {
+						element: $(".clc-slide-e-city-reflection"),
+					},
+					water: {
+						waveA: {
+							element: $(".clc-slide-e-city-water-wave-a")
+						},
+						waveB: {
+							element: $(".clc-slide-e-city-water-wave-b")
+						},
+						waveC: {
+							element: $(".clc-slide-e-city-water-wave-c")
+						},
+						waveD: {
+							element: $(".clc-slide-e-city-water-wave-d")
+						}
+					},
+					sky: {
+						section: [
+							{element: $(".clc-slide-e-city-sky-section-0")},  
+							{element: $(".clc-slide-e-city-sky-section-1")},  
+							{element: $(".clc-slide-e-city-sky-section-2")},  
+							{element: $(".clc-slide-e-city-sky-section-3")},  
+							{element: $(".clc-slide-e-city-sky-section-4")},  
+							{element: $(".clc-slide-e-city-sky-section-5")},  
+							{element: $(".clc-slide-e-city-sky-section-6")},  
+							{element: $(".clc-slide-e-city-sky-section-7")},  
+							{element: $(".clc-slide-e-city-sky-section-8")},  
+						],
+					},
+					boat: {
+						a: {element: $(".clc-slide-e-city-boat-a")}, 
+						b: {element: $(".clc-slide-e-city-boat-b")}, 
+						c: {element: $(".clc-slide-e-city-boat-c")}, 
+						d: {element: $(".clc-slide-e-city-boat-d")}, 
+						f: {element: $(".clc-slide-e-city-boat-f")}, 
+						g: {element: $(".clc-slide-e-city-boat-g")}, 
+						h: {element: $(".clc-slide-e-city-boat-h")}, 
+					},
+					balloon: {
+						element: $(".clc-slide-e-city-balloon"), 
+					}
 				}
 			},
 			slideI: {
@@ -178,6 +265,8 @@ $(document).ready(function() {
 	setupSlideC();
 
 	setupSlideD();
+
+	setupSlideE();
 
 	setupSlideI();
 
@@ -461,7 +550,7 @@ $(document).ready(function() {
 	}
 
 	function setupScrolling() {
-		documentElement.on("scroll", checkScroll);
+		documentElement.on("scroll", _.throttle(checkScroll, 50));
 
 		checkScroll();
 
@@ -505,7 +594,7 @@ $(document).ready(function() {
 				letter: String.fromCharCode(97 + slideNumber)
 			};
 
-			notifyObservers("activeSlideUpdated", screen.activeSlide );
+			notifyObservers("activeSlideUpdated", screen.activeSlide);
 		}
 
 		function updateVisibleSlides(slideNumbers) {
@@ -626,7 +715,7 @@ $(document).ready(function() {
 				mouseleave: function() {
 					TweenMax.killTweensOf(components.slideA.signinButton.background.element, {opacity: true});
 					
-					TweenMax.to(components.slideA.signinButton.text.element, .24, {
+					TweenMax.to(components.slideA.signinButton.text.element, .24, { 
 						className: "-=clc-slide-a-signin-button-text-hovered"
 					});
 
@@ -740,7 +829,7 @@ $(document).ready(function() {
 
 			cloudOffset = newOffset;
 				
-			TweenMax.set(components.slideB.cloud.element, {y: cloudOffset});
+			TweenMax.to(components.slideB.cloud.element, .2, {y: cloudOffset});
 
 			if (!tieTimeline) {
 				tieTimeline = new TimelineMax({paused: true});
@@ -844,9 +933,9 @@ $(document).ready(function() {
 	}
 
 	function setupSlideC() {
-		var heartTimeline,
-			heartOffset,
-			heartActivated;
+		var headacheTimeline,
+			headacheOffset,
+			headacheActivated;
 
 		observers["visibleSlidesUpdated"].push(updateActivation);
 
@@ -861,10 +950,10 @@ $(document).ready(function() {
 		updateParallax();
 
 		function updateActivation() {
-			if (screen.visibleSlides["2"]) {
+			if (screen.activeSlide.number == 2) {
 				activate();
 			}
-			else {
+			else if (!screen.visibleSlides["2"]) {
 				deactivate();
 			}
 		}
@@ -875,11 +964,11 @@ $(document).ready(function() {
 				scrollRatio,
 				newOffset;
 
-			if (!heartActivated) return;
+			if (!screen.visibleSlides["2"]) return;
 
-			screenDeltaRange = [screen.height * 1.5, screen.height * 2.5]
+			screenDeltaRange = [screen.height * 1, screen.height * 3]
 
-			offsetRange = screen.height * 1;
+			offsetRange = screen.height * .5;
 
 			scrollRatio = (screen.scrollPosition - screenDeltaRange[0]) / (screenDeltaRange[1] - screenDeltaRange[0]);
 
@@ -887,76 +976,200 @@ $(document).ready(function() {
 
 			newOffset = Math.round(scrollRatio * offsetRange);
 
-			if (newOffset == heartOffset) return;
+			if (newOffset == headacheOffset) return;
 
-			heartOffset = newOffset;
+			headacheOffset = newOffset;
 				
-			TweenMax.set(components.slideC.heart.element, {y: heartOffset});
+			TweenMax.to(components.slideC.headache.element, .2, {y: headacheOffset});
 		}
 
 		function activate() {
-			if (heartActivated) return;
+			if (headacheActivated) return;
 
-			heartActivated = true;
+			headacheActivated = true;
 			
-			if (!heartTimeline) {
-				heartTimeline = new TimelineMax({paused: true, delay: 0});
+			if (!headacheTimeline) {
+				TweenMax.set([
+					components.slideC.headache.boltC.element,
+					components.slideC.headache.boltB.element,
+					components.slideC.headache.boltA.element,
+				], {
+					scale: .8
+				});
 
-				// heartTimeline.addCallback(pulse, 0, [1]);
+				headacheTimeline = new TimelineMax({paused: true, delay: .4, repeat: -1, repeatDelay: .1});
 
-				// heartTimeline.addCallback(pulse, 1, [1.1]);
+				headacheTimeline.to(components.slideC.headache.boltC.element, .2, {
+					x: -17,
+					y: 34,
+					ease: Back.easeOut.config(1.48)
+				}, 0);
 
-				heartTimeline.addCallback(pulse, 0.85, [1]);
+				headacheTimeline.to(components.slideC.headache.boltC.element, .2, {
+					opacity: 1,
+				}, 0);
 
-				heartTimeline.addCallback(pulse, 1.6, [1]);
-
-				heartTimeline.addCallback(pulse, 2.3, [1, true]);
-
-				// heartTimeline.addCallback(pulse, 3.6, [1.8]);
-
-				heartTimeline.to(components.slideC.heart.element, .56, {
-					scale: .72,
-					ease: Power2.easeInOut,
-				}, 2.72);
-
-				heartTimeline.fromTo(components.slideC.heart.wrapper.element, 1, {
+				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, .025, {
 					x: -1,
-					y: -1,
 				}, {
 					x: 1,
-					y: 1,
 					ease: RoughEase.ease.config({
 						strength: 8,
-						points: 24,
+						points: 2,
 						template: Linear.easeNone,
 						randomize: false
 					}),
-					clearProps: "x, y"
-				}, 2.72);
+					clearProps: "x"
+				}, .1);
 
-				heartTimeline.to(components.slideC.heart.element, .36, {
+				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, .025, {
+					y: -1,
+				}, {
+					y: 1,
+					ease: RoughEase.ease.config({
+						strength: 8,
+						points: 2,
+						template: Linear.easeNone,
+						randomize: false
+					}),
+					clearProps: "y"
+				}, .1);
+
+				headacheTimeline.to(components.slideC.headache.boltB.element, .2, {
+					x: 2,
+					y: 34,
+					ease: Back.easeOut.config(1.48)
+				}, .1);
+
+				headacheTimeline.to(components.slideC.headache.boltB.element, .2, {
+					opacity: 1,
+				}, .1);
+
+				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, .025, {
+					x: -1,
+				}, {
+					x: 1,
+					ease: RoughEase.ease.config({
+						strength: 8,
+						points: 2,
+						template: Linear.easeNone,
+						randomize: false
+					}),
+					clearProps: "x"
+				}, .2);
+
+				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, .025, {
+					y: -1,
+				}, {
+					y: 1,
+					ease: RoughEase.ease.config({
+						strength: 8,
+						points: 2,
+						template: Linear.easeNone,
+						randomize: false
+					}),
+					clearProps: "y"
+				}, .2);
+
+				headacheTimeline.to(components.slideC.headache.boltA.element, .2, {
+					x: 12,
+					y: 32,
+					ease: Back.easeOut.config(1.48)
+				}, .2);
+
+				headacheTimeline.to(components.slideC.headache.boltA.element, .2, {
+					opacity: 1,
+				}, .2);
+
+				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, .025, {
+					x: -1,
+				}, {
+					x: 1,
+					ease: RoughEase.ease.config({
+						strength: 8,
+						points: 2,
+						template: Linear.easeNone,
+						randomize: false
+					}),
+					clearProps: "x"
+				}, .3);
+
+				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, .025, {
+					y: -1,
+				}, {
+					y: 1,
+					ease: RoughEase.ease.config({
+						strength: 8,
+						points: 2,
+						template: Linear.easeNone,
+						randomize: false
+					}),
+					clearProps: "y"
+				}, .3);
+
+				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, .52, {
+					y: -1,
+				}, {
+					y: 1,
+					ease: RoughEase.ease.config({
+						strength: 16,
+						points: 24,
+						template: Linear.easeNone,
+						randomize: true
+					}),
+					clearProps: "y"
+				}, .84);
+
+				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, .52, {
+					x: 1,
+				}, {
+					x: -1,
+					ease: RoughEase.ease.config({
+						strength: 16,
+						points: 24,
+						template: Linear.easeNone,
+						randomize: true
+					}),
+					clearProps: "x"
+				}, .84);
+
+				headacheTimeline.to([
+					components.slideC.headache.boltC.element,
+				], .34, {
+					x: 0,
+					y: 0,
 					scale: 1,
-					ease: Back.easeOut.config(5.2),
-				}, 3.52);
+					ease: Back.easeInOut.config(3.4)
+				}, .98);
 
-				heartTimeline.from(components.slideC.heart.pieceA.element, .24, {
-					x: 3
-				}, 3.52);
+				headacheTimeline.to([
+					components.slideC.headache.boltB.element,
+				], .38, {
+					x: 0,
+					y: 0,
+					scale: 1,
+					ease: Back.easeInOut.config(3.4)
+				}, .98);
 
-				heartTimeline.from(components.slideC.heart.pieceB.element, .24, {
-					x: -3
-				}, 3.52);
+				headacheTimeline.to([
+					components.slideC.headache.boltA.element,
+				], .36, {
+					x: 0,
+					y: 0,
+					scale: 1,
+					ease: Back.easeInOut.config(3.4)
+				}, .98);
 
-				heartTimeline.to(components.slideC.heart.pieceB.element.find(".clc-slide-c-heart-body"), .24, {
-					morphSVG: "M90.4,0C78.6,0,68.3,6,62.2,15.1L51.9,31.7l13.9,13.1l-9.5,15.9l10.8,14.8L57,86l5.1,20.3c3.5-1.5,62.1-30.6,62.1-72.4C124.3,15.2,109.1,0,90.4,0z"
-				}, 4.52);
-
-				heartTimeline.to(components.slideC.heart.pieceB.element.find(".clc-slide-c-heart-shading"), .24, {
-					morphSVG: "M110.3,54.3c-7.2,7-15.2,13.2-23.9,18.5c-8.8,5.2-18.2,9.1-28,11.8L57,86l5.1,20.3c3.4-1.4,58.5-28.8,61.9-68.6C120.1,43.6,115.5,49.1,110.3,54.3z"
-				}, 4.52);
+				headacheTimeline.to([
+					components.slideC.headache.boltC.element,
+					components.slideC.headache.boltB.element,
+					components.slideC.headache.boltA.element,
+				], .28, {
+					opacity: 0,
+				}, 2.2);
 			}
 
-			heartTimeline.play();
+			headacheTimeline.play();
 
 			function pulse(timescale, skip) {
 				var pulseTimeline = new TimelineMax({paused: true});
@@ -990,11 +1203,11 @@ $(document).ready(function() {
 		}
 
 		function deactivate() {
-			if (!heartActivated) return;
+			if (!headacheActivated) return;
 
-			heartTimeline.pause(0);
+			headacheTimeline.pause(0);
 
-			heartActivated = false;
+			headacheActivated = false;
 		}
 	}
 
@@ -1043,7 +1256,7 @@ $(document).ready(function() {
 
 			slouchOffset = newOffset;
 				
-			TweenMax.set(components.slideD.slouch.element, {y: slouchOffset});
+			TweenMax.to(components.slideD.slouch.element, .2, {y: slouchOffset});
 		}
 
 		function activate() {
@@ -1074,6 +1287,724 @@ $(document).ready(function() {
 			if (!flickerActivated) return;
 
 			flickerActivated = false;
+		}
+	}
+
+	function setupSlideE() {
+		var parallaxHandler,
+			slideActive = false,
+			fogTimeline;
+
+		observers["visibleSlidesUpdated"].push(updateActivation);
+
+		updateActivation();
+
+		function updateActivation() {
+			if (screen.visibleSlides["4"]) {
+				activate();
+			}
+			else {
+				deactivate();
+			}
+		}
+
+		// update water and sky animations on resaize
+
+		function activate() {
+			if (slideActive) return;
+
+			slideActive = true;
+
+			clearFog();
+
+			activateWater();
+			
+			activateSky();
+
+			activateBoats();
+
+			activateBalloon();
+
+			// activateCameraShake(); // Silly
+
+			// activateMouseParallax(); // To expensive performance wise
+
+			function clearFog() {
+				if (!fogTimeline) {
+					fogTimeline = new TimelineMax({paused: true, delay: .1});
+
+					fogTimeline.fromTo(components.slideE.fog.fill.element, 1.4, {
+						opacity: 1
+					}, {
+						opacity: 0,
+						ease: Power1.easeInOut
+					}, .8);
+
+					fogTimeline.to(components.slideE.fog.cloud.a.element, 1.2, {
+						x: "+=" + (.4 * screen.height),
+						y: 20,
+					}, 0);
+
+					fogTimeline.to(components.slideE.fog.cloud.a.element, .6, {
+						opacity: 0,
+					}, .6);
+
+					fogTimeline.to(components.slideE.fog.cloud.b.element, 1.6, {
+						x: "+=" + (.5333 * screen.height),
+						y: -12,
+					}, .1);
+
+					fogTimeline.to(components.slideE.fog.cloud.b.element, .6, {
+						opacity: 0,
+					}, 1.1);
+
+					fogTimeline.to(components.slideE.fog.cloud.c.element, 1.32, {
+						x: "+=" + (.2222 * screen.height),
+						y: 6,
+					}, .05);
+
+					fogTimeline.to(components.slideE.fog.cloud.c.element, .8, {
+						opacity: 0,
+					}, .57);
+
+					fogTimeline.to(components.slideE.fog.cloud.d.element, 1.4, {
+						x: "+=" + (.2933 * screen.height),
+						y: 6,
+					}, .16);
+
+					fogTimeline.to(components.slideE.fog.cloud.d.element, .48, {
+						opacity: 0,
+					}, 1.08);
+
+					fogTimeline.to(components.slideE.fog.cloud.e.element, 1.94, {
+						x: "+=" + (.6888 * screen.height),
+						y: -14,
+					}, 0);
+
+					fogTimeline.to(components.slideE.fog.cloud.e.element, .8, {
+						opacity: 0,
+					}, 1.02);
+
+					fogTimeline.to(components.slideE.fog.cloud.f.element, 1.28, {
+						x: "+=" + (.2177 * screen.height),
+						y: -14,
+					}, .04);
+
+					fogTimeline.to(components.slideE.fog.cloud.f.element, .54, {
+						opacity: 0,
+					}, .78);
+
+					fogTimeline.to(components.slideE.fog.cloud.g.element, 1.4, {
+						x: "+=" + (.2177 * screen.height),
+						y: -14,
+					}, .08);
+
+					fogTimeline.to(components.slideE.fog.cloud.g.element, .68, {
+						opacity: 0,
+					}, .8);
+
+					fogTimeline.to(components.slideE.fog.cloud.h.element, 1.64, {
+						x: "+=" + (.48 * screen.height),
+						y: 8,
+					}, .0);
+
+					fogTimeline.to(components.slideE.fog.cloud.h.element, .6, {
+						opacity: 0,
+					}, 1.04);
+
+					fogTimeline.to(components.slideE.fog.cloud.i.element, 1.44, {
+						x: "+=" + (.4088 * screen.height),
+						y: 8,
+					}, .1);
+
+					fogTimeline.to(components.slideE.fog.cloud.i.element, .72, {
+						opacity: 0,
+					}, .82);
+
+					fogTimeline.to(components.slideE.fog.cloud.j.element, 1.88, {
+						x: "+=" + (.6422 * screen.height),
+						y: 12,
+					}, 0);
+
+					fogTimeline.to(components.slideE.fog.cloud.j.element, .8, {
+						opacity: 0,
+					}, 1.08);
+
+					fogTimeline.to(components.slideE.fog.cloud.k.element, 1.28, {
+						x: "+=" + (.1977 * screen.height),
+						y: 4,
+					}, .12);
+
+					fogTimeline.to(components.slideE.fog.cloud.k.element, .6, {
+						opacity: 0,
+					}, .8);
+
+					fogTimeline.to(components.slideE.fog.cloud.l.element, 1.72, {
+						x: "+=" + (.5688 * screen.height),
+						y: -18,
+					}, 0);
+
+					fogTimeline.to(components.slideE.fog.cloud.l.element, .74, {
+						opacity: 0,
+					}, .98);
+
+					fogTimeline.to(components.slideE.fog.cloud.m.element, 1.36, {
+						x: "+=" + (.6 * screen.height),
+						y: -18,
+					}, 0);
+
+					fogTimeline.to(components.slideE.fog.cloud.m.element, .6, {
+						opacity: 0,
+					}, .76);
+
+					fogTimeline.to(components.slideE.fog.cloud.n.element, 2, {
+						x: "+=" + (.5422 * screen.height),
+						y: -18,
+					}, .06);
+
+					fogTimeline.to(components.slideE.fog.cloud.n.element, .88, {
+						opacity: 0,
+					}, 1.18);
+				}
+
+				fogTimeline.play();
+			}
+
+			function activateWater() {
+				var baseTime = screen.width * .0625;
+
+				TweenMax.fromTo(components.slideE.city.water.waveA.element, baseTime, {
+					xPercent: 0,
+				}, {
+					xPercent: 50,
+					repeat: -1,
+					ease: Power0.easeNone
+				});
+
+				TweenMax.fromTo(components.slideE.city.water.waveB.element, baseTime * .8, {
+					xPercent: 50,
+				}, {
+					xPercent: 0,
+					repeat: -1,
+					ease: Power0.easeNone
+				});
+
+				TweenMax.to(components.slideE.city.water.waveC.element, baseTime * .9, {
+					xPercent: 50,
+					repeat: -1,
+					ease: Power0.easeNone
+				});
+
+				TweenMax.fromTo(components.slideE.city.water.waveD.element, baseTime * .65, {
+					xPercent: 50,
+				}, {
+					xPercent: 0,
+					repeat: -1,
+					ease: Power0.easeNone
+				});
+			}
+
+			function activateSky() {
+				var layerCTime = 60,
+					layerBTime = 0.833333333 * layerCTime,
+					layerATime = 0.666666667 * layerCTime,
+					fadeOutTime = 6,
+					fadeInTime = 4.5,
+					repeats = {};
+
+				repeats.section6 = function() {
+					var duration = layerCTime * 2;
+
+					if (!slideActive) return;
+
+					TweenMax.set(components.slideE.city.sky.section[6].element, {xPercent: -36});
+
+					TweenMax.to(components.slideE.city.sky.section[6].element, duration, {xPercent: 32, ease: Power0.easeNone});
+
+					TweenMax.to(components.slideE.city.sky.section[6].element, fadeInTime, {opacity: 1, ease: Power0.easeNone});
+
+					TweenMax.to(components.slideE.city.sky.section[6].element, fadeOutTime, {
+						opacity: 0,
+						ease: Power0.easeNone,
+						onComplete: repeats.section6,
+						delay: duration - fadeOutTime
+					});
+				}
+
+				TweenMax.to(components.slideE.city.sky.section[6].element, layerCTime, {
+					xPercent: 32,
+					ease: Power0.easeNone,
+				});
+
+				TweenMax.to(components.slideE.city.sky.section[6].element, fadeOutTime, {
+					opacity: 0,
+					ease: Power0.easeNone,
+					onComplete: repeats.section6,
+					delay: layerCTime - fadeOutTime,
+				});
+
+				repeats.section7 = function() {
+					var duration = layerCTime * .48;
+
+					if (!slideActive) return;
+
+					TweenMax.set(components.slideE.city.sky.section[7].element, {xPercent: -80});
+
+					TweenMax.to(components.slideE.city.sky.section[7].element, duration, {xPercent: 4, ease: Power0.easeNone});
+
+					TweenMax.to(components.slideE.city.sky.section[7].element, fadeInTime, {opacity: 1, ease: Power0.easeNone});
+
+					TweenMax.to(components.slideE.city.sky.section[7].element, fadeOutTime, {
+						opacity: 0,
+						ease: Power0.easeNone,
+						onComplete: repeats.section7,
+						delay: duration - fadeOutTime
+					});
+				}
+
+				TweenMax.to(components.slideE.city.sky.section[7].element, layerCTime * .2, {
+					xPercent: 28,
+					ease: Power0.easeNone,
+				});
+
+				TweenMax.to(components.slideE.city.sky.section[7].element, fadeOutTime, {
+					opacity: 0,
+					ease: Power0.easeNone,
+					onComplete: repeats.section7,
+					delay:  layerCTime * .2 - fadeOutTime,
+				});
+
+				repeats.section8 = function() {
+					var duration = layerCTime * 1.3;
+
+					if (!slideActive) return;
+
+					TweenMax.set(components.slideE.city.sky.section[8].element, {xPercent: -24});
+
+					TweenMax.to(components.slideE.city.sky.section[8].element, duration, {xPercent: 30, ease: Power0.easeNone});
+
+					TweenMax.to(components.slideE.city.sky.section[8].element, fadeInTime, {opacity: 1, ease: Power0.easeNone});
+
+					TweenMax.to(components.slideE.city.sky.section[8].element, fadeOutTime, {
+						opacity: 0,
+						ease: Power0.easeNone,
+						onComplete: repeats.section8,
+						delay: duration - fadeOutTime
+					});
+				}
+
+				TweenMax.to(components.slideE.city.sky.section[8].element, layerCTime * .72, {
+					xPercent: 30,
+					ease: Power0.easeNone,
+				});
+
+				TweenMax.to(components.slideE.city.sky.section[8].element, fadeOutTime, {
+					opacity: 0,
+					ease: Power0.easeNone,
+					onComplete: repeats.section8,
+					delay:  layerCTime * .72 - fadeOutTime,
+				});
+
+				// == Layer B
+
+				repeats.section3 = function() {
+					var duration = layerBTime * .64;
+
+					if (!slideActive) return;
+
+					TweenMax.set(components.slideE.city.sky.section[3].element, {xPercent: -14});
+
+					TweenMax.to(components.slideE.city.sky.section[3].element, duration, {xPercent: 26, ease: Power0.easeNone});
+
+					TweenMax.to(components.slideE.city.sky.section[3].element, fadeInTime, {opacity: 1, ease: Power0.easeNone});
+
+					TweenMax.to(components.slideE.city.sky.section[3].element, fadeOutTime, {
+						opacity: 0,
+						ease: Power0.easeNone,
+						onComplete: repeats.section3,
+						delay: duration - fadeOutTime
+					});
+				}
+
+				TweenMax.to(components.slideE.city.sky.section[3].element, layerBTime * .54, {
+					xPercent: 26,
+					ease: Power0.easeNone,
+				});
+
+				TweenMax.to(components.slideE.city.sky.section[3].element, fadeOutTime, {
+					opacity: 0,
+					ease: Power0.easeNone,
+					onComplete: repeats.section3,
+					delay:  layerBTime * .54 - fadeOutTime,
+				});
+
+				repeats.section4 = function() {
+					var duration = layerBTime * .64;
+
+					if (!slideActive) return;
+
+					TweenMax.set(components.slideE.city.sky.section[4].element, {xPercent: -14});
+
+					TweenMax.to(components.slideE.city.sky.section[4].element, duration, {xPercent: 26, ease: Power0.easeNone});
+
+					TweenMax.to(components.slideE.city.sky.section[4].element, fadeInTime, {opacity: 1, ease: Power0.easeNone});
+
+					TweenMax.to(components.slideE.city.sky.section[4].element, fadeOutTime, {
+						opacity: 0,
+						ease: Power0.easeNone,
+						onComplete: repeats.section4,
+						delay: duration - fadeOutTime
+					});
+				}
+
+				TweenMax.to(components.slideE.city.sky.section[4].element, layerBTime * .3, {
+					xPercent: 20,
+					ease: Power0.easeNone,
+				});
+
+				TweenMax.to(components.slideE.city.sky.section[4].element, fadeOutTime, {
+					opacity: 0,
+					ease: Power0.easeNone,
+					onComplete: repeats.section4,
+					delay:  layerBTime * .3 - fadeOutTime,
+				});
+
+				repeats.section5 = function() {
+					var duration = layerBTime;
+
+					if (!slideActive) return;
+
+					TweenMax.set(components.slideE.city.sky.section[5].element, {xPercent: -22});
+
+					TweenMax.to(components.slideE.city.sky.section[5].element, duration, {xPercent: 26, ease: Power0.easeNone});
+
+					TweenMax.to(components.slideE.city.sky.section[5].element, fadeInTime, {opacity: 1, ease: Power0.easeNone});
+
+					TweenMax.to(components.slideE.city.sky.section[5].element, fadeOutTime, {
+						opacity: 0,
+						ease: Power0.easeNone,
+						onComplete: repeats.section5,
+						delay: duration - fadeOutTime
+					});
+				}
+
+				TweenMax.to(components.slideE.city.sky.section[5].element, layerBTime * .54, {
+					xPercent: 14,
+					ease: Power0.easeNone,
+				});
+
+				TweenMax.to(components.slideE.city.sky.section[5].element, fadeOutTime, {
+					opacity: 0,
+					ease: Power0.easeNone,
+					onComplete: repeats.section5,
+					delay:  layerBTime * .54 - fadeOutTime,
+				});
+
+				// == Layer A
+
+				repeats.section0 = function() {
+					var duration = layerATime * 1.76;
+
+					if (!slideActive) return;
+
+					TweenMax.set(components.slideE.city.sky.section[0].element, {xPercent: -32});
+
+					TweenMax.to(components.slideE.city.sky.section[0].element, duration, {xPercent: 24, ease: Power0.easeNone});
+
+					TweenMax.to(components.slideE.city.sky.section[0].element, fadeInTime, {opacity: 1, ease: Power0.easeNone});
+
+					TweenMax.to(components.slideE.city.sky.section[0].element, fadeOutTime, {
+						opacity: 0,
+						ease: Power0.easeNone,
+						onComplete: repeats.section0,
+						delay: duration - fadeOutTime
+					});
+				}
+
+				TweenMax.to(components.slideE.city.sky.section[0].element, layerATime * .82, {
+					xPercent: 24,
+					ease: Power0.easeNone,
+				});
+
+				TweenMax.to(components.slideE.city.sky.section[0].element, fadeOutTime, {
+					opacity: 0,
+					ease: Power0.easeNone,
+					onComplete: repeats.section0,
+					delay:  layerATime * .82 - fadeOutTime,
+				});
+
+				repeats.section1 = function() {
+					var duration = layerATime * 1.56;
+
+					if (!slideActive) return;
+
+					TweenMax.set(components.slideE.city.sky.section[1].element, {xPercent: -48});
+
+					TweenMax.to(components.slideE.city.sky.section[1].element, duration, {xPercent: 26, ease: Power0.easeNone});
+
+					TweenMax.to(components.slideE.city.sky.section[1].element, fadeInTime, {opacity: 1, ease: Power0.easeNone});
+
+					TweenMax.to(components.slideE.city.sky.section[1].element, fadeOutTime, {
+						opacity: 0,
+						ease: Power0.easeNone,
+						onComplete: repeats.section1,
+						delay: duration - fadeOutTime
+					});
+				}
+
+				TweenMax.to(components.slideE.city.sky.section[1].element, layerATime * .62, {
+					xPercent: 26,
+					ease: Power0.easeNone,
+				});
+
+				TweenMax.to(components.slideE.city.sky.section[1].element, fadeOutTime, {
+					opacity: 0,
+					ease: Power0.easeNone,
+					onComplete: repeats.section1,
+					delay:  layerATime * .62 - fadeOutTime,
+				});
+
+				repeats.section2 = function() {
+					var duration = layerATime * 1.1;
+
+					if (!slideActive) return;
+
+					TweenMax.set(components.slideE.city.sky.section[2].element, {xPercent: -4});
+
+					TweenMax.to(components.slideE.city.sky.section[2].element, duration, {xPercent: 20, ease: Power0.easeNone});
+
+					TweenMax.to(components.slideE.city.sky.section[2].element, fadeInTime, {opacity: 1, ease: Power0.easeNone});
+
+					TweenMax.to(components.slideE.city.sky.section[2].element, fadeOutTime, {
+						opacity: 0,
+						ease: Power0.easeNone,
+						onComplete: repeats.section2,
+						delay: duration - fadeOutTime
+					});
+				}
+
+				TweenMax.to(components.slideE.city.sky.section[2].element, layerATime * 1.04, {
+					xPercent: 20,
+					ease: Power0.easeNone,
+				});
+
+				TweenMax.to(components.slideE.city.sky.section[2].element, fadeOutTime, {
+					opacity: 0,
+					ease: Power0.easeNone,
+					onComplete: repeats.section2,
+					delay:  layerATime * 1.04 - fadeOutTime,
+				});
+			}
+
+			function activateBoats() {
+				var baseBoatSpeed = screen.height * .2, // base boat speed on height
+					repeats = {},
+					leftEnd = -60,
+					rightEnd = 10;
+
+				repeats.boatA = function() {
+					TweenMax.delayedCall(Math.random() * 12, function() {
+						if (!slideActive) return;
+
+						TweenMax.fromTo(components.slideE.city.boat.a.element, baseBoatSpeed * 1.2, {
+							x: screen.width + rightEnd,
+						}, {
+							x: leftEnd,
+							ease: Power0.easeNone,
+							onComplete: repeats.boatA,
+						});
+					});
+				}
+
+				TweenMax.fromTo(components.slideE.city.boat.a.element, baseBoatSpeed, {
+					x: screen.width * .92,
+				}, {
+					x: leftEnd,
+					ease: Power0.easeNone,
+					onComplete: repeats.boatA,
+				});
+
+				repeats.boatB = function() {
+					TweenMax.delayedCall(Math.random() * 12, function() {
+						if (!slideActive) return;
+
+						TweenMax.fromTo(components.slideE.city.boat.b.element, baseBoatSpeed * 1, {
+							x: screen.width + rightEnd,
+						}, {
+							x: leftEnd,
+							ease: Power0.easeNone,
+							onComplete: repeats.boatB,
+						});
+					});
+				
+				}
+
+				TweenMax.fromTo(components.slideE.city.boat.b.element, baseBoatSpeed * .92, {
+					x: screen.width * .025,
+				}, {
+					x: screen.width + rightEnd,
+					ease: Power0.easeNone,
+					onComplete: repeats.boatB,
+				});
+
+				repeats.boatC = function() {
+					TweenMax.delayedCall(4 + Math.random() * 10, function() {
+						if (!slideActive) return;
+
+						TweenMax.fromTo(components.slideE.city.boat.c.element, baseBoatSpeed * .58, {
+							x: leftEnd,
+						}, {
+							x: screen.width + rightEnd,
+							ease: Power0.easeNone,
+							onComplete: repeats.boatC,
+						});
+					});
+				}
+
+				repeats.boatC();
+
+				repeats.boatD = function() {
+					TweenMax.delayedCall(4 + Math.random() * 24, function() {
+						if (!slideActive) return;
+
+						TweenMax.fromTo(components.slideE.city.boat.d.element, baseBoatSpeed * .96, {
+							x: leftEnd,
+						}, {
+							x: screen.width + rightEnd,
+							ease: Power0.easeNone,
+							onComplete: repeats.boatD,
+						});
+					});
+				}
+
+				repeats.boatD();
+
+				repeats.boatF = function() {
+					TweenMax.delayedCall(18 + Math.random() * 32, function() {
+						if (!slideActive) return;
+
+						TweenMax.fromTo(components.slideE.city.boat.f.element, baseBoatSpeed * .74, {
+							x: screen.width + rightEnd,
+						}, {
+							x: leftEnd,
+							ease: Power0.easeNone,
+							onComplete: repeats.boatF,
+						});
+					});
+				}
+
+				repeats.boatF();
+
+				repeats.boatG = function() {
+					TweenMax.delayedCall(6 + Math.random() * 8, function() {
+						if (!slideActive) return;
+
+						TweenMax.fromTo(components.slideE.city.boat.g.element, baseBoatSpeed * .86, {
+							x: leftEnd,
+						}, {
+							x: screen.width + rightEnd,
+							ease: Power0.easeNone,
+							onComplete: repeats.boatG,
+						});
+					});
+				}
+
+				repeats.boatG();
+
+				repeats.boatH = function() {
+					TweenMax.delayedCall(14 + Math.random() * 60, function() {
+						if (!slideActive) return;
+
+						TweenMax.fromTo(components.slideE.city.boat.h.element, baseBoatSpeed * .18, {
+							x: screen.width + rightEnd,
+						}, {
+							x: leftEnd,
+							ease: Power0.easeNone,
+							onComplete: repeats.boatH,
+						});
+					});
+				}
+
+				repeats.boatH();
+			}
+
+			function activateBalloon() {
+				var baseTime = 60; // base balloon speed on height
+
+				TweenMax.fromTo(components.slideE.city.balloon.element, baseTime, {
+					x: screen.width * .56,
+					y: 0,
+				}, {
+					x: screen.width + 20,
+					y: -132,
+					ease: Power0.easeNone,
+					onComplete: repeatBalloon
+				});
+
+				function repeatBalloon() {
+					TweenMax.delayedCall(1 + Math.random() + 6, function() {
+						if (!slideActive) return;
+
+						TweenMax.fromTo(components.slideE.city.balloon.element, baseTime * 2.2, {
+							x: -20,
+							y: Math.random() * 240 + -120,
+						}, {
+							x: screen.width + 20,
+							y: Math.random() * 240 + -120,
+							ease: Power0.easeNone,
+							onComplete: repeatBalloon
+						});
+					});
+				}
+			}
+
+			function activateMouseParallax() {
+				var targetOffset;
+
+				parallaxHandler = _.throttle(function(event) {
+					var maxDelta = 80, // make screen.width relative
+						halfPoint = screen.width / 2,
+						offset = Math.round(((event.clientX - halfPoint) / halfPoint) * maxDelta);
+
+					if (offset == targetOffset) return;
+
+					targetOffset = offset;
+
+					TweenMax.to([
+						components.slideE.city.complete.element,
+						components.slideE.city.reflection.element,
+					], .2, {
+						x: targetOffset,
+					});
+				}, 50);
+
+				bodyElement.on("mousemove", parallaxHandler);
+			}
+		}
+
+		function deactivate() {
+			if (!slideActive) return;
+
+			if (fogTimeline) fogTimeline.pause(0);
+
+			fogTimeline = null;
+
+			TweenMax.killTweensOf([
+				components.slideE.city.water.waveA.element,
+				components.slideE.city.water.waveB.element,
+				components.slideE.city.water.waveC.element,
+				components.slideE.city.water.waveD.element,
+			], {xPercent: true});
+
+			for (var idx = 0, len = components.slideE.city.sky.section.length; idx < len; idx++) {
+				TweenMax.killTweensOf(components.slideE.city.sky.section[idx].element, {xPercent: true, opacity: true});
+
+				TweenMax.set(components.slideE.city.sky.section[idx].element, {xPercent: 0, opacity: 1});
+			}
+
+			TweenMax.killTweensOf(components.slideE.city.balloon.element, {x: true, y: true});
+
+			slideActive = false;
 		}
 	}
 

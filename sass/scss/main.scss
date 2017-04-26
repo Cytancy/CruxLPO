@@ -479,8 +479,8 @@ body {
 
 	background-color: $slideColor;
 
-	&-heart {
-		$heartColor: desaturate(darken($slideColor, 8%), 10%);
+	&-headache {
+		$headacheColor: desaturate(darken($slideColor, 6%), 10%);
 
 		bottom: 0;
 		left: 0;
@@ -488,19 +488,30 @@ body {
 		position: absolute;
 		right: 0;
 		top: 0;
-		width: calc(16px + 42%);
-
-		&-body {
-			fill: $heartColor
-		}
-
-		&-shading {
-			fill: desaturate(darken($heartColor, 2%), 1%);
-		}
+		width: calc(16px + 70%);
 
 		&-wrapper {
 			@include rcm-fill;
 			@include rcm-flex-center;
+		}
+
+		&-head {
+			fill: $headacheColor;
+		}
+
+		&-ear-shading, &-nose-shading, &-lip-shading {
+			fill: desaturate(darken($headacheColor, 2%), 1%);
+		}
+
+		&-bolt-a, &-bolt-b, &-bolt-c {
+			fill: $headacheColor;
+			opacity: 0;
+
+			&-stroke {
+				stroke: $slideColor;
+				stroke-width: 6px;
+				stroke-miterlimit: 8;
+			}
 		}
 	}
 
@@ -634,7 +645,8 @@ body {
 .clc-slide-e {
 	@include rcm-flex-center;
 
-	background-color: hsla(192, 92%, 92%, 1);
+	cursor: url(../img/magnifying-cursor.png), pointer;
+	background-color: hsla(198, 86%, 90.5%, 1);
 
 	&-message {
 		color: hsla(232, 14%, 44%, 1);
@@ -647,7 +659,7 @@ body {
 		position: absolute;
 		text-align: center;
 		top: 0;
-		z-index: 5;
+		z-index: 7;
 	}
 
 	.clc-slide-image-descriptor {
@@ -659,6 +671,589 @@ body {
 
 		&-message{
 			color: hsla(204, 20%, 36%, 1);
+		}
+	}
+
+	&-city {
+		$waterHeight: 16.5%;
+
+		bottom: #{$waterHeight};
+		height: 100%;
+		left: 0;
+		position: absolute;
+		width: 100%;
+		z-index: 5;
+
+		&-complete, &-reflection {
+			height: 50%;
+			left: -9999px;
+			margin: auto;
+			position: absolute;
+			right: -9999px;
+		}
+
+		&-complete {
+			bottom: 0;
+			z-index: 5;
+		}
+
+		&-sky {
+			@include rcm-fill;
+
+			overflow: hidden;
+			z-index: 4;
+
+			&-layer {
+				height: 100%;
+				left: 0;
+				position: absolute;
+				width: 100%;
+
+				&-a {
+					fill: hsla(198, 92%, 96%, 1);
+					bottom: -6%;
+					z-index:5;
+				}
+
+				&-b {
+					fill: hsla(198, 90%, 94%, 1);
+					bottom: 8%;
+					z-index: 4;
+				}
+
+				&-c {
+					fill: hsla(198, 88%, 92%, 1);
+					bottom: 18%;
+					z-index: 3;
+				}
+			}
+
+			&-section {
+				left: 0px;
+				margin: auto;
+				position: absolute;
+				right: 0px;
+
+				&-0 {
+					bottom: -6%;
+					height: 42%;
+					left: -14%;
+				}
+
+				&-1 {
+					bottom: -20%;
+					height: 56%;
+					left: -40%;
+				}
+
+				&-2 {
+					bottom: 6%;
+					left: 68%;
+					height: 28%;
+				}
+
+				// ==
+
+				&-3 {
+					bottom: -6%;
+					left: -12%;
+					height: 46%;
+				}
+
+				&-4 {
+					bottom: -8%;
+					left: -44%;
+					height: 44%;
+				}
+
+				&-5 {
+					bottom: -8%;
+					left: 72%;
+					height: 44%;
+				}
+
+				// ==
+
+				&-6 {
+					bottom: -4%;
+					left: -20%;
+					height: 46%;
+				}
+
+				&-7 {
+					bottom: 0%;
+					left: -46%;
+					height: 42%;
+				}
+
+				&-8 {
+					bottom: -6%;
+					left: 64%;
+					height: 46%;
+				}
+			}
+		}
+
+		&-reflection {
+			@include transform(scaleY(-1));
+
+			bottom: -50%;
+			opacity: .25;
+			pointer-events: none;
+			z-index: 8;
+
+			&-gradient {
+				@include background-image(linear-gradient(top, rgba(#afd3f3, 0) 20%,rgba(#afd3f3, .75) 100%));
+
+				bottom: -#{$waterHeight};
+				height: #{$waterHeight};
+				left: -9999px;
+				margin: auto;
+				position: absolute;
+				right: -9999px;
+				z-index: 9;
+			}
+		}
+
+		&-line {
+			background-color: hsl(210, 26%, 58%);
+			bottom: -1px;
+			height: 2px;
+			position: absolute;
+			width: 100%;
+			z-index: 6;
+		}
+
+		&-water {
+			$waveAHeight: 5px;
+			$waveBHeight: 5px;
+			$waveCHeight: 5px;
+			$waveDHeight: 5px;
+
+			bottom: -#{$waterHeight};
+			height: #{$waterHeight};
+			left: 0;
+			position: absolute;
+			width: 100%;
+			z-index: 7;
+
+			&-wave {
+				@include display-flex;
+				@include flex-direction(column);
+
+				height: 100%;
+				left: -100%;
+				opacity: .325;
+				position: absolute;
+				top: 0;
+				width: 200%;
+
+				&-top {
+					@include flex(0 0 auto);
+
+					background-repeat: repeat-x;
+					background-size: auto 100%;
+					position: relative;
+					width: 100%;
+				}
+
+				&-fill {
+					@include flex(1 1 auto);
+
+					height: 100%;
+					position: relative;
+					background-color: #AFD3F3;
+					width: 100%;
+				}
+
+				&-a &-top {
+					background-image: url(../img/wave-a.svg);
+					height: $waveAHeight;
+					background-position: 16px 0;
+					margin-top: #{1px - $waveAHeight};
+				}
+
+				&-b &-top {
+					background-image: url(../img/wave-a.svg);
+					height: $waveBHeight;
+					background-position: 4px 0;
+					margin-top: #{2px - $waveBHeight};
+				}
+
+				&-c &-top {
+					background-image: url(../img/wave-a.svg);
+					height: $waveCHeight;
+					background-position: 12px 0;
+					margin-top: #{3px - $waveCHeight};
+				}
+
+				&-d &-top {
+					background-image: url(../img/wave-a.svg);
+					background-position: 6px 0;
+					height: $waveDHeight;
+					margin-top: #{5px - $waveDHeight};
+				}
+			}
+		}
+
+		&-boat {
+			@include transform(translateX(-100px));
+
+			left: 0;
+			position: absolute;
+
+			&-spacer {
+				height: 100%;
+				position: relative;
+				visibility: hidden;
+			}
+
+			&-base, &-reflection, &-water {
+				background-size: 100% auto; 
+				height: 100%;
+				left: 0;
+				position: absolute;
+				width: 100%;
+			}
+
+			&-base {
+				background-position: top; 
+				top: 0;
+				z-index: 5;
+			}
+
+			&-water {
+				background-position: bottom; 
+				bottom: 0;
+				opacity: .2;
+				z-index: 4;
+			}
+
+			&-reflection {
+				@include transform(scaleY(-1));
+				@include transform-origin(50%, 100%);
+
+				opacity: .35;
+				background-position: top; 
+				z-index: 6;
+			}
+
+			&s {
+				bottom: -#{$waterHeight};
+				height: #{$waterHeight};
+				left: 0;
+				position: absolute;
+				width: 100%;
+				z-index: 9;
+			}
+
+			&-a {
+				$break: 20%;
+
+				top: -2vh;
+				height: 4.25vh;
+				z-index: 4;
+
+				&-base, &-water, &-reflection {
+					background-image: url(../img/boat-a.svg);
+				}
+
+				&-base, &-reflection {
+					height: #{100% - $break};
+				}
+
+				&-water {
+					height: $break;
+				}
+
+				&-reflection {
+					bottom: $break;
+				}
+			}
+
+			&-b {
+				$break: 16%;
+
+				top: 6.25vh;
+				height: 5vh;
+				z-index: 9;
+
+				&-base, &-water, &-reflection {
+					background-image: url(../img/boat-b.svg);
+				}
+
+				&-base, &-reflection {
+					height: #{100% - $break};
+				}
+
+				&-water {
+					height: $break;
+				}
+
+				&-reflection {
+					bottom: $break;
+				}
+			}
+
+			&-c {
+				$break: 8%;
+
+				top: 12.25vh;
+				height: 2.25vh;
+				z-index: 10;
+
+				&-base, &-water, &-reflection {
+					background-image: url(../img/boat-c.svg);
+				}
+
+				&-base, &-reflection {
+					height: #{100% - $break};
+				}
+
+				&-water {
+					height: $break;
+				}
+
+				&-reflection {
+					bottom: $break;
+				}
+			}
+
+			&-d {
+				$break: 19%;
+
+				top: 2.25vh;
+				height: 4vh;
+				z-index: 7;
+
+				&-base, &-water, &-reflection {
+					background-image: url(../img/boat-d.svg);
+				}
+
+				&-base, &-reflection {
+					height: #{100% - $break};
+				}
+
+				&-water {
+					height: $break;
+				}
+
+				&-reflection {
+					bottom: $break;
+				}
+			}
+
+			&-f {
+				$break: 10%;
+
+				top: 2.5vh;
+				height: 2.25vh;
+				z-index: 6;
+
+				&-base, &-water, &-reflection {
+					background-image: url(../img/boat-f.svg);
+				}
+
+				&-base, &-reflection {
+					height: #{100% - $break};
+				}
+
+				&-water {
+					height: $break;
+				}
+
+				&-reflection {
+					bottom: $break;
+				}
+			}
+
+			&-g {
+				$break: 12%;
+
+				top: -.5vh;
+				height: 4.25vh;
+				z-index: 5;
+
+				&-base, &-water, &-reflection {
+					background-image: url(../img/boat-g.svg);
+				}
+
+				&-base, &-reflection {
+					height: #{100% - $break};
+				}
+
+				&-water {
+					height: $break;
+				}
+
+				&-reflection {
+					bottom: $break;
+				}
+			}
+
+			&-h {
+				$break: 2%;
+
+				top: 9.25vh;
+				height: 1vh;
+				z-index: 8;
+
+				&-base, &-water, &-reflection {
+					background-image: url(../img/boat-h.svg);
+				}
+
+				&-base, &-reflection {
+					height: #{100% - $break};
+				}
+
+				&-water {
+					height: $break;
+				}
+
+				&-reflection {
+					bottom: $break;
+				}
+			}
+		}
+
+		&-balloon {
+			position: absolute;
+			top: calc(#{$waterHeight} + 24vh);
+			left: 0;
+			z-index: 10;
+			width: .75vh;
+
+			&-shade {
+				fill: darken(desaturate($accentColor, 8%), 10%);
+			}
+
+			&-fill {
+				fill: $accentColor;
+			}
+
+			&-shine {
+				fill: lighten(desaturate($accentColor, 24%), 36%);
+			}
+		}
+
+		&-wrapper {
+			@include rcm-fill;
+
+			z-index: 1;
+		}
+	}
+
+	&-fog {
+		@include rcm-fill;
+
+		z-index: 6;
+
+		&-fill {
+			@include rcm-fill;
+
+			background-color: hsla(204, 26%, 95%, .94);
+			z-index: 0;
+		}
+
+		&-cloud {
+			left: -9999px;
+			margin: auto;
+			position: absolute;
+			right: -9999px;
+			z-index: 5;
+		}
+
+		&-cloud-a {
+			transform: translateX(3vh);
+			top: 35vh;
+			height: 26vh;
+		}
+
+		&-cloud-b {
+			transform: translateX(-80vh);
+			top: -5vh;
+			height: 28vh;
+		}
+
+		&-cloud-c {
+			transform: translateX(-34vh);
+			top: 8vh;
+			height: 34vh;
+			z-index: 0;
+		}
+
+		&-cloud-d {
+			transform: translateX(16vh);
+			bottom: -2vh;
+			height: 30vh;
+			z-index: 0;
+		}
+
+		&-cloud-e {
+			transform: translateX(-72vh);
+			bottom: -2vh;
+			height: 30vh;
+			z-index: 0;
+		}
+
+		&-cloud-f {
+			transform: translateX(60vh);
+			top: -5vh;
+			height: 26vh;
+			z-index: 0;
+		}
+
+		&-cloud-g {
+			transform: translateX(34vh);
+			bottom: -4vh;
+			height: 30vh;
+		}
+
+		&-cloud-h {
+			transform: translateX(20vh);
+			bottom: 10vh;
+			height: 24vh;
+			z-index: 3;
+		}
+
+		&-cloud-i {
+			transform: translateX(62vh);
+			top: 42vh;
+			height: 24vh;
+		}
+
+		&-cloud-j {
+			transform: translateX(-60vh);
+			top: 44vh;
+			height: 28vh;
+		}
+
+		&-cloud-k {
+			transform: translateX(58vh);
+			top: 48vh;
+			height: 35vh;
+			z-index: 4;
+		}
+
+		&-cloud-l {
+			transform: translateX(58vh);
+			top: 16vh;
+			height: 34vh;
+			z-index: 3;
+		}
+
+		&-cloud-m {
+			transform: translateX(-24vh);
+			top: -8vh;
+			height: 34vh;
+			z-index: 3;
+		}
+
+		&-cloud-n {
+			transform: translateX(-72vh);
+			top: 18vh;
+			height: 38vh;
+			z-index: 3;
 		}
 	}
 }
@@ -734,24 +1329,24 @@ body {
 // .clc-slide-h {
 // 	background-color: hsla(218, 32%, 44%, 1);
 
-// 	&-message {
-// 		@include display-flex;
-// 		@include align-items(center);
+	// &-message {
+	// 	@include display-flex;
+	// 	@include align-items(center);
 
-// 		color: #FFF;
-// 		font-family: 'futura-pt', sans-serif;
-// 		font-size: 4.75vw;
-// 		font-weight: 500;
-// 		height: 100%;
-// 		line-height: 5.75vw;
-// 		padding: calc(2% + 12px);
-// 		position: absolute;
-// 		right: 0;
-// 		text-align: right;
-// 		top: 0;
-// 		width: 30%;
-// 		z-index: 5;
-// 	}
+	// 	color: #FFF;
+	// 	font-family: 'futura-pt', sans-serif;
+	// 	font-size: 4.75vw;
+	// 	font-weight: 500;
+	// 	height: 100%;
+	// 	line-height: 5.75vw;
+	// 	padding: calc(2% + 12px);
+	// 	position: absolute;
+	// 	right: 0;
+	// 	text-align: right;
+	// 	top: 0;
+	// 	width: 30%;
+	// 	z-index: 5;
+	// }
 
 	// .clc-slide-image-descriptor {
 	// 	border-color: hsla(218, 34%, 68%, 1);
@@ -775,15 +1370,34 @@ body {
 	background-color: $slideColor;
 	background-color: hsla(218, 32%, 44%, 1);
 
+	// &-message {
+	// 	// color: hsla(218, 32%, 44%, 1);
+	// 	color: #FFF;
+	// 	font-family: 'futura-pt', sans-serif;
+	// 	font-size: 4.25vw;
+	// 	line-height: 5vw;
+	// 	font-weight: 500;
+	// 	padding: 36px;
+	// 	text-align: center;
+	// 	z-index: 5;
+	// }
+
 	&-message {
-		// color: hsla(218, 32%, 44%, 1);
+		@include display-flex;
+		@include align-items(center);
+
 		color: #FFF;
 		font-family: 'futura-pt', sans-serif;
-		font-size: 4.25vw;
-		line-height: 5vw;
+		font-size: 4.75vw;
 		font-weight: 500;
-		padding: 36px;
-		text-align: center;
+		height: 100%;
+		line-height: 5.75vw;
+		padding: calc(2% + 12px);
+		position: absolute;
+		right: 0;
+		text-align: right;
+		top: 0;
+		width: 30%;
 		z-index: 5;
 	}
 
@@ -935,10 +1549,6 @@ body {
 	overflow: hidden;
 	position: relative;
 	width: 100%;
-
-	&-pointed-section {
-
-	}
 
 	// add a pointer
 	&-left {

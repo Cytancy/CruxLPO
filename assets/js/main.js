@@ -134,28 +134,28 @@ $(document).ready(function() {
 					},
 				}
 			},
-			slideJ: {
+			slideI: {
 				message: {
 					words: {
-						element: $(".clc-slide-j-content-message-word")
+						element: $(".clc-slide-i-content-message-word")
 					}
 				},
 				divider: {
-					element: $(".clc-slide-j-content-divider")
+					element: $(".clc-slide-i-content-divider")
 				},
 				form: {
-					element: $(".clc-slide-j-content-form"),
+					element: $(".clc-slide-i-content-form"),
 					input: {
-						element: $(".clc-slide-j-content-form-input"),
+						element: $(".clc-slide-i-content-form-input"),
 						input: {
-							element: $(".clc-slide-j-content-form-input-input"),
+							element: $(".clc-slide-i-content-form-input-input"),
 						},
 						placeholder: {
-							element: $(".clc-slide-j-content-form-input-placeholder"),
+							element: $(".clc-slide-i-content-form-input-placeholder"),
 						},
 					},
 					button: {
-						element: $(".clc-slide-j-content-form-button")
+						element: $(".clc-slide-i-content-form-button")
 					}
 				}
 			}
@@ -179,7 +179,7 @@ $(document).ready(function() {
 
 	setupSlideD();
 
-	setupSlideJ();
+	setupSlideI();
 
 	function setupScreen() {
 		$(window).on("resize", updateScreen);
@@ -1077,7 +1077,7 @@ $(document).ready(function() {
 		}
 	}
 
-	function setupSlideJ() {
+	function setupSlideI() {
 		setupActivation();
 
 		setupForm();
@@ -1093,10 +1093,10 @@ $(document).ready(function() {
 			updateActivation();
 
 			function updateActivation() {
-				if (screen.activeSlide.number == 9) {
+				if (screen.activeSlide.number == 8) {
 					activate();
 				}
-				else if (!screen.visibleSlides["9"]) {
+				else if (!screen.visibleSlides["8"]) {
 					deactivate();
 				}
 			}
@@ -1109,45 +1109,45 @@ $(document).ready(function() {
 				if (!entryTimeline) {
 					entryTimeline = new TimelineMax({paused: true});
 
-					entryTimeline.from(components.slideJ.message.words.element[0], .8, {
+					entryTimeline.from(components.slideI.message.words.element[0], .8, {
 						opacity: 0
 					}, 0);
 
-					entryTimeline.from(components.slideJ.message.words.element[1], .8, {
+					entryTimeline.from(components.slideI.message.words.element[1], .8, {
 						opacity: 0
-					}, .12);
+					}, .14);
 
-					entryTimeline.from(components.slideJ.message.words.element[2], .8, {
+					entryTimeline.from(components.slideI.message.words.element[2], .8, {
 						opacity: 0
-					}, .24);
+					}, .28);
 
-					entryTimeline.from(components.slideJ.message.words.element[3], .8, {
+					entryTimeline.from(components.slideI.message.words.element[3], .8, {
 						opacity: 0
-					}, .42);
+					}, .44);
 
-					entryTimeline.from(components.slideJ.message.words.element[4], .8, {
+					entryTimeline.from(components.slideI.message.words.element[4], .8, {
 						opacity: 0
-					}, .54);
+					}, .58);
 
-					entryTimeline.from(components.slideJ.message.words.element[5], .8, {
+					entryTimeline.from(components.slideI.message.words.element[5], .8, {
 						opacity: 0
-					}, .66);
+					}, .76);
 
-					entryTimeline.from(components.slideJ.divider.element, .62, {
+					entryTimeline.from(components.slideI.divider.element, .62, {
 						scaleY: 0,
 						opacity: 0,
 						transformOrigin: "50% 0%"
 					}, .74);
 
-					entryTimeline.from(components.slideJ.form.element, .48, {
+					entryTimeline.from(components.slideI.form.element, .48, {
 						x: 42,
 					}, .9);
 
-					entryTimeline.from(components.slideJ.form.input.element, .62, {
+					entryTimeline.from(components.slideI.form.input.element, .62, {
 						opacity: 0,
 					}, .9);
 
-					entryTimeline.from(components.slideJ.form.button.element, .62, {
+					entryTimeline.from(components.slideI.form.button.element, .62, {
 						opacity: 0,
 					}, 1.06);
 				}
@@ -1167,35 +1167,35 @@ $(document).ready(function() {
 		function setupForm() {
 			var placeholderVisible = true;
 
-			components.slideJ.form.input.input.element.on({
+			components.slideI.form.input.input.element.on({
 				input: function() {
-					var value = components.slideJ.form.input.input.element.val();
+					var value = components.slideI.form.input.input.element.val();
 
 					if (value.length && placeholderVisible) {
-						TweenMax.killTweensOf(components.slideJ.form.input.placeholder.element, {opacity: true});
+						TweenMax.killTweensOf(components.slideI.form.input.placeholder.element, {opacity: true});
 
-						TweenMax.to(components.slideJ.form.input.placeholder.element, .3, {opacity: 0});
+						TweenMax.to(components.slideI.form.input.placeholder.element, .3, {opacity: 0});
 
 						placeholderVisible = false;
 					}
 					else if (value.length == 0 && !placeholderVisible) {
-						TweenMax.killTweensOf(components.slideJ.form.input.placeholder.element, {opacity: true});
+						TweenMax.killTweensOf(components.slideI.form.input.placeholder.element, {opacity: true});
 
-						TweenMax.to(components.slideJ.form.input.placeholder.element, .3, {opacity: 1});
+						TweenMax.to(components.slideI.form.input.placeholder.element, .3, {opacity: 1});
 
 						placeholderVisible = true;
 					}
 				}
 			});
 
-			components.slideJ.form.button.element.on({
+			components.slideI.form.button.element.on({
 				mouseenter: function() {
-					TweenMax.to(components.slideJ.form.button.element, .24, {
+					TweenMax.to(components.slideI.form.button.element, .24, {
 						className: "+=clc-slide-j-content-form-button-hovered"
 					});
 				},
 				mouseleave: function() {
-					TweenMax.to(components.slideJ.form.button.element, .24, {
+					TweenMax.to(components.slideI.form.button.element, .24, {
 						className: "-=clc-slide-j-content-form-button-hovered"
 					});
 				}

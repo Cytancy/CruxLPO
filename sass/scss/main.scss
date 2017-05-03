@@ -125,7 +125,6 @@ body {
 
 	&-tagline {
 		color: $slideBColor;
-		cursor: pointer;
 		font-family: 'futura-pt', sans-serif;
 		font-size: 1.5vw;
 		font-weight: 700;
@@ -563,8 +562,8 @@ body {
 		$hairColor: hsla(32, 48%, 34%, 1);
 		$suitColor: hsla(218, 6%, 38%, 1);
 
-		bottom: calc(-2px - .2%);
-		height: calc(42px + 62%);
+		bottom: -.5vh;
+		height: 66vh;
 		left: calc(6px + 5%);
 		position: absolute;
 		z-index: 4;
@@ -703,6 +702,12 @@ body {
 			overflow: hidden;
 			z-index: 4;
 
+			&-reflection {
+				@include transform(scaleY(-1));
+
+				z-index: 8;
+			}
+
 			&-layer {
 				height: 100%;
 				left: 0;
@@ -710,19 +715,19 @@ body {
 				width: 100%;
 
 				&-a {
-					fill: hsla(198, 92%, 96%, 1);
+					fill: hsla(198, 92%, 99%, 1);
 					bottom: -6%;
 					z-index:5;
 				}
 
 				&-b {
-					fill: hsla(198, 90%, 94%, 1);
+					fill: hsla(198, 90%, 96%, 1);
 					bottom: 8%;
 					z-index: 4;
 				}
 
 				&-c {
-					fill: hsla(198, 88%, 92%, 1);
+					fill: hsla(198, 88%, 93%, 1);
 					bottom: 18%;
 					z-index: 3;
 				}
@@ -798,12 +803,12 @@ body {
 			@include transform(scaleY(-1));
 
 			bottom: -50%;
-			opacity: .25;
+			opacity: .35;
 			pointer-events: none;
-			z-index: 8;
+			z-index: 9;
 
 			&-gradient {
-				@include background-image(linear-gradient(top, rgba(#afd3f3, 0) 20%,rgba(#afd3f3, .75) 100%));
+				@include background-image(linear-gradient(top, rgba(#afd3f3, 0) 20%,rgba(#afd3f3, .85) 100%));
 
 				bottom: -#{$waterHeight};
 				height: #{$waterHeight};
@@ -816,7 +821,7 @@ body {
 		}
 
 		&-line {
-			background-color: hsl(210, 26%, 58%);
+			background-color: hsl(210, 20%, 64%);
 			bottom: -1px;
 			height: 2px;
 			position: absolute;
@@ -862,7 +867,7 @@ body {
 
 					height: 100%;
 					position: relative;
-					background-color: #AFD3F3;
+					background-color: hsla(208, 60%, 56%, 1);
 					width: 100%;
 				}
 
@@ -955,7 +960,7 @@ body {
 				z-index: 4;
 
 				&-base, &-water, &-reflection {
-					background-image: url(../img/boat-a.svg);
+					background-image: url(../img/boat-a.png);
 				}
 
 				&-base, &-reflection {
@@ -979,7 +984,7 @@ body {
 				z-index: 9;
 
 				&-base, &-water, &-reflection {
-					background-image: url(../img/boat-b.svg);
+					background-image: url(../img/boat-b.png);
 				}
 
 				&-base, &-reflection {
@@ -1003,7 +1008,7 @@ body {
 				z-index: 10;
 
 				&-base, &-water, &-reflection {
-					background-image: url(../img/boat-c.svg);
+					background-image: url(../img/boat-c.png);
 				}
 
 				&-base, &-reflection {
@@ -1027,7 +1032,7 @@ body {
 				z-index: 7;
 
 				&-base, &-water, &-reflection {
-					background-image: url(../img/boat-d.svg);
+					background-image: url(../img/boat-d.png);
 				}
 
 				&-base, &-reflection {
@@ -1051,7 +1056,7 @@ body {
 				z-index: 6;
 
 				&-base, &-water, &-reflection {
-					background-image: url(../img/boat-f.svg);
+					background-image: url(../img/boat-f.png);
 				}
 
 				&-base, &-reflection {
@@ -1075,7 +1080,7 @@ body {
 				z-index: 5;
 
 				&-base, &-water, &-reflection {
-					background-image: url(../img/boat-g.svg);
+					background-image: url(../img/boat-g.png);
 				}
 
 				&-base, &-reflection {
@@ -1099,7 +1104,7 @@ body {
 				z-index: 8;
 
 				&-base, &-water, &-reflection {
-					background-image: url(../img/boat-h.svg);
+					background-image: url(../img/boat-h.png);
 				}
 
 				&-base, &-reflection {
@@ -1139,6 +1144,7 @@ body {
 		&-wrapper {
 			@include rcm-fill;
 
+			overflow: hidden;
 			z-index: 1;
 		}
 	}
@@ -1146,6 +1152,7 @@ body {
 	&-fog {
 		@include rcm-fill;
 
+		overflow: hidden;
 		z-index: 6;
 
 		&-fill {
@@ -1261,7 +1268,7 @@ body {
 .clc-slide-f {
 	@include rcm-flex-center;
 
-	background-color: hsla(232, 18%, 24%, 1);
+	background-color: rgb(28, 31, 46);
 
 	&-message {
 		bottom: -.75vw;
@@ -1274,26 +1281,70 @@ body {
 		position: absolute;
 		right: 0;
 		text-align: right;
-		z-index: 5;
+		z-index: 7;
 	}
 
-	.clc-slide-image-descriptor {
-		bottom: auto;
-		top: 12px;
-		border-color: hsla(232, 12%, 46%, 1);
+	&-sky {
+		position: absolute;
+		top: 0;
+		height: 100%;
+		width: 105%;
+		left: -2.5%;
+		background-color: rgba(28,31,46,1);
+		z-index: 3;
 
-		&-title {
-			color: hsla(232, 14%, 56%, 1);
+		&-light {
+			@include background-image(linear-gradient(top, rgba(202,184,209,0) 0%,rgba(202,184,209, .92) 100%));
+
+			bottom: 0;
+			height: 45vw;
+			left: 0;
+			position: absolute;
+			width: 100%;
+			z-index: 6;
 		}
 
-		&-message{
-			color: hsla(232, 18%, 84%, 1);
+		&-star {
+			$size: .25vw;
+
+			@include border-radius(50%);
+
+			background-color: hsla(230, 8%, 85%, 1);
+			position: absolute;
+			top: #{$size / 2};
+			left: #{$size / 2};
+			height: $size;
+			width: $size;
+			z-index: 5;
 		}
+	}
+
+	&-mountains {
+		@include box-shadow(0 24vh 0 0 #10161C);
+
+		bottom: -.5vw;
+		left: -4%;
+		position: absolute;
+		width: 108%;
+
+		&-wrapper {
+			@include rcm-fill;
+
+			z-index: 4;
+		}
+	}
+
+	&-wandering-man {
+		bottom: 0;
+		position: absolute;
+		right: 0;
+		width: 12vw;
+		z-index: 6;
 	}
 }
 
 .clc-slide-g {
-	background-color: hsla(132, 26%, 46%, 1);
+	background-color: #496B53;
 
 	&-message {
 		@include display-flex;
@@ -1313,74 +1364,83 @@ body {
 		z-index: 5;
 	}
 
-	.clc-slide-image-descriptor {
-		border-color: hsla(132, 22%, 68%, 1);
+	&-workfloor {
+		position: absolute;
+		top: -112vh;
+		left: 32vh;
+		height: 172vh;
+		z-index: 3;
+	}
 
-		&-title {
-			color: hsla(132, 22%, 78%, 1);
+	&-foreground {
+		@include rcm-fill;
+
+		&-wrapper {
+			@include rcm-fill;
+
+			z-index: 4;
 		}
+	}
 
-		&-message{
-			color: hsla(132, 28%, 92%, 1);
+	&-table {
+		position: absolute;
+		bottom: -26vh;
+		right: -25vh;
+		height: 120vh;
+		z-index: 4;
+	}
+
+	&-hand {
+		position: absolute;
+		bottom: -2vh;
+		right: -12vh;
+		height: 78vh;
+		visibility: hidden;
+		z-index: 6;
+	}
+
+	&-box {
+		bottom: 16vh;
+		height: 30vh;
+		position: absolute;
+		right: 36vh;
+		visibility: hidden;
+		z-index: 8;
+
+		&-shadow {
+			bottom: 13vh;
+			height: 19vh;
+			position: absolute;
+			right: 36vh;
+			visibility: hidden;
+			z-index: 7;
+		}
+	}
+
+	&-pipe {
+		position: absolute;
+		top: -104vh;
+		width: 44vh;
+		right: 28vh;
+		z-index: 10;
+
+
+		&-shadow {
+			position: absolute;
+			bottom: -56.5vh;
+			right: 28vh;
+			width: 164vh;
+			z-index: 5;
 		}
 	}
 }
 
-// .clc-slide-h {
-// 	background-color: hsla(218, 32%, 44%, 1);
-
-	// &-message {
-	// 	@include display-flex;
-	// 	@include align-items(center);
-
-	// 	color: #FFF;
-	// 	font-family: 'futura-pt', sans-serif;
-	// 	font-size: 4.75vw;
-	// 	font-weight: 500;
-	// 	height: 100%;
-	// 	line-height: 5.75vw;
-	// 	padding: calc(2% + 12px);
-	// 	position: absolute;
-	// 	right: 0;
-	// 	text-align: right;
-	// 	top: 0;
-	// 	width: 30%;
-	// 	z-index: 5;
-	// }
-
-	// .clc-slide-image-descriptor {
-	// 	border-color: hsla(218, 34%, 68%, 1);
-	// 	width: 54%;
-
-	// 	&-title {
-	// 		color: hsla(218, 34%, 82%, 1);
-	// 	}
-
-	// 	&-message{
-	// 		color: hsla(218, 34%, 94%, 1);
-	// 	}
-// 	}
-// }
-
 .clc-slide-h {
-	$slideColor: hsla(218, 3%, 14%, 1);
+	$slideColor: hsla(218, 32%, 44%, 1);
 
 	@include rcm-flex-center;
 
-	background-color: $slideColor;
 	background-color: hsla(218, 32%, 44%, 1);
-
-	// &-message {
-	// 	// color: hsla(218, 32%, 44%, 1);
-	// 	color: #FFF;
-	// 	font-family: 'futura-pt', sans-serif;
-	// 	font-size: 4.25vw;
-	// 	line-height: 5vw;
-	// 	font-weight: 500;
-	// 	padding: 36px;
-	// 	text-align: center;
-	// 	z-index: 5;
-	// }
 
 	&-message {
 		@include display-flex;
@@ -1399,19 +1459,193 @@ body {
 		top: 0;
 		width: 30%;
 		z-index: 5;
+
+		&-text {
+			position: relative;
+		}
 	}
 
-	.clc-slide-image-descriptor {
-		border-color: hsla(218, 34%, 68%, 1);
-		width: 54%;
+	&-storescape {
+		@include rcm-fill;
 
-		&-title {
-			color: hsla(218, 34%, 82%, 1);
+		&-content {
+			position: absolute;
+			top: -1004vmin;
+			bottom: -1000vmin;
+			left: -1016vmin;
+			right: -1000vmin;
+			margin: auto;
+			width: 248vmin;
+			z-index: 4;
 		}
 
-		&-message{
-			color: hsla(218, 34%, 94%, 1);
+		&-wrapper {
+			@include rcm-fill;
+
+			z-index: 1;
 		}
+	}
+
+	&-car {
+		position: absolute;
+		margin: auto;
+		z-index: 5;
+
+		&-striped-car {
+			top: -1018vmin;
+			bottom: -1000vmin;
+			left: -1000.5vmin;
+			right: -1000vmin;
+			width: 8vmin;
+		}
+
+		&-blue-truck {
+			top: -1018vmin;
+			bottom: -1000vmin;
+			left: -1000.5vmin;
+			right: -1000vmin;
+			width: 10vmin;
+		}
+
+		&-yellow-truck {
+			top: -1018vmin;
+			bottom: -1000vmin;
+			left: -1000.5vmin;
+			right: -1000vmin;
+			width: 8vmin;
+		}
+
+		&-suv {
+			top: -1018vmin;
+			bottom: -1000vmin;
+			left: -1002vmin;
+			right: -1000vmin;
+			width: 8vmin;
+		}
+
+		&-stationwagon {
+			top: -1018vmin;
+			bottom: -1000vmin;
+			left: -1001.5vmin;
+			right: -1000vmin;
+			width: 15vmin;
+		}
+	}
+
+	&-sky {
+		@include rcm-fill;
+
+		z-index: 2;
+
+		&-cloud {
+			bottom: -1000vmin;
+			height: 12vmin;
+			left: -1000vmin;
+			margin: auto;
+			position: absolute;
+			right: -1000vmin;
+			top: -1000vmin;
+			// width: 14vmin;
+
+			&-content {
+				position: absolute;
+				width: 100%;
+				top: 0;
+				left: 0;
+				z-index: 5;
+			}
+
+			&-shadow {
+				bottom: 0;
+				bottom: 0;
+				left: 5%;
+				margin: auto;
+				position: absolute;
+				width: 90%;
+				z-index: 4;
+			}
+		}
+	}
+
+	&-product {
+		@include display-flex;
+		@include align-items(flex-start);
+		@include justify-content(space-between);
+
+		height: 36%;
+		left: 8%;
+		position: absolute;
+		bottom: 0;
+		width: 62%;
+		z-index: 4;
+
+		&-item {
+			@include flex(0 0 auto);
+
+			height: 16.5vmin;
+			position: relative;
+
+			&-binoculars {
+				height: 12vmin;
+				margin-top: 2vmin;
+			}
+
+			&-bread {
+				padding: 1.5vmin 0;
+			}
+
+			&-book {
+				padding: 1vmin 0;
+			}
+
+			&-turkey {
+				height: 13vmin;
+				margin-top: 1vmin;
+			}
+
+			&-dead-fish {
+				height: 8vmin;
+				margin-top: 4.5vmin;
+			}
+
+			&-car-battery {
+				height: 16vmin;
+				margin-top: .25vmin;
+			}
+
+			&-batteries {
+				height: 14vmin;
+				margin-top: 2vmin;
+			}
+
+			&-hats {
+				height: 14vmin;
+				margin-top: .5vmin;
+			}
+
+			&-cat-b {
+				height: 15vmin;
+			}
+
+			&-lunch {
+				height: 14vmin;
+				margin-top: 1vmin;
+			}
+		}
+	}
+
+	&-overlay-effects {
+		@include rcm-fill;
+
+		pointer-events: none;
+		z-index: 6;
+	}
+
+	&-underlay-effects {
+		@include rcm-fill;
+
+		pointer-events: none;
+		z-index: 3;
 	}
 }
 

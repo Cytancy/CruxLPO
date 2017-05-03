@@ -151,6 +151,7 @@ $(document).ready(function() {
 			},
 			slideE: {
 				fog: {
+					element: $(".clc-slide-e-fog"),
 					fill: {element: $(".clc-slide-e-fog-fill")},
 					cloud: {
 						a: {element: $(".clc-slide-e-fog-cloud-a")},
@@ -196,15 +197,15 @@ $(document).ready(function() {
 					},
 					sky: {
 						section: [
-							{element: $(".clc-slide-e-city-sky-section-0")},  
-							{element: $(".clc-slide-e-city-sky-section-1")},  
-							{element: $(".clc-slide-e-city-sky-section-2")},  
-							{element: $(".clc-slide-e-city-sky-section-3")},  
-							{element: $(".clc-slide-e-city-sky-section-4")},  
-							{element: $(".clc-slide-e-city-sky-section-5")},  
-							{element: $(".clc-slide-e-city-sky-section-6")},  
-							{element: $(".clc-slide-e-city-sky-section-7")},  
-							{element: $(".clc-slide-e-city-sky-section-8")},  
+							{element: $(".clc-slide-e-city-sky-section-0")},	
+							{element: $(".clc-slide-e-city-sky-section-1")},	
+							{element: $(".clc-slide-e-city-sky-section-2")},	
+							{element: $(".clc-slide-e-city-sky-section-3")},	
+							{element: $(".clc-slide-e-city-sky-section-4")},	
+							{element: $(".clc-slide-e-city-sky-section-5")},	
+							{element: $(".clc-slide-e-city-sky-section-6")},	
+							{element: $(".clc-slide-e-city-sky-section-7")},	
+							{element: $(".clc-slide-e-city-sky-section-8")},	
 						],
 					},
 					boat: {
@@ -219,6 +220,61 @@ $(document).ready(function() {
 					balloon: {
 						element: $(".clc-slide-e-city-balloon"), 
 					}
+				}
+			},
+			slideF: {
+				element: $(".clc-slide-f"),
+				sky: {
+					element: $(".clc-slide-f-sky"),
+				},
+				mountains: {
+					element: $(".clc-slide-f-mountains"),
+					wrapper: {
+						element: $(".clc-slide-f-mountains-wrapper"),
+					}
+				},
+				wanderingMan: {
+					element: $(".clc-slide-f-wandering-man"),
+				}
+			},
+			slideG: {
+				element: $(".clc-slide-g"),
+				foreground: {
+					element: $(".clc-slide-g-foreground"),
+					wrapper: {element: $(".clc-slide-g-foreground-wrapper")},
+				},
+				workfloor: {
+					element: $(".clc-slide-g-workfloor"),
+				},
+				hand: {
+					element: $(".clc-slide-g-hand"),
+				},
+				box: {
+					element: $(".clc-slide-g-box"),
+					shadow: {
+						element: $(".clc-slide-g-box-shadow"),
+					},
+				},
+			},
+			slideH: {
+				element: $(".clc-slide-h"),
+				sky: {
+					element: $(".clc-slide-h-sky")
+				},
+				storescape: {
+					element: $(".clc-slide-h-storescape"),
+					wrapper: {
+						element: $(".clc-slide-h-storescape-wrapper"),
+					}
+				},
+				product: {
+					element: $(".clc-slide-h-product"),
+				},
+				overlayEffects: {
+					element: $(".clc-slide-h-overlay-effects"),
+				},
+				underlayEffects: {
+					element: $(".clc-slide-h-underlay-effects"),
 				}
 			},
 			slideI: {
@@ -268,6 +324,12 @@ $(document).ready(function() {
 
 	setupSlideE();
 
+	setupSlideF();
+
+	setupSlideG();
+
+	setupSlideH();
+
 	setupSlideI();
 
 	function setupScreen() {
@@ -282,23 +344,63 @@ $(document).ready(function() {
 
 			screen.height = components.main.element.height();
 
+			if (screen.width > screen.height) {
+				screen.lesser = screen.height;
+				
+				screen.greater = screen.width;
+			}
+			else {
+				screen.lesser = screen.width;
+				
+				screen.greater = screen.height;
+			}
+
+			screen.vmin = screen.lesser / 100;
+
+			screen.vmax = screen.greater / 100;
+
 			notifyObservers("resize");
 		}
 	}
 
 	function setupEntryCover() {
+		var playing;
+
 		if (screen.scrollPosition == 0) {
+			playing = true;
+
 			enter(true);
 		}
 		else if (screen.visibleSlides["0"]) {
+			playing = true;
+
 			enter();
 		}
 		else {
 			components.slideA.coverA.element.remove();
 
 			components.slideA.coverB.element.remove();
+		}
 
-			components.slideA.content.background.video.element[0].play();
+		observers["scroll"].push(updateVideo);
+
+		function updateVideo() {
+			if (screen.visibleSlides["0"]) {
+				if (!playing) {
+					playing = true;
+
+					components.slideA.content.background.video.element[0].play();
+				}
+			}
+			else {
+				if (playing) {
+					playing = false;
+
+					components.slideA.content.background.video.element[0].pause();
+
+					components.slideA.content.background.video.element[0].currentTime = 0;
+				}
+			}
 		}
 
 		function enter(lock) {
@@ -342,7 +444,7 @@ $(document).ready(function() {
 					[{ratio: .85, delta: 0}, {ratio: .21, delta: 0}],
 					[{ratio: .86, delta: 0}, {ratio: .21, delta: 0}],
 				],
-				entryTimeline = new TimelineMax({paused: true, delay: .4, onComplete: function() {
+				entryTimeline = new TimelineMax({paused: true, delay: .34, onComplete: function() {
 					components.slideA.coverA.element.remove();
 
 					components.slideA.coverB.element.remove();
@@ -439,7 +541,7 @@ $(document).ready(function() {
 			}, 1.26);
 
 			entryTimeline.addCallback(function() {
-				components.slideA.content.background.video.element[0].play();
+				if (playing) components.slideA.content.background.video.element[0].play();
 			}, 1.4);
 
 			entryTimeline.to(components.slideA.coverB.element, .6, {
@@ -493,7 +595,6 @@ $(document).ready(function() {
 				window.scrollTo(0, 0);
 			}
 		}
-
 
 		function parsePointsIntoLine(points, tag) {
 			var x, y,
@@ -550,7 +651,9 @@ $(document).ready(function() {
 	}
 
 	function setupScrolling() {
-		documentElement.on("scroll", _.throttle(checkScroll, 50));
+		documentElement.on("scroll", _.throttle(function() {
+			window.requestAnimationFrame(checkScroll);
+		}, 50));
 
 		checkScroll();
 
@@ -796,7 +899,7 @@ $(document).ready(function() {
 
 		updateActivation();
 
-		updateParallax();
+		updateParallax(0, true);
 
 		function updateActivation() {
 			if (screen.visibleSlides["1"]) {
@@ -807,13 +910,14 @@ $(document).ready(function() {
 			}
 		}
 
-		function updateParallax() {
+		function updateParallax(value, force) {
 			var offsetRange,
 				screenDeltaRange,
 				scrollRatio,
-				newOffset;
+				newOffset,
+				duration = force ? 0 : .2;
 
-			if (!cloudTimelines) return;
+			if (!cloudTimelines && !force) return;
 
 			screenDeltaRange = [screen.height * .5, screen.height * 1.5]
 
@@ -828,14 +932,8 @@ $(document).ready(function() {
 			if (newOffset == cloudOffset) return;
 
 			cloudOffset = newOffset;
-				
-			TweenMax.to(components.slideB.cloud.element, .2, {y: cloudOffset});
 
-			if (!tieTimeline) {
-				tieTimeline = new TimelineMax({paused: true});
-
-
-			}
+			TweenMax.to(components.slideB.cloud.element, duration, {y: cloudOffset});
 		}
 
 		function activate() {
@@ -947,7 +1045,7 @@ $(document).ready(function() {
 
 		updateActivation();
 
-		updateParallax();
+		updateParallax(0, true);
 
 		function updateActivation() {
 			if (screen.activeSlide.number == 2) {
@@ -958,13 +1056,14 @@ $(document).ready(function() {
 			}
 		}
 
-		function updateParallax() {
+		function updateParallax(value, force) {
 			var offsetRange,
 				screenDeltaRange,
 				scrollRatio,
-				newOffset;
+				newOffset,
+				duration = force ? 0 : .2;
 
-			if (!screen.visibleSlides["2"]) return;
+			if (!screen.visibleSlides["2"] && !force) return;
 
 			screenDeltaRange = [screen.height * 1, screen.height * 3]
 
@@ -980,7 +1079,7 @@ $(document).ready(function() {
 
 			headacheOffset = newOffset;
 				
-			TweenMax.to(components.slideC.headache.element, .2, {y: headacheOffset});
+			TweenMax.to(components.slideC.headache.element, duration, {y: headacheOffset});
 		}
 
 		function activate() {
@@ -1223,7 +1322,7 @@ $(document).ready(function() {
 
 		updateActivation();
 
-		updateParallax();
+		updateParallax(0, true);
 
 		function updateActivation() {
 			if (screen.visibleSlides["3"]) {
@@ -1234,17 +1333,18 @@ $(document).ready(function() {
 			}
 		}
 
-		function updateParallax() {
+		function updateParallax(value, force) {
 			var offsetRange,
 				screenDeltaRange,
 				scrollRatio,
-				newOffset;
+				newOffset,
+				duration = force ? 0 : .2;
 
-			if (!flickerActivated) return;
+			if (!flickerActivated && !force) return;
 
 			screenDeltaRange = [screen.height * 2.5, screen.height * 3.5]
 
-			offsetRange = screen.height * .2;
+			offsetRange = screen.height * .1;
 
 			scrollRatio = (screen.scrollPosition - screenDeltaRange[0]) / (screenDeltaRange[1] - screenDeltaRange[0]);
 
@@ -1255,8 +1355,8 @@ $(document).ready(function() {
 			if (newOffset == slouchOffset) return;
 
 			slouchOffset = newOffset;
-				
-			TweenMax.to(components.slideD.slouch.element, .2, {y: slouchOffset});
+
+			TweenMax.to(components.slideD.slouch.element, duration, {y: slouchOffset});
 		}
 
 		function activate() {
@@ -1293,15 +1393,49 @@ $(document).ready(function() {
 	function setupSlideE() {
 		var parallaxHandler,
 			slideActive = false,
-			fogTimeline;
+			fogTimeline,
+			cityOffset,
+			boatCalls = [];
 
-		observers["visibleSlidesUpdated"].push(updateActivation);
+		observers["scroll"].push(updateActivation);
+
+		observers["scroll"].push(updateParallax);
+
+		observers["resize"].push(updateParallax);
 
 		updateActivation();
 
+		updateParallax(0, true);
+
+		function updateParallax(value, force) {
+			var offsetRange,
+				screenDeltaRange,
+				scrollRatio,
+				newOffset,
+				duration = force ? 0 : .2;
+
+			if (!slideActive && !force) return;
+
+			screenDeltaRange = [screen.height * 3, screen.height * 5]
+
+			offsetRange = screen.height * .12;
+
+			scrollRatio = (screen.scrollPosition - screenDeltaRange[0]) / (screenDeltaRange[1] - screenDeltaRange[0]);
+
+			scrollRatio = Math.max(Math.min((scrollRatio - .5) * 2, 1), -1);
+
+			newOffset = Math.round(scrollRatio * offsetRange);
+
+			if (newOffset == cityOffset) return;
+
+			cityOffset = newOffset;
+
+			TweenMax.to(components.slideE.city.wrapper.element, duration, {y: cityOffset});
+		}
+
 		function updateActivation() {
 			if (screen.visibleSlides["4"]) {
-				activate();
+				if (!slideActive && screen.scrollPosition > screen.height * 3.2) activate();
 			}
 			else {
 				deactivate();
@@ -1331,7 +1465,11 @@ $(document).ready(function() {
 
 			function clearFog() {
 				if (!fogTimeline) {
-					fogTimeline = new TimelineMax({paused: true, delay: .1});
+					fogTimeline = new TimelineMax({paused: true, delay: 0, 
+						onComplete: function() {
+							TweenMax.set(components.slideE.fog.element, {display: "none"});
+						}
+					});
 
 					fogTimeline.fromTo(components.slideE.fog.fill.element, 1.4, {
 						opacity: 1
@@ -1571,7 +1709,7 @@ $(document).ready(function() {
 					opacity: 0,
 					ease: Power0.easeNone,
 					onComplete: repeats.section7,
-					delay:  layerCTime * .2 - fadeOutTime,
+					delay: layerCTime * .2 - fadeOutTime,
 				});
 
 				repeats.section8 = function() {
@@ -1602,7 +1740,7 @@ $(document).ready(function() {
 					opacity: 0,
 					ease: Power0.easeNone,
 					onComplete: repeats.section8,
-					delay:  layerCTime * .72 - fadeOutTime,
+					delay: layerCTime * .72 - fadeOutTime,
 				});
 
 				// == Layer B
@@ -1635,7 +1773,7 @@ $(document).ready(function() {
 					opacity: 0,
 					ease: Power0.easeNone,
 					onComplete: repeats.section3,
-					delay:  layerBTime * .54 - fadeOutTime,
+					delay: layerBTime * .54 - fadeOutTime,
 				});
 
 				repeats.section4 = function() {
@@ -1666,7 +1804,7 @@ $(document).ready(function() {
 					opacity: 0,
 					ease: Power0.easeNone,
 					onComplete: repeats.section4,
-					delay:  layerBTime * .3 - fadeOutTime,
+					delay: layerBTime * .3 - fadeOutTime,
 				});
 
 				repeats.section5 = function() {
@@ -1697,7 +1835,7 @@ $(document).ready(function() {
 					opacity: 0,
 					ease: Power0.easeNone,
 					onComplete: repeats.section5,
-					delay:  layerBTime * .54 - fadeOutTime,
+					delay: layerBTime * .54 - fadeOutTime,
 				});
 
 				// == Layer A
@@ -1730,7 +1868,7 @@ $(document).ready(function() {
 					opacity: 0,
 					ease: Power0.easeNone,
 					onComplete: repeats.section0,
-					delay:  layerATime * .82 - fadeOutTime,
+					delay: layerATime * .82 - fadeOutTime,
 				});
 
 				repeats.section1 = function() {
@@ -1761,7 +1899,7 @@ $(document).ready(function() {
 					opacity: 0,
 					ease: Power0.easeNone,
 					onComplete: repeats.section1,
-					delay:  layerATime * .62 - fadeOutTime,
+					delay: layerATime * .62 - fadeOutTime,
 				});
 
 				repeats.section2 = function() {
@@ -1792,7 +1930,7 @@ $(document).ready(function() {
 					opacity: 0,
 					ease: Power0.easeNone,
 					onComplete: repeats.section2,
-					delay:  layerATime * 1.04 - fadeOutTime,
+					delay: layerATime * 1.04 - fadeOutTime,
 				});
 			}
 
@@ -1803,7 +1941,7 @@ $(document).ready(function() {
 					rightEnd = 10;
 
 				repeats.boatA = function() {
-					TweenMax.delayedCall(Math.random() * 12, function() {
+					addBoatCall(Math.random() * 12, function() {
 						if (!slideActive) return;
 
 						TweenMax.fromTo(components.slideE.city.boat.a.element, baseBoatSpeed * 1.2, {
@@ -1825,7 +1963,7 @@ $(document).ready(function() {
 				});
 
 				repeats.boatB = function() {
-					TweenMax.delayedCall(Math.random() * 12, function() {
+					addBoatCall(Math.random() * 12, function() {
 						if (!slideActive) return;
 
 						TweenMax.fromTo(components.slideE.city.boat.b.element, baseBoatSpeed * 1, {
@@ -1836,7 +1974,6 @@ $(document).ready(function() {
 							onComplete: repeats.boatB,
 						});
 					});
-				
 				}
 
 				TweenMax.fromTo(components.slideE.city.boat.b.element, baseBoatSpeed * .92, {
@@ -1848,7 +1985,7 @@ $(document).ready(function() {
 				});
 
 				repeats.boatC = function() {
-					TweenMax.delayedCall(4 + Math.random() * 10, function() {
+					addBoatCall(4 + Math.random() * 10, function() {
 						if (!slideActive) return;
 
 						TweenMax.fromTo(components.slideE.city.boat.c.element, baseBoatSpeed * .58, {
@@ -1864,7 +2001,7 @@ $(document).ready(function() {
 				repeats.boatC();
 
 				repeats.boatD = function() {
-					TweenMax.delayedCall(4 + Math.random() * 24, function() {
+					addBoatCall(4 + Math.random() * 24, function() {
 						if (!slideActive) return;
 
 						TweenMax.fromTo(components.slideE.city.boat.d.element, baseBoatSpeed * .96, {
@@ -1880,7 +2017,7 @@ $(document).ready(function() {
 				repeats.boatD();
 
 				repeats.boatF = function() {
-					TweenMax.delayedCall(18 + Math.random() * 32, function() {
+					addBoatCall(18 + Math.random() * 32, function() {
 						if (!slideActive) return;
 
 						TweenMax.fromTo(components.slideE.city.boat.f.element, baseBoatSpeed * .74, {
@@ -1896,7 +2033,7 @@ $(document).ready(function() {
 				repeats.boatF();
 
 				repeats.boatG = function() {
-					TweenMax.delayedCall(6 + Math.random() * 8, function() {
+					addBoatCall(6 + Math.random() * 8, function() {
 						if (!slideActive) return;
 
 						TweenMax.fromTo(components.slideE.city.boat.g.element, baseBoatSpeed * .86, {
@@ -1912,7 +2049,7 @@ $(document).ready(function() {
 				repeats.boatG();
 
 				repeats.boatH = function() {
-					TweenMax.delayedCall(14 + Math.random() * 60, function() {
+					addBoatCall(14 + Math.random() * 60, function() {
 						if (!slideActive) return;
 
 						TweenMax.fromTo(components.slideE.city.boat.h.element, baseBoatSpeed * .18, {
@@ -1926,6 +2063,12 @@ $(document).ready(function() {
 				}
 
 				repeats.boatH();
+
+				function addBoatCall(delay, call) {
+					TweenMax.delayedCall(delay, call);
+
+					boatCalls.push(call);
+				}
 			}
 
 			function activateBalloon() {
@@ -1989,12 +2132,25 @@ $(document).ready(function() {
 
 			fogTimeline = null;
 
+			while (boatCalls.length) {
+				TweenMax.killDelayedCallsTo(boatCalls.shift());
+			}
+
+			for (var key in components.slideE.city.boat) {
+				TweenMax.killTweensOf(components.slideE.city.boat[key].element, {x: true});
+
+				TweenMax.set(components.slideE.city.boat[key].element, {x: -50});
+			}
+
+			TweenMax.set(components.slideE.fog.element, {display: ""});
+
 			TweenMax.killTweensOf([
 				components.slideE.city.water.waveA.element,
 				components.slideE.city.water.waveB.element,
 				components.slideE.city.water.waveC.element,
 				components.slideE.city.water.waveD.element,
 			], {xPercent: true});
+
 
 			for (var idx = 0, len = components.slideE.city.sky.section.length; idx < len; idx++) {
 				TweenMax.killTweensOf(components.slideE.city.sky.section[idx].element, {xPercent: true, opacity: true});
@@ -2005,6 +2161,927 @@ $(document).ready(function() {
 			TweenMax.killTweensOf(components.slideE.city.balloon.element, {x: true, y: true});
 
 			slideActive = false;
+		}
+	}
+
+	function setupSlideF() {
+		var stars = [],
+			parallaxHandler,
+			slideActive,
+			scrollOffsets = {};
+
+		observers["scroll"].push(updateActivation);
+
+		observers["scroll"].push(updateParallax);
+
+		observers["resize"].push(function() {
+			updateParallax();
+
+			regenerateStars();
+		});
+
+		updateActivation();
+
+		updateParallax(0, true);
+
+		function updateParallax(value, force) {
+			var offsetRanges = {
+					wanderingMan: screen.height * .1,
+					mountains: screen.height * .16,
+					sky: screen.height * .32,
+				},
+				screenDeltaRange,
+				scrollRatio,
+				newOffsets = {},
+				duration = force ? 0 : .2;
+
+			if (!slideActive && !force) return;
+
+			screenDeltaRange = [screen.height * 4, screen.height * 6]
+
+			scrollRatio = (screen.scrollPosition - screenDeltaRange[0]) / (screenDeltaRange[1] - screenDeltaRange[0]);
+
+			scrollRatio = Math.max(Math.min((scrollRatio - .5) * 2, 1), -1);
+
+			for (var key in offsetRanges) {
+				newOffsets[key] = Math.round(scrollRatio * offsetRanges[key]);
+
+				if (newOffsets[key] != scrollOffsets[key]) {
+					scrollOffsets[key] = newOffsets[key];
+
+					if (key == "mountains") {
+						TweenMax.to(components.slideF.mountains.wrapper.element, duration, {y: scrollOffsets[key]});
+					}
+					else if (key == "sky") {
+						TweenMax.to(components.slideF.sky.element, duration, {y: scrollOffsets[key]});
+					}
+					else if (key == "wanderingMan") {
+						TweenMax.to(components.slideF.wanderingMan.element, duration, {y: scrollOffsets[key]});
+					} 
+				}
+			}
+		}
+
+		function updateActivation() {
+			if (screen.visibleSlides["5"]) {
+				activate();
+			}
+			else {
+				deactivate();
+			}
+		}
+
+		function activate() {
+			if (slideActive) return;
+
+			slideActive = true;
+
+			generateStars();
+
+			activateMouseParallax();
+		}
+
+		function deactivate() {
+			if (!slideActive) return;
+
+			TweenMax.killDelayedCallsTo(twinkle);
+
+			while (stars.length) {
+				stars.shift().element.remove();
+			}
+
+			if (parallaxHandler) {
+				components.slideF.element.off("mousemove", parallaxHandler);
+
+				parallaxHandler = null;
+			}
+			else {
+				console.warn("Parallax handler is missing.")
+			}
+
+			slideActive = false;
+		}
+
+		function generateStars() {
+			var starCount = 0.00021637867 * screen.width * screen.height; // make this width & height based
+
+			for (var idx = 0; idx < starCount; idx++) {
+				generateStar();
+			}
+
+			function generateStar() {
+				var starElement = $("<div class='clc-slide-f-sky-star'></div>");
+
+				TweenMax.set(starElement, {
+					x: Math.random() * screen.width * 1.05,
+					y: Math.random() * Math.random() * screen.height,
+					scale: (Math.random() * Math.random() * .9) + .1,
+				});
+
+				stars.push({
+					element: starElement
+				});
+
+				components.slideF.sky.element.append(starElement);
+			}
+
+			twinkle();
+		}
+
+		function activateMouseParallax() {
+			var targetOffsets = {},
+				offsets = {};
+
+			parallaxHandler = _.throttle(function(event) {
+				var maxDeltas = {
+						mountains: -400,
+						sky: -200,
+						wanderingMan: 200,
+					},
+					halfPoint = screen.width / 2,
+					offsetRatio = ((event.clientX - halfPoint) / halfPoint);
+
+				for (var key in maxDeltas) {
+					offsets[key] = Math.round(offsetRatio * maxDeltas[key]);
+
+					if (offsets[key] != targetOffsets[key]) {
+						targetOffsets[key] = offsets[key];
+
+						if (key == "mountains") {
+							TweenMax.to(components.slideF.mountains.wrapper.element, .2, {
+								xPercent: targetOffsets.mountains / 100,
+							});
+						}
+						else if (key == "sky") {
+							TweenMax.to(components.slideF.sky.element, .2, {
+								xPercent: targetOffsets.sky / 100,
+							});
+						}
+						else if (key == "wanderingMan") {
+							TweenMax.to(components.slideF.wanderingMan.element, .2, {
+								xPercent: targetOffsets.wanderingMan / 100,
+							});
+						}
+					}
+				}
+			}, 50);
+
+			components.slideF.element.on("mousemove", parallaxHandler);
+		}
+
+		function regenerateStars() {
+			TweenMax.killDelayedCallsTo(twinkle);
+
+			while (stars.length) {
+				stars.shift().element.remove();
+			}
+
+			generateStars();
+		}
+
+		function twinkle() {
+			var star;
+
+			if (!slideActive) return;
+
+			star = stars[Math.round(Math.random() * (stars.length - 1))];
+
+			TweenMax.to(star.element, Math.random() * .72 + .2, {
+				opacity: 0,
+				onComplete: function() {
+					TweenMax.to(star.element, Math.random() * .72 + .2, {opacity: 1});
+				}
+			});
+
+			TweenMax.delayedCall(Math.pow(Math.random(), 3) * .0001, twinkle);
+		}
+	}
+
+	function setupSlideG() {
+		var parallaxHandler,
+			slideActive,
+			scrollOffsets = {},
+			boxDropTimeline;
+
+		observers["scroll"].push(updateActivation);
+
+		observers["scroll"].push(updateParallax);
+
+		observers["resize"].push(updateParallax);
+
+		updateActivation();
+
+		updateParallax(0, true);
+
+		function updateActivation() {
+			if (screen.visibleSlides["6"]) {
+				activate();
+			}
+			else {
+				deactivate();
+			}
+		}
+
+		function activate() {
+			if (slideActive) return;
+
+			TweenMax.set([
+				components.slideG.hand.element,
+				components.slideG.box.element,
+				components.slideG.box.shadow.element
+			], {visibility: "visible"});
+
+			slideActive = true;
+
+			activateBoxDrop();
+
+			activateMouseParallax();
+		}
+
+		function deactivate() {
+			if (!slideActive) return;
+
+			slideActive = false;
+
+			boxDropTimeline.pause(0);
+
+			boxDropTimeline = null;
+
+			TweenMax.set([
+				components.slideG.hand.element,
+				components.slideG.box.element,
+				components.slideG.box.shadow.element
+			], {visibility: ""});
+
+			if (parallaxHandler) {
+				components.slideF.element.off("mousemove", parallaxHandler);
+
+				parallaxHandler = null;
+			}
+			else {
+				console.warn("Parallax handler is missing.")
+			}
+		}
+
+		function updateParallax(value, force) {
+			var offsetRanges = {
+					foreground: screen.height * .36,
+					workfloor: screen.height * .14,
+				},
+				screenDeltaRange,
+				scrollRatio,
+				newOffsets = {},
+				duration = force ? 0 : .2;
+
+			if (!screen.visibleSlides["6"] && !force) return;
+
+			screenDeltaRange = [screen.height * 5, screen.height * 7]
+
+			scrollRatio = (screen.scrollPosition - screenDeltaRange[0]) / (screenDeltaRange[1] - screenDeltaRange[0]);
+
+			scrollRatio = Math.max(Math.min((scrollRatio - .5) * 2, 1), -1);
+
+			for (var key in offsetRanges) {
+				newOffsets[key] = Math.round(scrollRatio * offsetRanges[key]);
+
+				if (newOffsets[key] != scrollOffsets[key]) {
+					scrollOffsets[key] = newOffsets[key];
+
+					if (key == "foreground") {
+						TweenMax.to(components.slideG.foreground.wrapper.element, duration, {y: scrollOffsets[key]});
+					}
+					else {
+						TweenMax.to(components.slideG[key].element, duration, {y: scrollOffsets[key]});
+					}
+				}
+			}
+		}
+
+		function activateBoxDrop() {
+			boxDropTimeline = new TimelineMax({paused: true, delay: .4, repeat: -1, repeatDelay: .8});
+
+			boxDropTimeline.fromTo(components.slideG.hand.element, .56, {
+				x: screen.height * .84333333333333,
+				y: screen.height * -.50172222222222,
+			}, {
+				x: 0,
+				y: 0,
+				ease: Back.easeOut.config(.5)
+			}, 0);
+
+			boxDropTimeline.fromTo(components.slideG.box.element, .4, {
+				y: screen.height * -.6,
+			}, {
+				y: 0,
+				ease: Back.easeOut.config(.6)
+			}, .36);
+
+			boxDropTimeline.from(components.slideG.box.shadow.element, .3, {
+				opacity: 0,
+				scale: .8
+			}, .46);
+
+			boxDropTimeline.to(components.slideG.hand.element, .08, {
+				y: 0.00222222222 * screen.height + 2,
+			}, .61);
+
+			boxDropTimeline.to(components.slideG.hand.element, .12, {
+				y: 0,
+			}, .69);
+
+			boxDropTimeline.to([
+				components.slideG.hand.element,
+				components.slideG.box.element,
+				components.slideG.box.shadow.element,
+			], .4, {
+				x: screen.height * .84333333333333,
+				y: screen.height * -.50172222222222,
+				ease: Power1.easeIn
+			}, 1.8);
+
+
+			boxDropTimeline.play();
+		}
+
+		function activateMouseParallax() {
+			var targetOffsets = {},
+				offsets = {};
+
+			parallaxHandler = _.throttle(function(event) {
+				var maxDeltas = {
+						workfloor: -120,
+						foreground: 50,
+					},
+					halfPoint = screen.width / 2,
+					offsetRatio = ((event.clientX - halfPoint) / halfPoint);
+
+				for (var key in maxDeltas) {
+					offsets[key] = Math.round(offsetRatio * maxDeltas[key]);
+
+					if (offsets[key] != targetOffsets[key]) {
+						targetOffsets[key] = offsets[key];
+
+						TweenMax.to(components.slideG[key].element, .2, {
+							x: targetOffsets[key],
+							y: targetOffsets[key] * .575,
+						});
+					}
+				}
+			}, 50);
+
+			components.slideG.element.on("mousemove", parallaxHandler);
+		}
+	}
+
+	function setupSlideH() {
+		var activeCar,
+			itemTypes = [
+				"gas-canister", "map", "binoculars", "hot-chocolate", "milkshake", "shake", "sodas", "sandwich", "bread", "book", "turkey", 
+				// "dead-fish",
+				"car-battery", "batteries", "hats", "cat-a", "cat-b", "snacks", "lunch"
+			],
+			pickedSets = [
+				["gas-canister", "map", "lunch"],
+				["cat-a", "cat-b", "dead-fish"],
+				["car-battery", "tire", "sodas"],
+				["batteries", "hats", "shake"],
+				["tire", "gas-canister", "car-battery"],
+				["book", "binoculars", "lunch"],
+				// ["dead-fish", "dead-fish", "dead-fish"],
+				["gas-canister", "hot-chocolate", "batteries"],
+				["map", "binoculars", "lunch"],
+			],
+			carTypes = ["stationwagon", "suv", "yellow-truck", "blue-truck", "striped-car"],
+			previousCarIndex,
+			slideActive,
+			parallaxHandler,
+			scrollOffsets = {},
+			startingCloudTimeline;
+
+		observers["scroll"].push(updateActivation);
+
+		observers["scroll"].push(updateParallax);
+
+		observers["resize"].push(updateParallax);
+
+		generateStartingClouds();
+
+		updateActivation();
+
+		updateParallax(0, true);
+
+		function updateActivation() {
+			if (screen.visibleSlides["7"]) {
+				if (!slideActive && screen.scrollPosition > screen.height * 6.2) activate();
+			}
+			else {
+				deactivate();
+			}
+		}
+
+		function activate() {
+			if (slideActive) return;
+
+			slideActive = true;
+
+			activateCars();
+
+			activateMouseParallax();
+
+			generateClouds();
+		}
+
+		function deactivate() {
+			if (!slideActive) return;
+
+			slideActive = false;
+
+			TweenMax.killDelayedCallsTo(autogenerateCar);
+
+			TweenMax.killDelayedCallsTo(autogenerateCloud);
+
+			if (startingCloudTimeline) {
+				startingCloudTimeline.kill();
+
+				startingCloudTimeline = null;
+
+				components.slideH.sky.element.empty();
+
+				generateStartingClouds();
+			}
+			else {
+				console.warn("Missing starting cloud timeline.")
+			}
+
+			if (activeCar) {
+				console.log("hit");
+				activeCar.timeline.progress(1, false);
+			}
+
+			if (parallaxHandler) {
+				components.slideF.element.off("mousemove", parallaxHandler);
+
+				parallaxHandler = null;
+			}
+			else {
+				console.warn("Parallax handler is missing.")
+			}
+		}
+
+		function updateParallax(value, force) {
+			var offsetRanges = {
+					storescape: screen.height * .24,
+					sky: screen.height * .14,
+				},
+				screenDeltaRange,
+				scrollRatio,
+				newOffsets = {},
+				duration = force ? 0 : .2;
+
+			if (!screen.visibleSlides["7"] && !force) return;
+
+			screenDeltaRange = [screen.height * 6, screen.height * 8]
+
+			scrollRatio = (screen.scrollPosition - screenDeltaRange[0]) / (screenDeltaRange[1] - screenDeltaRange[0]);
+
+			scrollRatio = Math.max(Math.min((scrollRatio - .5) * 2, 1), -1);
+
+			for (var key in offsetRanges) {
+				newOffsets[key] = Math.round(scrollRatio * offsetRanges[key]);
+
+				if (newOffsets[key] != scrollOffsets[key]) {
+					scrollOffsets[key] = newOffsets[key];
+
+					if (key == "storescape") {
+						TweenMax.to(components.slideH.storescape.wrapper.element, duration, {y: scrollOffsets[key]});
+					}
+					else {
+						TweenMax.to(components.slideH[key].element, duration, {y: scrollOffsets[key]});
+					}
+				}
+			}
+		}
+
+		function activateCars() {
+			activateCar("stationwagon", {
+				items: ["gas-canister", "map", "binoculars"],
+			});
+
+			autogenerateCar(true);
+		}
+
+		function activateCar(type, properties) {
+			var car = {
+					element: $("<img class='clc-slide-h-car clc-slide-h-car-" + type + "' src='assets/img/" + type + ".svg' />"),
+					items: []
+				},
+				carTimeline = new TimelineMax({
+					paused: true,
+					delay: .6,
+					onComplete: function() {
+						components.slideH.underlayEffects.element.empty();
+
+						components.slideH.overlayEffects.element.empty();
+
+						components.slideH.product.element.empty();
+
+						car.element.remove();
+
+						if (activeCar == car) activeCar = null;
+					}
+				}),
+				target = {},
+				delta,
+				arrivalTime,
+				departureTime,
+				enterTime;
+
+			previousCarIndex = carTypes.indexOf(type);
+
+			car.timeline = carTimeline;
+
+			activeCar = car;
+
+			target.x = -94 * screen.vmin;
+
+			target.y = 0.57735026919 * -target.x;
+
+			delta = Math.sqrt(Math.pow(target.x, 2) + Math.pow(target.y, 2));
+
+			arrivalTime = delta * .0036;
+
+			carTimeline.from(car.element, arrivalTime, {
+				x: target.x,
+				y: target.y,
+				ease: CustomEase.create("custom", "M0,0,C0.338,0.388,0.678,0.867,0.83,0.958,0.9,1,0.932,1,1,1")
+			}, 0);
+
+			for (var idx = 0, len = properties.items.length; idx < len; idx++) {
+				addItem(properties.items[idx]);
+			}
+
+			target.x = 96 * screen.vmin;
+
+			target.y = 0.57735026919 * -target.x;
+
+			delta = Math.sqrt(Math.pow(target.x, 2) + Math.pow(target.y, 2));
+
+			departureTime = delta * .0012;
+
+			carTimeline.to(car.element, departureTime, {
+				x: target.x,
+				y: target.y,
+				ease: Sine.easeIn
+			}, arrivalTime + 1.04);
+
+			components.slideH.storescape.element.append(car.element);
+
+			carTimeline.play();
+
+			function addItem(itemType) {
+				var item = $("<img class='clc-slide-h-product-item clc-slide-h-product-item-" + itemType + "' src='assets/img/" + itemType + ".svg' />");
+
+				car.items.push(item);
+
+				enterTime = arrivalTime - .22 + (.12 * idx);
+
+				carTimeline.addCallback(function() {
+					var clientRect = item[0].getBoundingClientRect(),
+						coordinate = { x: clientRect.left + clientRect.width / 2, y: screen.height },
+						center = {x: coordinate.x, y: clientRect.height / 2 + .64 * screen.height},
+						topDelay = 340,
+						adjustmentRatio = screen.lesser / 900,
+						entryBurst = new mojs.Burst({
+							parent: components.slideH.overlayEffects.element,
+							left: 0, top: 0,
+							degree: 120,
+							angle: 300,
+							radius: {[adjustmentRatio * 6]:adjustmentRatio * 44},
+							count: 4,
+							children: {
+								shape: "line",
+								radius: 10 * adjustmentRatio,
+								radiusY: 0,
+								scale: 1,
+								strokeDasharray: "100%",
+								strokeDashoffset: { "-100%": "100%" },
+								stroke: "#FFF",
+								easing: "ease.out",
+								duration: 300
+							},
+							delay: 40,
+						}),
+						trail = new mojs.Shape({
+							parent: components.slideH.underlayEffects.element,
+							fill: "none",
+							stroke: "white",
+							shape: "line",
+							radiusY: 0,
+							radiusX: {0: screen.height - clientRect.height - (.64 * screen.height)},
+							strokeDasharray: "100% 100%",
+							strokeDashoffset: { "0%": "100%" },
+							angle: 90,
+							duration: 480,
+							strokeWidth: 2 * adjustmentRatio,
+							easing: "cubic.out",
+							left: 0,
+							top: 0,
+							delay: 120,
+						}),
+						circleA = new mojs.Shape({
+							parent: components.slideH.underlayEffects.element,
+							left: 0, top: 0,
+							stroke: "red",
+							strokeWidth: {[24 * adjustmentRatio]:0},
+							fill: 'none',
+							scale: { .8: 1 },
+							radius: {[24 * adjustmentRatio]: 84 * adjustmentRatio},
+							duration: 320,
+							easing: 'cubic.out',
+							delay: topDelay,
+						}),
+						circleB = new mojs.Shape({
+							parent: components.slideH.underlayEffects.element,
+							left: 0, top: 0,
+							stroke: "#FFF",
+							strokeWidth: {[54 * adjustmentRatio]:0},
+							fill: 'none',
+							scale: { .8: 1 },
+							radius: {[24 * adjustmentRatio]: 88 * adjustmentRatio},
+							duration: 320,
+							easing: 'cubic.out',
+							delay: topDelay + 60,
+						}),
+						crossBurst = new mojs.Burst({
+							parent: components.slideH.underlayEffects.element,
+							left: 0, top: 0,
+							radius: {[54 * adjustmentRatio]: 120 * adjustmentRatio},
+							angle: "rand(0, 90)",
+							count: 10,
+							children: {
+								shape: "cross",
+								radius: 9 * adjustmentRatio,
+								angle: "rand(0, 90)",
+								strokeWidth: 4 * adjustmentRatio,
+								stroke: ['red', 'white'],
+								scale: { 1: 0, easing: 'quad.in' },
+								pathScale: [.8, null],
+								degreeShift: [13, null],
+								duration: [500, 700],
+								easing: 'quint.out',
+								delay: topDelay,
+							},
+						});
+
+					entryBurst.tune(coordinate).replay();
+
+					trail.tune(coordinate).replay();
+
+					circleA.tune(center).replay();
+
+					circleB.tune(center).replay();
+
+					crossBurst.tune(center).replay();
+				}, enterTime - .15);
+
+				carTimeline.from(item, .52, {
+					y: .36 * screen.height,
+					ease: Back.easeOut.config(.86),
+				}, enterTime);
+
+				carTimeline.addCallback(function() {
+					wiggleProp(item, "x", -4, 4, [.18, .36]);
+					wiggleProp(item, "y", -4, 4, [.18, .36]);
+					wiggleProp(item, "rotation", -4, 4, [.14, .36]);
+				}, .48 + enterTime);
+
+				carTimeline.addCallback(function() {
+					TweenMax.killTweensOf(item, {y: true});
+
+					TweenMax.to(item, .52, {
+						y: 16 * screen.vmin,
+						opacity: 0,
+						ease: Back.easeIn.config(1.4),
+						onComplete: function() {
+							TweenMax.killTweensOf(item, {
+								x: true,
+								rotation: true,
+							});
+						}
+					});
+				}, enterTime + 1.1);
+
+				components.slideH.product.element.append(item);
+			}
+
+			function wiggleProp(element, prop, min, max, time) {
+				var duration = Math.random() * time[1] + time[0],
+					tweenProps = {
+						ease: Power1.easeInOut,
+						onComplete: wiggleProp,
+						onCompleteParams: [element, prop, min, max, time]
+					};
+
+				tweenProps[prop] = Math.random() * (max - min) + min;
+			
+				TweenMax.to(element, duration, tweenProps);
+			}
+		}
+
+		function activateMouseParallax() {
+			var targetOffsets = {},
+				offsets = {};
+
+			parallaxHandler = _.throttle(function(event) {
+				var maxDeltas = {
+						storescape: -60,
+						sky: -20,
+					},
+					halfPoint = screen.width / 2,
+					offsetRatio = ((event.clientX - halfPoint) / halfPoint);
+
+				for (var key in maxDeltas) {
+					offsets[key] = Math.round(offsetRatio * maxDeltas[key]);
+
+					if (offsets[key] != targetOffsets[key]) {
+						targetOffsets[key] = offsets[key];
+
+						TweenMax.to(components.slideH[key].element, .2, {
+							x: targetOffsets[key],
+							y: targetOffsets[key] * .575,
+						});
+					}
+				}
+			}, 50);
+
+			components.slideH.element.on("mousemove", parallaxHandler);
+		}
+
+		function generateStartingClouds() {
+			generateCloud({
+				width: 14,
+				height: 32,
+				x: -54,
+				y: -24
+			}, true);
+
+			generateCloud({
+				width: 10,
+				height: 24,
+				x: 10,
+				y: 8
+			}, true);
+
+			generateCloud({
+				width: 22,
+				height: 48,
+				x: -62,
+				y: 48
+			}, true);
+
+			generateCloud({
+				width: 22,
+				height: 48,
+				x: 42,
+				y: -34
+			}, true);
+		}
+
+		function generateClouds() {
+			startingCloudTimeline.play();
+
+			autogenerateCloud(true);
+		}
+
+		function generateCloud(parameters, isStartingCloud) {
+			var cloud = {
+					element: $(
+						"<div class='clc-slide-h-sky-cloud'>" +
+							"<img class='clc-slide-h-sky-cloud-content' src='assets/img/isometric-cloud.svg' />" +
+							"<img class='clc-slide-h-sky-cloud-shadow' src='assets/img/isometric-cloud-shadow.svg' />" +
+						"</div>"
+					)
+				},
+				properties,
+				target,
+				delta,
+				width;
+
+			if (!parameters) {
+				width = 8 + (Math.random() * 16);
+
+				parameters = {
+					width: width,
+					height: width * 1.4 + 4 + Math.random() * 16,
+				};
+
+				properties = {
+					width: Math.round(parameters.width * screen.vmin),
+					height: Math.round(parameters.height * screen.vmin),
+				};
+
+				properties.x = -properties.width - screen.width / 2 - 10;
+				
+				properties.y = (-.42 + Math.random() * 1.12) * screen.height;
+			}
+			else {
+				properties = {
+					x: Math.round(parameters.x * screen.vmin),
+					y: Math.round(parameters.y * screen.vmin),
+					width: Math.round(parameters.width * screen.vmin),
+					height: Math.round(parameters.height * screen.vmin),
+					zIndex: 200 + parameters.y
+				};
+			}
+
+			properties.zIndex = Math.round(properties.y + screen.height); 
+			
+			target = {
+				y: (properties.height / 2) - screen.height,
+			};
+
+			TweenMax.set(cloud.element, $.extend({}, properties));
+
+			components.slideH.sky.element.append(cloud.element);
+
+			target.x = 1.73205080757 * (properties.y - target.y) + properties.x;
+
+			delta = Math.sqrt(Math.pow(target.x - properties.x, 2) + Math.pow(target.y - properties.y, 2))
+
+			if (isStartingCloud) {
+				if (!startingCloudTimeline) {
+					startingCloudTimeline = new TimelineMax({paused: true});
+				}
+
+				startingCloudTimeline.to(cloud.element, delta * .12 * (16 / (parameters.width + 4)), {
+					x: target.x,
+					y: target.y,
+					ease: Power0.easeNone,
+					onComplete: function() {
+						cloud.element.remove();
+					}
+				}, 0);
+			}
+			else {
+				TweenMax.to(cloud.element, delta * .12 * (16 / (parameters.width + 4)), {
+					x: target.x,
+					y: target.y,
+					ease: Power0.easeNone,
+					onComplete: function() {
+						cloud.element.remove();
+					}
+				});
+			}
+		}
+
+		function autogenerateCloud(initial) {
+			if (!initial) generateCloud();
+
+			TweenMax.delayedCall(6 + Math.random() * Math.random() * 48, autogenerateCloud);
+		}
+
+		function autogenerateCar(initial) {
+			var typeIndex;
+
+			if (!initial) {
+				if (activeCar) {
+					console.warn("Overlapping car generation.");
+				}
+				else {
+					do {
+						typeIndex = Math.round(Math.random() * (carTypes.length - 1));
+					} while (typeIndex == previousCarIndex);
+
+					activateCar(carTypes[typeIndex], {
+						items: generateItemSet()
+					});
+				}
+			}
+
+			TweenMax.delayedCall(6.4 + Math.random() * 1.5, autogenerateCar);
+
+			function generateItemSet() {
+				var consumedIndices = [],
+					set = [],
+					itemIndex;
+
+				if (Math.random() > .4) {
+					return pickedSets[Math.round(Math.random() * (pickedSets.length - 1))];
+				}
+				else {
+					while (consumedIndices.length < 3) {
+						itemIndex = Math.round(Math.random() * (itemTypes.length - 1));
+
+						if (consumedIndices.indexOf(itemIndex) == -1) {
+							consumedIndices.push(itemIndex);
+
+							set.push(itemTypes[itemIndex]);
+						}
+					}
+
+					return set;
+				}
+			}
 		}
 	}
 
@@ -2048,9 +3125,13 @@ $(document).ready(function() {
 						opacity: 0
 					}, .14);
 
+					// entryTimeline.from(components.slideI.message.words.element[2], .8, {
+					// 	opacity: 0
+					// }, .28);
+
 					entryTimeline.from(components.slideI.message.words.element[2], .8, {
 						opacity: 0
-					}, .28);
+					}, .3);
 
 					entryTimeline.from(components.slideI.message.words.element[3], .8, {
 						opacity: 0
@@ -2058,11 +3139,7 @@ $(document).ready(function() {
 
 					entryTimeline.from(components.slideI.message.words.element[4], .8, {
 						opacity: 0
-					}, .58);
-
-					entryTimeline.from(components.slideI.message.words.element[5], .8, {
-						opacity: 0
-					}, .76);
+					}, .6);
 
 					entryTimeline.from(components.slideI.divider.element, .62, {
 						scaleY: 0,

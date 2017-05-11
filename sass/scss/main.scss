@@ -107,10 +107,13 @@ body {
 	}
 
 	&-logo, &-cover-a-logo, &-cover-b-logo {
-		margin-bottom: .5vw;
 		position: relative;
-		width: calc(42px + 28%);
+		width: 56vmin;
 		z-index: 5;
+	}
+
+	&-logo, &-cover-a-logo, &-cover-b-logo {
+		margin-bottom: 1.75vmin;
 	}
 
 	&-logo {
@@ -126,20 +129,20 @@ body {
 	&-tagline {
 		color: $slideBColor;
 		font-family: 'futura-pt', sans-serif;
-		font-size: 1.5vw;
+		font-size: 2.75vmin;
 		font-weight: 700;
 		height: 4vw;
 		left: 0;
-		letter-spacing: .48vw;
-		line-height: 1.5vw;
+		letter-spacing: 1vmin;
+		line-height: 2.75vmin;
 		margin: auto;
 		position: absolute;
 		right: 0;
 		text-align: center;
+		text-indent: 1vmin;
 		text-transform: uppercase;
-		top: calc(50% + 4.75vw);
+		top: calc(50% + 8.1vmin);
 		user-select: none;
-		width: 31.25%;
 
 		&-item {
 			@include rcm-fill;
@@ -149,11 +152,24 @@ body {
 		}
 	}
 
-	&-signin-button, &-signup-button {
-		cursor: pointer;
+	&-top-buttons {
+		@include display-flex;
+		@include justify-content(flex-end);
+
+		height: 44px;
+		padding: 0 12px;
 		position: absolute;
 		top: 12px;
-		height: 44px;
+		width: 100%;
+	}
+
+	&-signin-button, &-signup-button {
+		@include flex(0 0 auto);
+
+		cursor: pointer;
+		height: 100%;
+		position: absolute;
+		position: relative;
 		width: 170px;
 
 		&-text {
@@ -192,7 +208,7 @@ body {
 	}
 
 	&-signin-button {
-		right: 194px;
+		margin-left: 12px;
 
 		&-background {
 			background-color: hsla(0, 0%, 68%, 1);
@@ -204,8 +220,6 @@ body {
 	}
 
 	&-signup-button {
-		right: 12px;
-
 		&-text {
 			color: $accentColor;
 		
@@ -300,31 +314,27 @@ body {
 			@include rcm-flex-center;
 		}
 
-		&-spotter {
-			@include border-radius(50%);
-
-			background-color: #000;
-			height: 8px;
-			left: -4px;
-			position: absolute;
-			top: -4px;
-			width: 8px;
-			z-index: 10;
-		}
-
 		&-lines {
-			@include rcm-fill;
+			@include transform(translateY(-.875vmin));
 
+			bottom: -9999px;
+			height: 100vmin;
+			left: -9999px;
+			margin: auto;
+			position: absolute;
+			right: -9999px;
+			top: -9999px;
 			z-index: 7;
 
 			path {
-				stroke: #FFF;
 				fill: none;
+				stroke-width: 0;
+				stroke: #FFF;
 			}
 		}
 
 		&-logo {
-			margin-bottom: $footerHeight;
+			padding-bottom: $footerHeight;
 
 			&-x {
 				fill: #FFF;
@@ -350,7 +360,7 @@ body {
 		}
 
 		&-logo {
-			margin-bottom: $footerHeight;
+			padding-bottom: $footerHeight;
 
 			&-c, &-r, &-u {
 				fill: #FFF;
@@ -361,6 +371,61 @@ body {
 			}
 		}
 	}
+
+	@media all and (max-width: 480px) {
+		&-logo, &-cover-a-logo, &-cover-b-logo {
+			margin-bottom: 0;
+			margin-top: 6vmin;
+		}
+
+		&-tagline {
+			display: none;
+		}
+
+		&-cover-a-lines {
+			@include transform(translateY(-1.5vmin));
+		}
+	}
+
+	@media all and (max-width: 400px) {
+		$smallFooterHeight: 46px;
+
+		&-signin-button, &-signup-button {
+			@include flex(1 1 auto);
+
+			width: auto;
+		}
+
+		&-footer {
+			height: $smallFooterHeight;
+			padding: 0;
+
+			&-button {
+				&-text {
+					font-size: 13px;
+					padding: 0 18px;
+
+					i {
+						font-size: 14px;
+					}
+				}
+
+				&-edge {
+					height: 0;
+				}
+			}
+		}
+
+		&-cover-a, &-cover-b {
+			&-logo {
+				padding-bottom: $smallFooterHeight;
+			}
+		}
+
+		&-cover-a-lines {
+			@include transform(translateY(-.5vmin));
+		}
+	}
 }
 
 .clc-slide-b {
@@ -369,7 +434,6 @@ body {
 	background-color: $slideBColor;
 
 	&-cloud {
-		margin: auto;
 		position: absolute;
 
 		&-body {
@@ -381,24 +445,21 @@ body {
 		}
 
 		&-a {
-			right: calc(16px + 6%);
-			top: 20px;
-			bottom: 0;
-			height: calc(8px + 3.5%);
+			bottom: 46.5vmin;
+			height: 4.5vmin;
+			right: 12.5vmin;
 		}
 
 		&-b {
-			bottom: 0;
-			height: calc(8px + 5.5%);
-			right: calc(16px + 26%);
-			top: calc(32% + 16px);
+			bottom: 29.75vmin;
+			height: 6.5vmin;
+			right: 48vmin;
 		}
 
 		&-c {
-			bottom: 0;
-			height: calc(8px + 10%);
-			right: calc(12px + 4%);
-			top: calc(76% + 16px);
+			bottom: 5vmin;
+			height: 11vmin;
+			right: 8.5vmin;
 			z-index: 6;
 		}
 	}
@@ -407,7 +468,7 @@ body {
 		position: absolute;
 		right: 0;
 		bottom: 0;
-		height: calc(96px + 55%);
+		height: 66vmin;
 		z-index: 4;
 
 		&-mountain {
@@ -464,7 +525,7 @@ body {
 	&-message {
 		color: hsla(0, 0%, 60%, 1);
 		font-family: 'futura-pt', sans-serif;
-		font-size: 5.25vw;
+		font-size: 9.5vmin;
 		font-weight: 500;
 		padding: 36px;
 		z-index: 5;
@@ -481,13 +542,13 @@ body {
 	&-headache {
 		$headacheColor: desaturate(darken($slideColor, 6%), 10%);
 
-		bottom: 0;
-		left: 0;
+		bottom: -9999px;
+		left: -9999px;
 		margin: auto;
 		position: absolute;
-		right: 0;
-		top: 0;
-		width: calc(16px + 70%);
+		right: -9999px;
+		top: -9999px;
+		width: 126vmin;
 
 		&-wrapper {
 			@include rcm-fill;
@@ -517,7 +578,7 @@ body {
 	&-message {
 		color: #FFF;
 		font-family: 'futura-pt', sans-serif;
-		font-size: 5.25vw;
+		font-size: 9.5vmin;
 		font-weight: 500;
 		padding: 36px;
 		text-align: center;
@@ -538,21 +599,21 @@ body {
 	background-color: hsla(0, 0%, 94%, 1);
 
 	&-background {
-		height: 100%;
-		left: -9999px;
-		margin: auto;
+		height: 194vmin;
 		position: absolute;
-		right: -9999px;
-		top: 0;
+		right: -4vmin;
+		top: -4vmin;
 		z-index: 0;
 
-		&-box {
-			fill: hsla(0, 0%, 91.5%, 1);
-		}
-
 		&-light {
-			fill: hsla(176, 30%, 98%, 1);
+			background-color: hsla(176, 30%, 98%, 1);
+			height: 17vmin;
 			opacity: 0;
+			position: absolute;
+			right: 14.4444vmin;
+			top: 18.1111vmin;
+			width: 17vmin;
+			z-index: 1;
 		}
 	}
 
@@ -633,15 +694,17 @@ body {
 	&-message {
 		color: hsla(0, 0%, 32%, 1);
 		font-family: 'futura-pt', sans-serif;
-		font-size: 5.25vw;
+		font-size: 9.5vmin;
 		font-weight: 500;
-		padding: 36px;
+		padding: 4vmin 6.25vmin;
 		text-align: center;
 		z-index: 5;
 	}
 }
 
 .clc-slide-e {
+	$waterHeight: 16.5%;
+
 	@include rcm-flex-center;
 
 	cursor: url(../img/magnifying-cursor.png), pointer;
@@ -650,32 +713,67 @@ body {
 	&-message {
 		color: hsla(232, 14%, 44%, 1);
 		font-family: 'futura-pt', sans-serif;
-		font-size: 3.75vw;
+		font-size: 6.75vmin;
 		font-weight: 500;
 		left: 0;
-		line-height: 2.5vw;
-		padding: calc(4.5% + 12px);
+		padding: 5.5vmin 7.25vmin;
 		position: absolute;
-		text-align: center;
+		text-align: left;
 		top: 0;
 		z-index: 7;
 	}
 
-	.clc-slide-image-descriptor {
-		border-color: hsla(191, 32%, 74%, 1);
+	&-sky {
+		bottom: $waterHeight;
+		height: 100%;
+		left: 0;
+		position: absolute;
+		width: 100%;
+		z-index: 1;
 
-		&-title {
-			color: hsla(204, 30%, 64%, 1);
+		&-layer {
+			left: -106.6667vh;
+			position: absolute;
+			width: 391.1111vh;
+
+			&-a {
+				bottom: -20%;
+				z-index: 5;
+			}
+
+			&-b {
+				bottom: -2%;
+				z-index: 4;
+			}
+
+			&-c {
+				bottom: 11%;
+				z-index: 3;
+			}
 		}
 
-		&-message{
-			color: hsla(204, 20%, 36%, 1);
+		&-balloon {
+			position: absolute;
+			top: calc(#{$waterHeight} + 24vh);
+			left: 0;
+			width: .75vh;
+			z-index: 10;
+
+			&-shade {
+				fill: darken(desaturate($accentColor, 8%), 10%);
+			}
+
+			&-fill {
+				fill: $accentColor;
+			}
+
+			&-shine {
+				fill: lighten(desaturate($accentColor, 24%), 36%);
+			}
 		}
 	}
 
 	&-city {
-		$waterHeight: 16.5%;
-
 		bottom: #{$waterHeight};
 		height: 100%;
 		left: 0;
@@ -686,7 +784,7 @@ body {
 		&-complete, &-reflection {
 			height: 50%;
 			left: -9999px;
-			margin: auto;
+			margin: 0 auto;
 			position: absolute;
 			right: -9999px;
 		}
@@ -695,110 +793,7 @@ body {
 			bottom: 0;
 			z-index: 5;
 		}
-
-		&-sky {
-			@include rcm-fill;
-
-			overflow: hidden;
-			z-index: 4;
-
-			&-reflection {
-				@include transform(scaleY(-1));
-
-				z-index: 8;
-			}
-
-			&-layer {
-				height: 100%;
-				left: 0;
-				position: absolute;
-				width: 100%;
-
-				&-a {
-					fill: hsla(198, 92%, 99%, 1);
-					bottom: -6%;
-					z-index:5;
-				}
-
-				&-b {
-					fill: hsla(198, 90%, 96%, 1);
-					bottom: 8%;
-					z-index: 4;
-				}
-
-				&-c {
-					fill: hsla(198, 88%, 93%, 1);
-					bottom: 18%;
-					z-index: 3;
-				}
-			}
-
-			&-section {
-				left: 0px;
-				margin: auto;
-				position: absolute;
-				right: 0px;
-
-				&-0 {
-					bottom: -6%;
-					height: 42%;
-					left: -14%;
-				}
-
-				&-1 {
-					bottom: -20%;
-					height: 56%;
-					left: -40%;
-				}
-
-				&-2 {
-					bottom: 6%;
-					left: 68%;
-					height: 28%;
-				}
-
-				// ==
-
-				&-3 {
-					bottom: -6%;
-					left: -12%;
-					height: 46%;
-				}
-
-				&-4 {
-					bottom: -8%;
-					left: -44%;
-					height: 44%;
-				}
-
-				&-5 {
-					bottom: -8%;
-					left: 72%;
-					height: 44%;
-				}
-
-				// ==
-
-				&-6 {
-					bottom: -4%;
-					left: -20%;
-					height: 46%;
-				}
-
-				&-7 {
-					bottom: 0%;
-					left: -46%;
-					height: 42%;
-				}
-
-				&-8 {
-					bottom: -6%;
-					left: 64%;
-					height: 46%;
-				}
-			}
-		}
-
+		
 		&-reflection {
 			@include transform(scaleY(-1));
 
@@ -835,11 +830,11 @@ body {
 			$waveCHeight: 5px;
 			$waveDHeight: 5px;
 
-			bottom: -#{$waterHeight};
-			height: #{$waterHeight};
-			left: 0;
+			bottom: -#{$waterHeight + 20%}; // Buffer percentage when user scrolls really fast
+			height: #{$waterHeight + 20%};
+			left: -10%;
 			position: absolute;
-			width: 100%;
+			width: 120%;
 			z-index: 7;
 
 			&-wave {
@@ -1121,31 +1116,11 @@ body {
 			}
 		}
 
-		&-balloon {
-			position: absolute;
-			top: calc(#{$waterHeight} + 24vh);
-			left: 0;
-			z-index: 10;
-			width: .75vh;
-
-			&-shade {
-				fill: darken(desaturate($accentColor, 8%), 10%);
-			}
-
-			&-fill {
-				fill: $accentColor;
-			}
-
-			&-shine {
-				fill: lighten(desaturate($accentColor, 24%), 36%);
-			}
-		}
-
 		&-wrapper {
 			@include rcm-fill;
 
 			overflow: hidden;
-			z-index: 1;
+			z-index: 2;
 		}
 	}
 
@@ -1271,13 +1246,12 @@ body {
 	background-color: rgb(28, 31, 46);
 
 	&-message {
-		bottom: -.75vw;
+		bottom: 0;
 		color: hsla(232, 6%, 86%, 1);
 		font-family: 'futura-pt', sans-serif;
-		font-size: 3.75vw;
+		font-size: 6.75vmin;
 		font-weight: 500;
-		line-height: 4.75vw;
-		padding: calc(4.5% + 12px);
+		padding: 5.5vmin 7.25vmin;
 		position: absolute;
 		right: 0;
 		text-align: right;
@@ -1285,47 +1259,40 @@ body {
 	}
 
 	&-sky {
+		background-color: rgba(28,31,46,1);
+		height: 100%;
+		left: -2.5%;
 		position: absolute;
 		top: 0;
-		height: 100%;
 		width: 105%;
-		left: -2.5%;
-		background-color: rgba(28,31,46,1);
 		z-index: 3;
+
+		&-canvas {
+			@include rcm-fill;
+			
+			z-index: 5;
+		}
 
 		&-light {
 			@include background-image(linear-gradient(top, rgba(202,184,209,0) 0%,rgba(202,184,209, .92) 100%));
 
 			bottom: 0;
-			height: 45vw;
+			height: 80vh;
 			left: 0;
 			position: absolute;
 			width: 100%;
 			z-index: 6;
-		}
-
-		&-star {
-			$size: .25vw;
-
-			@include border-radius(50%);
-
-			background-color: hsla(230, 8%, 85%, 1);
-			position: absolute;
-			top: #{$size / 2};
-			left: #{$size / 2};
-			height: $size;
-			width: $size;
-			z-index: 5;
 		}
 	}
 
 	&-mountains {
 		@include box-shadow(0 24vh 0 0 #10161C);
 
-		bottom: -.5vw;
-		left: -4%;
+		bottom: -12vh;
+		left: -7.1111vh;
 		position: absolute;
-		width: 108%;
+		width: 192vh;
+		min-width: calc(100% + 14.2222vh);
 
 		&-wrapper {
 			@include rcm-fill;
@@ -1338,7 +1305,7 @@ body {
 		bottom: 0;
 		position: absolute;
 		right: 0;
-		width: 12vw;
+		width: 21.33333vh;
 		z-index: 6;
 	}
 }
@@ -1350,25 +1317,25 @@ body {
 		@include display-flex;
 		@include align-items(center);
 
-		font-family: 'futura-pt', sans-serif;
-		font-size: 4.75vw;
-		line-height: 5.75vw;
-		font-weight: 500;
 		color: #FFF;
-		width: 30%;
-		position: absolute;
-		left: 0;
-		top: 0;
+		font-family: 'futura-pt', sans-serif;
+		font-size: 8.5vmin;
+		font-weight: 500;
 		height: 100%;
+		left: 0;
+		line-height: 10.4444vmin;
 		padding: calc(2% + 12px);
+		position: absolute;
+		top: 0;
+		width: 30%;
 		z-index: 5;
 	}
 
 	&-workfloor {
+		bottom: 42.5vmin;
+		left: 40vmin;
 		position: absolute;
-		top: -112vh;
-		left: 32vh;
-		height: 172vh;
+		width: 162vmin;
 		z-index: 3;
 	}
 
@@ -1384,34 +1351,34 @@ body {
 
 	&-table {
 		position: absolute;
-		bottom: -26vh;
-		right: -25vh;
-		height: 120vh;
+		bottom: -26vmin;
+		right: -25vmin;
+		height: 120vmin;
 		z-index: 4;
 	}
 
 	&-hand {
 		position: absolute;
-		bottom: -2vh;
-		right: -12vh;
-		height: 78vh;
+		bottom: -2vmin;
+		right: -12vmin;
+		height: 78vmin;
 		visibility: hidden;
 		z-index: 6;
 	}
 
 	&-box {
-		bottom: 16vh;
-		height: 30vh;
+		bottom: 16vmin;
+		height: 30vmin;
 		position: absolute;
-		right: 36vh;
+		right: 36vmin;
 		visibility: hidden;
 		z-index: 8;
 
 		&-shadow {
-			bottom: 13vh;
-			height: 19vh;
+			bottom: 13vmin;
+			height: 19vmin;
 			position: absolute;
-			right: 36vh;
+			right: 36vmin;
 			visibility: hidden;
 			z-index: 7;
 		}
@@ -1419,17 +1386,17 @@ body {
 
 	&-pipe {
 		position: absolute;
-		top: -104vh;
-		width: 44vh;
-		right: 28vh;
+		top: -104vmin;
+		width: 44vmin;
+		right: 28vmin;
 		z-index: 10;
 
 
 		&-shadow {
 			position: absolute;
-			bottom: -56.5vh;
-			right: 28vh;
-			width: 164vh;
+			bottom: -56.5vmin;
+			right: 28vmin;
+			width: 164vmin;
 			z-index: 5;
 		}
 	}
@@ -1448,16 +1415,16 @@ body {
 
 		color: #FFF;
 		font-family: 'futura-pt', sans-serif;
-		font-size: 4.75vw;
+		font-size: 8.5vmin;
 		font-weight: 500;
 		height: 100%;
-		line-height: 5.75vw;
+		line-height: 10.4444vmin;
 		padding: calc(2% + 12px);
 		position: absolute;
 		right: 0;
 		text-align: right;
 		top: 0;
-		width: 30%;
+		width: 34%;
 		z-index: 5;
 
 		&-text {
@@ -1647,6 +1614,12 @@ body {
 		pointer-events: none;
 		z-index: 3;
 	}
+
+	@media all and (max-width: 480px) {
+		&-message {
+			width: 52%;
+		}
+	}
 }
 
 .clc-slide-i {
@@ -1672,7 +1645,9 @@ body {
 		@include display-flex;
 		@include align-items(center);
 
+		padding: 8vmin;
 		position: relative;
+		z-index: 5;
 	
 		&-message {
 			@include flex(0 0 auto);
@@ -1681,12 +1656,13 @@ body {
 			color: hsla(0, 0%, 32%, 1);
 			text-align: right;
 			font-family: 'futura-pt', sans-serif;
-			font-size: 4vw;
-			line-height: 4.75vw;
+			font-size: 7.1111vmin;
+			line-height: 8.4444vmin;
 			z-index: 5;
 
 			&-word {
 				display: inline;
+				opacity: 0;
 			}
 
 			&-highlight {
@@ -1699,37 +1675,39 @@ body {
 		&-divider {
 			@include flex(0 0 auto);
 
-			height: 100%;
-			width: .3vw;
-			height: 8.5vw;
-			margin: 0 1.5vw;
 			background-color: hsla(0, 0%, 32%, 1);
+			height: 100%;
+			height: 15.1111vmin;
+			margin: 0 2.6667vmin;
+			opacity: 0;
 			position: relative;
+			width: .5333vmin;
 		}
 
 		&-form {
 			@include display-flex;
 
-			height: 3vw;
-			width: 40vw;
+			height: 5.3333vmin;
+			width: 71.1111vmin;
 
 			&-input, &-button {
 				height: 100%;
+				opacity: 0;
 				position: relative;
 			}
 
 			&-input {
 				@include flex(1 1 auto);
 				
-				border: .3vw solid hsla(0, 0%, 32%, 1);
-				border-right-width: 0vw;
+				border: .5333vmin solid hsla(0, 0%, 32%, 1);
+				z-index: 5;
 
 				&-input, &-placeholder {
 					@include rcm-fill;
 
-					padding: 0 .65vw;
+					padding: 0 1.1556vmin;
 					font-family: 'proxima-nova', sans-serif;
-					font-size: 1.35vw;
+					font-size: 2.4vmin;
 					font-weight: 400;
 				}
 
@@ -1754,20 +1732,135 @@ body {
 				@include align-items(center);
 				@include display-flex;
 
+				margin-left: -.5333vmin;
 				background-color: $accentColor;
 				color: #FFF;
 				cursor: pointer;
 				font-family: 'proxima-nova', sans-serif;
-				font-size: .9vw;
+				font-size: 1.6vmin;
 				font-weight: 600;
-				letter-spacing: .2vw;
-				padding: 0 1.5vw;
+				letter-spacing: .3555vmin;
+				padding: 0 2.6667vmin;
+				z-index: 6;
 
 				&-hovered {
 					background-color: hsla(0, 0%, 32%, 1);
 					color: $accentColor;
 				}
 			}
+
+			&-warning {
+				color: #2A2A2A;
+				font-family: 'proxima-nova', sans-serif;
+				font-size: 2vmin;
+				height: 100%;
+				left: 0;
+				margin-top: 1.25vmin;
+				opacity: 0;
+				position: absolute;
+				top: 100%;
+				width: 100%;
+				z-index: 3;
+
+				&-focus {
+					color: $accentColor;
+					display: inline;
+					font-weight: 500;
+				}
+			}
+		}
+	}
+
+	&-acceptance {
+		@include rcm-fill;
+		@include display-flex;
+		@include align-items(center);
+		@include justify-content(center);
+		@include flex-direction(column);
+
+		padding: 4vmin;
+		pointer-events: none;
+		z-index: 6;
+
+		&-title {
+			color: #444444;
+			font-family: 'futura-pt', sans-serif;
+			font-size: 16vmin;
+			font-weight: 500;
+			opacity: 0;
+			line-height: 12vmin;
+		}
+
+		&-message {
+			color: $accentColor;
+			font-family: 'futura-pt', sans-serif;
+			font-size: 4vmin;
+			font-weight: 500;
+			opacity: 0;
+			margin-top: 1.1vmin;
+		}
+
+		&-ring {
+			@include rcm-fill;
+		}
+	}
+
+	&-email {
+		@include rcm-absolute-center;
+
+		opacity: 0;
+		pointer-events: none;
+		top: -1vmin;
+		width: 28vmin;
+		z-index: 7;
+	}
+
+	@media all and (max-width: 600px) {
+		&-content {
+			@include flex-direction(column);
+
+			width: 100%;
+
+			&-message {
+				font-size: 8.5vmin;
+				margin-bottom: 4vmin;
+
+				br {
+					display: none;
+				}
+			}
+
+			&-form {
+				width: 100%;
+				height: 11vmin;
+
+				&-input {
+					border-width: 1vmin 0 1vmin 1vmin;
+
+					&-input, &-placeholder {
+						font-size: 5vmin;
+						padding: 0 2vmin;
+					}
+				}
+
+				&-button {
+					font-size: 3.5vmin;
+				}
+
+				&-warning {
+					font-size: 4.5vmin;
+					margin-top: 3vmin;
+				}
+			}
+
+			&-divider {
+				display: none;
+			}
+		}
+
+		&-acceptance-message {
+			font-size: 6vmin;
+			margin-top: 1.6vmin;
 		}
 	}
 }
@@ -1777,8 +1870,8 @@ body {
 	@include display-flex;
 	@include align-items(center);
 
-	padding: calc(12px + 1.5%);
-	height: 8vw;
+	padding: 4vh;
+	height: 14.22222vh;
 	background-color: hsla(0, 0%, 20%, 1);
 	overflow: hidden;
 	position: relative;
@@ -1791,7 +1884,7 @@ body {
 		@include flex-direction(column);
 		@include justify-content(space-between);
 		
-		height: calc(100% + 6px);
+		height: calc(100% + .7vh);
 		position: relative;
 	}
 
@@ -1807,15 +1900,15 @@ body {
 		@include align-items(center);
 		@include flex-wrap(nowrap);
 
-		height: 1.5vw;
+		height: 4.6667vh;
 
 		&-button {
 			@include flex(0 0 auto);
 
 			color: #FFF;
 			display: block;
-			font-size: 2.25vw;
-			margin-right: 2.25vw;
+			font-size: 4vh;
+			margin-right: 4vh;
 			opacity: .75;
 			position: relative;
 		}

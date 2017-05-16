@@ -1,9 +1,9 @@
-"use strict";
-
 $(document).ready(function() {
+	"use strict";
+
 	var config = {
 			activeSlideRatio: {
-				min: .4,
+				min: 0.4,
 				max: 1.35
 			}
 		},
@@ -165,7 +165,6 @@ $(document).ready(function() {
 						c: {element: $(".clc-slide-e-fog-cloud-c")},
 						e: {element: $(".clc-slide-e-fog-cloud-e")},
 						d: {element: $(".clc-slide-e-fog-cloud-d")},
-						e: {element: $(".clc-slide-e-fog-cloud-e")},
 						f: {element: $(".clc-slide-e-fog-cloud-f")},
 						g: {element: $(".clc-slide-e-fog-cloud-g")},
 						h: {element: $(".clc-slide-e-fog-cloud-h")},
@@ -200,16 +199,16 @@ $(document).ready(function() {
 					water: {
 						element: $(".clc-slide-e-city-water"),
 						waveA: {
-							top: {element: $(".clc-slide-e-city-water-wave-a .clc-slide-e-city-water-wave-top")}
+							top: {element: $(".clc-slide-e-city-water-wave-a 0.clc-slide-e-city-water-wave-top")}
 						},
 						waveB: {
-							top: {element: $(".clc-slide-e-city-water-wave-b .clc-slide-e-city-water-wave-top")}
+							top: {element: $(".clc-slide-e-city-water-wave-b 0.clc-slide-e-city-water-wave-top")}
 						},
 						waveC: {
-							top: {element: $(".clc-slide-e-city-water-wave-c .clc-slide-e-city-water-wave-top")}
+							top: {element: $(".clc-slide-e-city-water-wave-c 0.clc-slide-e-city-water-wave-top")}
 						},
 						waveD: {
-							top: {element: $(".clc-slide-e-city-water-wave-d .clc-slide-e-city-water-wave-top")}
+							top: {element: $(".clc-slide-e-city-water-wave-d 0.clc-slide-e-city-water-wave-top")}
 						}
 					},
 					boats: {
@@ -410,7 +409,7 @@ $(document).ready(function() {
 	function setupEntryCover() {
 		var playing;
 
-		if (screen.scrollPosition == 0) {
+		if (screen.scrollPosition === 0) {
 			playing = true;
 
 			enter(true);
@@ -426,7 +425,7 @@ $(document).ready(function() {
 			components.slideA.coverB.element.remove();
 		}
 
-		observers["scroll"].push(updateVideo);
+		observers.scroll.push(updateVideo);
 
 		function updateVideo() {
 			if (screen.visibleSlides["0"]) {
@@ -448,16 +447,16 @@ $(document).ready(function() {
 		}
 
 		function enter(lock) {
-			var entryTimeline = new TimelineMax({paused: true, delay: .34, onComplete: function() {
+			var entryTimeline = new TimelineMax({paused: true, delay: 0.34, onComplete: function() {
 					// components.slideA.coverA.element.remove();
 
 					components.slideA.coverB.element.remove();
 				}}),
 				strokeWidth = 42,
-				bDelay = .14,
+				bDelay = 0.14,
 				footerHeight = components.slideA.footer.element.height();
 
-			entryTimeline.fromTo(components.slideA.coverA.lines.a.element, .8, {
+			entryTimeline.fromTo(components.slideA.coverA.lines.a.element, 0.8, {
 				strokeWidth: 0,
 			}, {
 				strokeWidth: strokeWidth,
@@ -475,17 +474,17 @@ $(document).ready(function() {
 				opacity: 1
 			}, 1.05);
 
-			entryTimeline.to(components.slideA.coverA.lines.a.element, .7, {
+			entryTimeline.to(components.slideA.coverA.lines.a.element, 0.7, {
 				drawSVG: "100% 100%",
 				ease: Power3.easeOut
 			}, 1.02);
 
-			entryTimeline.to(components.slideA.coverA.lines.a.element, .5, {
+			entryTimeline.to(components.slideA.coverA.lines.a.element, 0.5, {
 				strokeWidth: 0,
 				ease: Power2.easeOut
 			}, 1.02);
 
-			entryTimeline.fromTo(components.slideA.coverA.lines.b.element, .8, {
+			entryTimeline.fromTo(components.slideA.coverA.lines.b.element, 0.8, {
 				strokeWidth: 0,
 			}, {
 				strokeWidth: strokeWidth,
@@ -503,22 +502,22 @@ $(document).ready(function() {
 				opacity: 1
 			}, 1.05 + bDelay);
 
-			entryTimeline.to(components.slideA.coverA.lines.b.element, .7, {
+			entryTimeline.to(components.slideA.coverA.lines.b.element, 0.7, {
 				drawSVG: "100% 100%",
 				ease: Power3.easeOut
 			}, 1.02 + bDelay);
 
-			entryTimeline.to(components.slideA.coverA.lines.b.element, .5, {
+			entryTimeline.to(components.slideA.coverA.lines.b.element, 0.5, {
 				strokeWidth: 0,
 				ease: Power2.easeOut
 			}, 1.02 + bDelay);
 
-			entryTimeline.to(components.slideA.coverA.element, .64, {
+			entryTimeline.to(components.slideA.coverA.element, 0.64, {
 				xPercent: 100,
 				ease: Power2.easeOut
 			}, 1.26);
 
-			entryTimeline.to(components.slideA.coverA.content.element, .64, {
+			entryTimeline.to(components.slideA.coverA.content.element, 0.64, {
 				xPercent: -100,
 				ease: Power2.easeOut
 			}, 1.26);
@@ -527,24 +526,24 @@ $(document).ready(function() {
 				if (playing) components.slideA.content.background.video.element[0].play();
 			}, 1.4);
 
-			entryTimeline.to(components.slideA.coverB.element, .6, {
+			entryTimeline.to(components.slideA.coverB.element, 0.6, {
 				yPercent: 100,
 				y: -footerHeight,
 				ease: Power2.easeOut
 			}, 1.5);
 
-			entryTimeline.to(components.slideA.coverB.content.element, .6, {
+			entryTimeline.to(components.slideA.coverB.content.element, 0.6, {
 				yPercent: -100,
 				y: footerHeight,
 				ease: Power2.easeOut
 			}, 1.5);
 
-			entryTimeline.from(components.slideA.footer.button.element, .44, {
+			entryTimeline.from(components.slideA.footer.button.element, 0.44, {
 				y: footerHeight,
 				ease: Power2.easeOut
 			}, 1.8);
 
-			entryTimeline.from(components.slideA.footer.button.element, .12, {
+			entryTimeline.from(components.slideA.footer.button.element, 0.12, {
 				opacity: 0,
 			}, 1.8);
 
@@ -553,7 +552,7 @@ $(document).ready(function() {
 				ease: Power2.easeOut
 			}, 1.7);
 
-			entryTimeline.from(components.slideA.signinButton.text.element, .48, {
+			entryTimeline.from(components.slideA.signinButton.text.element, 0.48, {
 				opacity: 0,
 			}, 2);
 
@@ -562,31 +561,21 @@ $(document).ready(function() {
 				ease: Power2.easeOut
 			}, 2);
 
-			entryTimeline.from(components.slideA.signupButton.text.element, .48, {
+			entryTimeline.from(components.slideA.signupButton.text.element, 0.48, {
 				opacity: 0,
 			}, 2.3);
 
-			entryTimeline.from(components.slideA.content.background.element, .6, {
-				opacity: .35,
+			entryTimeline.from(components.slideA.content.background.element, 0.6, {
+				opacity: 0.35,
 			}, 1.8);
 
 			components.slideA.coverA.content.element.append(components.slideA.coverA.lines.element);
 
 			entryTimeline.play();
-
-			function lockScroll() {
-				window.scrollTo(0, 0);
-			}
-		}
-
-		function segmentToString(x, y) {
-			return [x.b.toFixed(2), y.b.toFixed(2), x.c.toFixed(2), y.c.toFixed(2), x.d.toFixed(2), y.d.toFixed(2)].join(",");
 		}
 	}
 
 	function setupScrolling() {
-		var targetSlide;
-
 		documentElement.on("scroll", _.throttle(function() {
 			window.requestAnimationFrame(checkScroll);
 		}, 50));
@@ -614,7 +603,7 @@ $(document).ready(function() {
 			e.preventDefault(); // prevent the default action (scroll / move caret)
 
 			function jumpToSlide(delta) {
-				TweenMax.to(bodyElement, .48, {
+				TweenMax.to(bodyElement, 0.48, {
 					scrollTo: {y: (screen.activeSlide.number + delta) * screen.height},
 					ease: Power1.easeInOut
 				});
@@ -625,8 +614,7 @@ $(document).ready(function() {
 			var scrollPosition = documentElement.scrollTop(),
 				potentialSlideNumber,
 				selectedSlideNumber,
-				remainingOffset,
-				slideData;
+				remainingOffset;
 
 			remainingOffset = scrollPosition % screen.height;
 
@@ -701,25 +689,23 @@ $(document).ready(function() {
 
 		setupSignUpButton();
 
-		// setupTagline();
-
 		function setupFooterButton() {
 			components.slideA.footer.button.element.on({
 				mouseenter: function() {
-					TweenMax.to(components.slideA.footer.button.element, .24, {
+					TweenMax.to(components.slideA.footer.button.element, 0.24, {
 						className: "+=clc-slide-a-footer-button-hovered"
 					});
 
-					TweenMax.to(components.slideA.footer.button.edge.element, .24, {
+					TweenMax.to(components.slideA.footer.button.edge.element, 0.24, {
 						className: "+=clc-slide-a-footer-button-edge-hovered"
 					});
 				},
 				mouseleave: function() {
-					TweenMax.to(components.slideA.footer.button.element, .24, {
+					TweenMax.to(components.slideA.footer.button.element, 0.24, {
 						className: "-=clc-slide-a-footer-button-hovered"
 					});
 
-					TweenMax.to(components.slideA.footer.button.edge.element, .24, {
+					TweenMax.to(components.slideA.footer.button.edge.element, 0.24, {
 						className: "-=clc-slide-a-footer-button-edge-hovered"
 					});
 
@@ -730,12 +716,12 @@ $(document).ready(function() {
 
 					TweenMax.killTweensOf(components.slideA.footer.button.text.element, {y: true});
 
-					TweenMax.to(components.slideA.footer.button.edge.element, .08, {
+					TweenMax.to(components.slideA.footer.button.edge.element, 0.08, {
 						scaleY: 0,
 						transformOrigin: "50% 100%"
 					});
 
-					TweenMax.to(components.slideA.footer.button.text.element, .08, {
+					TweenMax.to(components.slideA.footer.button.text.element, 0.08, {
 						y: 1.5
 					});
 				},
@@ -743,7 +729,7 @@ $(document).ready(function() {
 					unclick();
 				},
 				click: function() {
-					TweenMax.to(bodyElement, .86, {
+					TweenMax.to(bodyElement, 0.86, {
 						scrollTo: {y: screen.height},
 						ease: Power2.easeInOut
 					});
@@ -755,12 +741,12 @@ $(document).ready(function() {
 
 				TweenMax.killTweensOf(components.slideA.footer.button.text.element, {y: true});
 
-				TweenMax.to(components.slideA.footer.button.edge.element, .08, {
+				TweenMax.to(components.slideA.footer.button.edge.element, 0.08, {
 					scaleY: 1,
 					transformOrigin: "50% 100%"
 				});
 
-				TweenMax.to(components.slideA.footer.button.text.element, .08, {
+				TweenMax.to(components.slideA.footer.button.text.element, 0.08, {
 					y: 0
 				});
 			}
@@ -771,22 +757,22 @@ $(document).ready(function() {
 				mouseenter: function() {
 					TweenMax.killTweensOf(components.slideA.signinButton.background.element, {opacity: true});
 
-					TweenMax.to(components.slideA.signinButton.text.element, .24, {
+					TweenMax.to(components.slideA.signinButton.text.element, 0.24, {
 						className: "+=clc-slide-a-signin-button-text-hovered"
 					});
 
-					TweenMax.to(components.slideA.signinButton.background.element, .24, {
+					TweenMax.to(components.slideA.signinButton.background.element, 0.24, {
 						opacity: 1
 					});
 				},
 				mouseleave: function() {
 					TweenMax.killTweensOf(components.slideA.signinButton.background.element, {opacity: true});
 					
-					TweenMax.to(components.slideA.signinButton.text.element, .24, { 
+					TweenMax.to(components.slideA.signinButton.text.element, 0.24, { 
 						className: "-=clc-slide-a-signin-button-text-hovered"
 					});
 
-					TweenMax.to(components.slideA.signinButton.background.element, .24, {
+					TweenMax.to(components.slideA.signinButton.background.element, 0.24, {
 						opacity: 0
 					});
 				},
@@ -801,22 +787,22 @@ $(document).ready(function() {
 				mouseenter: function() {
 					TweenMax.killTweensOf(components.slideA.signupButton.background.element, {opacity: true});
 
-					TweenMax.to(components.slideA.signupButton.text.element, .24, {
+					TweenMax.to(components.slideA.signupButton.text.element, 0.24, {
 						className: "+=clc-slide-a-signup-button-text-hovered"
 					});
 
-					TweenMax.to(components.slideA.signupButton.background.element, .24, {
+					TweenMax.to(components.slideA.signupButton.background.element, 0.24, {
 						opacity: 1
 					});
 				},
 				mouseleave: function() {
 					TweenMax.killTweensOf(components.slideA.signupButton.background.element, {opacity: true});
 					
-					TweenMax.to(components.slideA.signupButton.text.element, .24, {
+					TweenMax.to(components.slideA.signupButton.text.element, 0.24, {
 						className: "-=clc-slide-a-signup-button-text-hovered"
 					});
 
-					TweenMax.to(components.slideA.signupButton.background.element, .24, {
+					TweenMax.to(components.slideA.signupButton.background.element, 0.24, {
 						opacity: 0
 					});
 				},
@@ -830,39 +816,17 @@ $(document).ready(function() {
 				}
 			});
 		}
-
-		function setupTagline() {
-			var activeTagline = 1,
-				totalItems = components.slideA.tagline.items.element.length;
-
-			TweenMax.set(components.slideA.tagline.items.element, {visibility: "hidden"});
-
-			TweenMax.set(components.slideA.tagline.element.find(".clc-slide-a-tagline-item-" + activeTagline), {visibility: ""});
-
-			components.slideA.tagline.element.on({
-				click: function() {
-					activeTagline++;
-
-					if (activeTagline > totalItems) activeTagline = 0;
-
-					TweenMax.set(components.slideA.tagline.items.element, {visibility: "hidden"});
-
-					TweenMax.set(components.slideA.tagline.element.find(".clc-slide-a-tagline-item-" + activeTagline), {visibility: ""});
-				}
-			});
-		}
 	}
 
 	function setupSlideB() {
 		var cloudTimelines,
-			cloudOffset,
-			tieTimeline;
+			cloudOffset;
 
 		observers["visibleSlidesUpdated"].push(updateActivation);
 
-		observers["scroll"].push(updateParallax);
+		observers.scroll.push(updateParallax);
 
-		observers["resize"].push(updateParallax);
+		observers.resize.push(updateParallax);
 
 		updateActivation();
 
@@ -882,17 +846,17 @@ $(document).ready(function() {
 				screenDeltaRange,
 				scrollRatio,
 				newOffset,
-				duration = force ? 0 : .2;
+				duration = force ? 0 : 0.2;
 
 			if (!cloudTimelines && !force) return;
 
-			screenDeltaRange = [screen.height * .5, screen.height * 1.5]
+			screenDeltaRange = [screen.height * 0.5, screen.height * 1.5];
 
-			offsetRange = screen.height * -.2;
+			offsetRange = screen.height * -0.2;
 
 			scrollRatio = (screen.scrollPosition - screenDeltaRange[0]) / (screenDeltaRange[1] - screenDeltaRange[0]);
 
-			scrollRatio = Math.max(Math.min((scrollRatio - .5) * 2, 1), -1);
+			scrollRatio = Math.max(Math.min((scrollRatio - 0.5) * 2, 1), -1);
 
 			newOffset = Math.round(scrollRatio * offsetRange);
 
@@ -908,70 +872,70 @@ $(document).ready(function() {
 
 			cloudTimelines = [];
 
-			cloudTimelines.push(new TimelineMax({paused: true, delay: .1, repeat: -1}));
-			cloudTimelines.push(new TimelineMax({paused: true, delay: .26, repeat: -1}));
-			cloudTimelines.push(new TimelineMax({paused: true, delay: .42, repeat: -1}));
+			cloudTimelines.push(new TimelineMax({paused: true, delay: 0.1, repeat: -1}));
+			cloudTimelines.push(new TimelineMax({paused: true, delay: 0.26, repeat: -1}));
+			cloudTimelines.push(new TimelineMax({paused: true, delay: 0.42, repeat: -1}));
 
-			cloudTimelines[0].fromTo(components.slideB.cloud.a.element, .48, {
+			cloudTimelines[0].fromTo(components.slideB.cloud.a.element, 0.48, {
 				opacity: 0
 			}, {
 				opacity: 1
 			}, 0);
 
-			cloudTimelines[0].from(components.slideB.cloud.a.element, .72, {
-				x: 12 + screen.width * .032,
+			cloudTimelines[0].from(components.slideB.cloud.a.element, 0.72, {
+				x: 12 + screen.width * 0.032,
 				ease: Power1.easeOut
 			}, 0);
 
 			cloudTimelines[0].to(components.slideB.cloud.a.element, 12, {
-				x: -36 - screen.width * .096,
+				x: -36 - screen.width * 0.096,
 				overwrite: false,
 				ease: Power0.easeNone
-			}, .7);
+			}, 0.7);
 
 			cloudTimelines[0].to(components.slideB.cloud.a.element, 1, {
 				opacity: 0
 			}, 11.7);
 
-			cloudTimelines[1].fromTo(components.slideB.cloud.b.element, .48, {
+			cloudTimelines[1].fromTo(components.slideB.cloud.b.element, 0.48, {
 				opacity: 0
 			}, {
 				opacity: 1
 			}, 0);
 
-			cloudTimelines[1].from(components.slideB.cloud.b.element, .64, {
-				x: 18 + screen.width * .048,
+			cloudTimelines[1].from(components.slideB.cloud.b.element, 0.64, {
+				x: 18 + screen.width * 0.048,
 				ease: Power1.easeOut
 			}, 0);
 
 			cloudTimelines[1].to(components.slideB.cloud.b.element, 8.4, {
-				x: -54 - screen.width * .144,
+				x: -54 - screen.width * 0.144,
 				overwrite: false,
 				ease: Power0.easeNone
-			}, .58);
+			}, 0.58);
 
 			cloudTimelines[1].to(components.slideB.cloud.b.element, 1, {
 				opacity: 0
 			}, 7.98);
 
-			cloudTimelines[2].fromTo(components.slideB.cloud.c.element, .48, {
+			cloudTimelines[2].fromTo(components.slideB.cloud.c.element, 0.48, {
 				opacity: 0
 			}, {
 				opacity: 1
 			}, 0);
 
-			cloudTimelines[2].fromTo(components.slideB.cloud.c.element, .56, {
-				x: 24 + screen.width * .054,
+			cloudTimelines[2].fromTo(components.slideB.cloud.c.element, 0.56, {
+				x: 24 + screen.width * 0.054,
 			}, {
 				x: 0,
 				ease: Power1.easeOut
 			}, 0);
 
 			cloudTimelines[2].to(components.slideB.cloud.c.element, 4.8, {
-				x: -72 - screen.width * .162,
+				x: -72 - screen.width * 0.162,
 				ease: Power0.easeNone,
 				overwrite: false
-			}, .5);
+			}, 0.5);
 
 			cloudTimelines[2].to(components.slideB.cloud.c.element, 1, {
 				opacity: 0
@@ -1006,9 +970,9 @@ $(document).ready(function() {
 
 		observers["activeSlideUpdated"].push(updateActivation);
 
-		observers["scroll"].push(updateParallax);
+		observers.scroll.push(updateParallax);
 
-		observers["resize"].push(updateParallax);
+		observers.resize.push(updateParallax);
 
 		updateActivation();
 
@@ -1028,17 +992,17 @@ $(document).ready(function() {
 				screenDeltaRange,
 				scrollRatio,
 				newOffset,
-				duration = force ? 0 : .2;
+				duration = force ? 0 : 0.2;
 
 			if (!screen.visibleSlides["2"] && !force) return;
 
-			screenDeltaRange = [screen.height * 1, screen.height * 3]
+			screenDeltaRange = [screen.height * 1, screen.height * 3];
 
-			offsetRange = screen.height * .5;
+			offsetRange = screen.height * 0.5;
 
 			scrollRatio = (screen.scrollPosition - screenDeltaRange[0]) / (screenDeltaRange[1] - screenDeltaRange[0]);
 
-			scrollRatio = Math.max(Math.min((scrollRatio - .5) * 2, 1), -1);
+			scrollRatio = Math.max(Math.min((scrollRatio - 0.5) * 2, 1), -1);
 
 			newOffset = Math.round(scrollRatio * offsetRange);
 
@@ -1060,22 +1024,22 @@ $(document).ready(function() {
 					components.slideC.headache.boltB.element,
 					components.slideC.headache.boltA.element,
 				], {
-					scale: .8
+					scale: 0.8
 				});
 
-				headacheTimeline = new TimelineMax({paused: true, delay: .4, repeat: -1, repeatDelay: .1});
+				headacheTimeline = new TimelineMax({paused: true, delay: 0.4, repeat: -1, repeatDelay: 0.1});
 
-				headacheTimeline.to(components.slideC.headache.boltC.element, .2, {
+				headacheTimeline.to(components.slideC.headache.boltC.element, 0.2, {
 					x: -17,
 					y: 34,
 					ease: Back.easeOut.config(1.48)
 				}, 0);
 
-				headacheTimeline.to(components.slideC.headache.boltC.element, .2, {
+				headacheTimeline.to(components.slideC.headache.boltC.element, 0.2, {
 					opacity: 1,
 				}, 0);
 
-				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, .025, {
+				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, 0.025, {
 					x: -1,
 				}, {
 					x: 1,
@@ -1086,9 +1050,9 @@ $(document).ready(function() {
 						randomize: false
 					}),
 					clearProps: "x"
-				}, .1);
+				}, 0.1);
 
-				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, .025, {
+				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, 0.025, {
 					y: -1,
 				}, {
 					y: 1,
@@ -1099,19 +1063,19 @@ $(document).ready(function() {
 						randomize: false
 					}),
 					clearProps: "y"
-				}, .1);
+				}, 0.1);
 
-				headacheTimeline.to(components.slideC.headache.boltB.element, .2, {
+				headacheTimeline.to(components.slideC.headache.boltB.element, 0.2, {
 					x: 2,
 					y: 34,
 					ease: Back.easeOut.config(1.48)
-				}, .1);
+				}, 0.1);
 
-				headacheTimeline.to(components.slideC.headache.boltB.element, .2, {
+				headacheTimeline.to(components.slideC.headache.boltB.element, 0.2, {
 					opacity: 1,
-				}, .1);
+				}, 0.1);
 
-				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, .025, {
+				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, 0.025, {
 					x: -1,
 				}, {
 					x: 1,
@@ -1122,9 +1086,9 @@ $(document).ready(function() {
 						randomize: false
 					}),
 					clearProps: "x"
-				}, .2);
+				}, 0.2);
 
-				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, .025, {
+				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, 0.025, {
 					y: -1,
 				}, {
 					y: 1,
@@ -1135,19 +1099,19 @@ $(document).ready(function() {
 						randomize: false
 					}),
 					clearProps: "y"
-				}, .2);
+				}, 0.2);
 
-				headacheTimeline.to(components.slideC.headache.boltA.element, .2, {
+				headacheTimeline.to(components.slideC.headache.boltA.element, 0.2, {
 					x: 12,
 					y: 32,
 					ease: Back.easeOut.config(1.48)
-				}, .2);
+				}, 0.2);
 
-				headacheTimeline.to(components.slideC.headache.boltA.element, .2, {
+				headacheTimeline.to(components.slideC.headache.boltA.element, 0.2, {
 					opacity: 1,
-				}, .2);
+				}, 0.2);
 
-				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, .025, {
+				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, 0.025, {
 					x: -1,
 				}, {
 					x: 1,
@@ -1158,9 +1122,9 @@ $(document).ready(function() {
 						randomize: false
 					}),
 					clearProps: "x"
-				}, .3);
+				}, 0.3);
 
-				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, .025, {
+				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, 0.025, {
 					y: -1,
 				}, {
 					y: 1,
@@ -1171,9 +1135,9 @@ $(document).ready(function() {
 						randomize: false
 					}),
 					clearProps: "y"
-				}, .3);
+				}, 0.3);
 
-				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, .52, {
+				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, 0.52, {
 					y: -1,
 				}, {
 					y: 1,
@@ -1184,9 +1148,9 @@ $(document).ready(function() {
 						randomize: true
 					}),
 					clearProps: "y"
-				}, .84);
+				}, 0.84);
 
-				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, .52, {
+				headacheTimeline.fromTo(components.slideC.headache.wrapper.element, 0.52, {
 					x: 1,
 				}, {
 					x: -1,
@@ -1197,75 +1161,45 @@ $(document).ready(function() {
 						randomize: true
 					}),
 					clearProps: "x"
-				}, .84);
+				}, 0.84);
 
 				headacheTimeline.to([
 					components.slideC.headache.boltC.element,
-				], .34, {
+				], 0.34, {
 					x: 0,
 					y: 0,
 					scale: 1,
 					ease: Back.easeInOut.config(3.4)
-				}, .98);
+				}, 0.98);
 
 				headacheTimeline.to([
 					components.slideC.headache.boltB.element,
-				], .38, {
+				], 0.38, {
 					x: 0,
 					y: 0,
 					scale: 1,
 					ease: Back.easeInOut.config(3.4)
-				}, .98);
+				}, 0.98);
 
 				headacheTimeline.to([
 					components.slideC.headache.boltA.element,
-				], .36, {
+				], 0.36, {
 					x: 0,
 					y: 0,
 					scale: 1,
 					ease: Back.easeInOut.config(3.4)
-				}, .98);
+				}, 0.98);
 
 				headacheTimeline.to([
 					components.slideC.headache.boltC.element,
 					components.slideC.headache.boltB.element,
 					components.slideC.headache.boltA.element,
-				], .28, {
+				], 0.28, {
 					opacity: 0,
 				}, 2.2);
 			}
 
 			headacheTimeline.play();
-
-			function pulse(timescale, skip) {
-				var pulseTimeline = new TimelineMax({paused: true});
-
-				if (timescale) pulseTimeline.timeScale(timescale);
-
-				pulseTimeline.to(components.slideC.heart.element, .14, {
-					scale: .88,
-					ease: Power1.easeInOut
-				}, 0);
-
-				pulseTimeline.to(components.slideC.heart.element, .32, {
-					scale: 1.1,
-					ease: Power3.easeInOut
-				}, .12);
-
-				if (!skip) {
-					pulseTimeline.to(components.slideC.heart.element, .2, {
-						scale: .92,
-						ease: Power2.easeInOut
-					}, .4);
-
-					pulseTimeline.to(components.slideC.heart.element, .14, {
-						scale: 1,
-						ease: Power2.easeInOut
-					}, .56);
-				}
-
-				pulseTimeline.play();
-			}
 		}
 
 		function deactivate() {
@@ -1283,9 +1217,9 @@ $(document).ready(function() {
 
 		observers["visibleSlidesUpdated"].push(updateActivation);
 
-		observers["scroll"].push(updateParallax);
+		observers.scroll.push(updateParallax);
 
-		observers["resize"].push(updateParallax);
+		observers.resize.push(updateParallax);
 
 		updateActivation();
 
@@ -1305,17 +1239,17 @@ $(document).ready(function() {
 				screenDeltaRange,
 				scrollRatio,
 				newOffset,
-				duration = force ? 0 : .2;
+				duration = force ? 0 : 0.2;
 
 			if (!flickerActivated && !force) return;
 
-			screenDeltaRange = [screen.height * 2.5, screen.height * 3.5]
+			screenDeltaRange = [screen.height * 2.5, screen.height * 3.5];
 
-			offsetRange = screen.height * .1;
+			offsetRange = screen.height * 0.1;
 
 			scrollRatio = (screen.scrollPosition - screenDeltaRange[0]) / (screenDeltaRange[1] - screenDeltaRange[0]);
 
-			scrollRatio = Math.max(Math.min((scrollRatio - .5) * 2, 1), -1);
+			scrollRatio = Math.max(Math.min((scrollRatio - 0.5) * 2, 1), -1);
 
 			newOffset = Math.round(scrollRatio * offsetRange);
 
@@ -1331,21 +1265,21 @@ $(document).ready(function() {
 
 			flickerActivated = true;
 
-			TweenMax.delayedCall(Math.random() * .2, flicker);
+			TweenMax.delayedCall(Math.random() * 0.2, flicker);
 
 			function flicker() {
 				var lightDuration;
 
 				if (!flickerActivated) return;
 
-				lightDuration = Math.random() * .75;
+				lightDuration = Math.random() * 0.75;
 
-				TweenMax.to([components.slideD.slouch.laptopLight.element, components.slideD.background.light.element], .1, {opacity: 1});
+				TweenMax.to([components.slideD.slouch.laptopLight.element, components.slideD.background.light.element], 0.1, {opacity: 1});
 
 				TweenMax.delayedCall(lightDuration, function() {
-					TweenMax.to([components.slideD.slouch.laptopLight.element, components.slideD.background.light.element], .1, {opacity: 0});
+					TweenMax.to([components.slideD.slouch.laptopLight.element, components.slideD.background.light.element], 0.1, {opacity: 0});
 
-					if (flickerActivated) TweenMax.delayedCall(Math.random() * 1.5 + .1, flicker);
+					if (flickerActivated) TweenMax.delayedCall(Math.random() * 1.5 + 0.1, flicker);
 				});
 			}
 		}
@@ -1358,20 +1292,19 @@ $(document).ready(function() {
 	}
 
 	function setupSlideE() {
-		var parallaxHandler,
-			slideActive = false,
+		var slideActive = false,
 			fogTimeline,
 			scrollOffsets = {},
 			targetMouseOffsets = {},
 			boatCalls = [];
 
-		observers["scroll"].push(updateActivation);
+		observers.scroll.push(updateActivation);
 
-		observers["scroll"].push(updateParallax);
+		observers.scroll.push(updateParallax);
 
-		observers["mousemove"].push(updateMouseParallax);
+		observers.mousemove.push(updateMouseParallax);
 
-		observers["resize"].push(updateParallax);
+		observers.resize.push(updateParallax);
 
 		updateActivation();
 
@@ -1379,21 +1312,21 @@ $(document).ready(function() {
 
 		function updateParallax(value, force) {
 			var offsetRanges = {
-					sky: screen.height * .32,
-					city: screen.height * .16,
+					sky: screen.height * 0.32,
+					city: screen.height * 0.16,
 				},
 				screenDeltaRange,
 				scrollRatio,
 				newOffsets = {},
-				duration = force ? 0 : .2;
+				duration = force ? 0 : 0.2;
 
 			if (!screen.visibleSlides["4"] && !force) return;
 
-			screenDeltaRange = [screen.height * 3, screen.height * 5]
+			screenDeltaRange = [screen.height * 3, screen.height * 5];
 
 			scrollRatio = (screen.scrollPosition - screenDeltaRange[0]) / (screenDeltaRange[1] - screenDeltaRange[0]);
 
-			scrollRatio = Math.max(Math.min((scrollRatio - .5) * 2, 1), -1);
+			scrollRatio = Math.max(Math.min((scrollRatio - 0.5) * 2, 1), -1);
 
 			for (var key in offsetRanges) {
 				newOffsets[key] = Math.round(scrollRatio * offsetRanges[key]);
@@ -1443,131 +1376,131 @@ $(document).ready(function() {
 					}, {
 						opacity: 0,
 						ease: Power1.easeInOut
-					}, .8);
+					}, 0.8);
 
 					fogTimeline.to(components.slideE.fog.cloud.a.element, 1.2, {
-						x: "+=" + (.4 * screen.height),
+						x: "+=" + (0.4 * screen.height),
 						y: 20,
 					}, 0);
 
-					fogTimeline.to(components.slideE.fog.cloud.a.element, .6, {
+					fogTimeline.to(components.slideE.fog.cloud.a.element, 0.6, {
 						opacity: 0,
-					}, .6);
+					}, 0.6);
 
 					fogTimeline.to(components.slideE.fog.cloud.b.element, 1.6, {
-						x: "+=" + (.5333 * screen.height),
+						x: "+=" + (0.5333 * screen.height),
 						y: -12,
-					}, .1);
+					}, 0.1);
 
-					fogTimeline.to(components.slideE.fog.cloud.b.element, .6, {
+					fogTimeline.to(components.slideE.fog.cloud.b.element, 0.6, {
 						opacity: 0,
 					}, 1.1);
 
 					fogTimeline.to(components.slideE.fog.cloud.c.element, 1.32, {
-						x: "+=" + (.2222 * screen.height),
+						x: "+=" + (0.2222 * screen.height),
 						y: 6,
-					}, .05);
+					}, 0.05);
 
-					fogTimeline.to(components.slideE.fog.cloud.c.element, .8, {
+					fogTimeline.to(components.slideE.fog.cloud.c.element, 0.8, {
 						opacity: 0,
-					}, .57);
+					}, 0.57);
 
 					fogTimeline.to(components.slideE.fog.cloud.d.element, 1.4, {
-						x: "+=" + (.2933 * screen.height),
+						x: "+=" + (0.2933 * screen.height),
 						y: 6,
-					}, .16);
+					}, 0.16);
 
-					fogTimeline.to(components.slideE.fog.cloud.d.element, .48, {
+					fogTimeline.to(components.slideE.fog.cloud.d.element, 0.48, {
 						opacity: 0,
 					}, 1.08);
 
 					fogTimeline.to(components.slideE.fog.cloud.e.element, 1.94, {
-						x: "+=" + (.6888 * screen.height),
+						x: "+=" + (0.6888 * screen.height),
 						y: -14,
 					}, 0);
 
-					fogTimeline.to(components.slideE.fog.cloud.e.element, .8, {
+					fogTimeline.to(components.slideE.fog.cloud.e.element, 0.8, {
 						opacity: 0,
 					}, 1.02);
 
 					fogTimeline.to(components.slideE.fog.cloud.f.element, 1.28, {
-						x: "+=" + (.2177 * screen.height),
+						x: "+=" + (0.2177 * screen.height),
 						y: -14,
-					}, .04);
+					}, 0.04);
 
-					fogTimeline.to(components.slideE.fog.cloud.f.element, .54, {
+					fogTimeline.to(components.slideE.fog.cloud.f.element, 0.54, {
 						opacity: 0,
-					}, .78);
+					}, 0.78);
 
 					fogTimeline.to(components.slideE.fog.cloud.g.element, 1.4, {
-						x: "+=" + (.2177 * screen.height),
+						x: "+=" + (0.2177 * screen.height),
 						y: -14,
-					}, .08);
+					}, 0.08);
 
-					fogTimeline.to(components.slideE.fog.cloud.g.element, .68, {
+					fogTimeline.to(components.slideE.fog.cloud.g.element, 0.68, {
 						opacity: 0,
-					}, .8);
+					}, 0.8);
 
 					fogTimeline.to(components.slideE.fog.cloud.h.element, 1.64, {
-						x: "+=" + (.48 * screen.height),
+						x: "+=" + (0.48 * screen.height),
 						y: 8,
-					}, .0);
+					}, 0.0);
 
-					fogTimeline.to(components.slideE.fog.cloud.h.element, .6, {
+					fogTimeline.to(components.slideE.fog.cloud.h.element, 0.6, {
 						opacity: 0,
 					}, 1.04);
 
 					fogTimeline.to(components.slideE.fog.cloud.i.element, 1.44, {
-						x: "+=" + (.4088 * screen.height),
+						x: "+=" + (0.4088 * screen.height),
 						y: 8,
-					}, .1);
+					}, 0.1);
 
-					fogTimeline.to(components.slideE.fog.cloud.i.element, .72, {
+					fogTimeline.to(components.slideE.fog.cloud.i.element, 0.72, {
 						opacity: 0,
-					}, .82);
+					}, 0.82);
 
 					fogTimeline.to(components.slideE.fog.cloud.j.element, 1.88, {
-						x: "+=" + (.6422 * screen.height),
+						x: "+=" + (0.6422 * screen.height),
 						y: 12,
 					}, 0);
 
-					fogTimeline.to(components.slideE.fog.cloud.j.element, .8, {
+					fogTimeline.to(components.slideE.fog.cloud.j.element, 0.8, {
 						opacity: 0,
 					}, 1.08);
 
 					fogTimeline.to(components.slideE.fog.cloud.k.element, 1.28, {
-						x: "+=" + (.1977 * screen.height),
+						x: "+=" + (0.1977 * screen.height),
 						y: 4,
-					}, .12);
+					}, 0.12);
 
-					fogTimeline.to(components.slideE.fog.cloud.k.element, .6, {
+					fogTimeline.to(components.slideE.fog.cloud.k.element, 0.6, {
 						opacity: 0,
-					}, .8);
+					}, 0.8);
 
 					fogTimeline.to(components.slideE.fog.cloud.l.element, 1.72, {
-						x: "+=" + (.5688 * screen.height),
+						x: "+=" + (0.5688 * screen.height),
 						y: -18,
 					}, 0);
 
-					fogTimeline.to(components.slideE.fog.cloud.l.element, .74, {
+					fogTimeline.to(components.slideE.fog.cloud.l.element, 0.74, {
 						opacity: 0,
-					}, .98);
+					}, 0.98);
 
 					fogTimeline.to(components.slideE.fog.cloud.m.element, 1.36, {
-						x: "+=" + (.6 * screen.height),
+						x: "+=" + (0.6 * screen.height),
 						y: -18,
 					}, 0);
 
-					fogTimeline.to(components.slideE.fog.cloud.m.element, .6, {
+					fogTimeline.to(components.slideE.fog.cloud.m.element, 0.6, {
 						opacity: 0,
-					}, .76);
+					}, 0.76);
 
 					fogTimeline.to(components.slideE.fog.cloud.n.element, 2, {
-						x: "+=" + (.5422 * screen.height),
+						x: "+=" + (0.5422 * screen.height),
 						y: -18,
-					}, .06);
+					}, 0.06);
 
-					fogTimeline.to(components.slideE.fog.cloud.n.element, .88, {
+					fogTimeline.to(components.slideE.fog.cloud.n.element, 0.88, {
 						opacity: 0,
 					}, 1.18);
 				}
@@ -1576,7 +1509,7 @@ $(document).ready(function() {
 			}
 
 			function activateWater() {
-				var baseTime = screen.width * .0625;
+				var baseTime = screen.width * 0.0625;
 
 				TweenMax.fromTo(components.slideE.city.water.waveA.top.element, baseTime, {
 					xPercent: 0,
@@ -1586,7 +1519,7 @@ $(document).ready(function() {
 					ease: Power0.easeNone
 				});
 
-				TweenMax.fromTo(components.slideE.city.water.waveB.top.element, baseTime * .8, {
+				TweenMax.fromTo(components.slideE.city.water.waveB.top.element, baseTime * 0.8, {
 					xPercent: 50,
 				}, {
 					xPercent: 0,
@@ -1594,13 +1527,13 @@ $(document).ready(function() {
 					ease: Power0.easeNone
 				});
 
-				TweenMax.to(components.slideE.city.water.waveC.top.element, baseTime * .9, {
+				TweenMax.to(components.slideE.city.water.waveC.top.element, baseTime * 0.9, {
 					xPercent: 50,
 					repeat: -1,
 					ease: Power0.easeNone
 				});
 
-				TweenMax.fromTo(components.slideE.city.water.waveD.top.element, baseTime * .65, {
+				TweenMax.fromTo(components.slideE.city.water.waveD.top.element, baseTime * 0.65, {
 					xPercent: 50,
 				}, {
 					xPercent: 0,
@@ -1618,7 +1551,6 @@ $(document).ready(function() {
 					},
 					fadeOutTime = 6,
 					fadeInTime = 4.5,
-					repeats = {},
 					maxXPercent = 22;
 
 				cycleSkyLayer("layerA", true);
@@ -1656,7 +1588,7 @@ $(document).ready(function() {
 			}
 
 			function activateBoats() {
-				var baseBoatSpeed = screen.height * .2, // base boat speed on height
+				var baseBoatSpeed = screen.height * 0.2, // base boat speed on height
 					repeats = {},
 					leftEnd = -60,
 					rightEnd = 10;
@@ -1673,10 +1605,10 @@ $(document).ready(function() {
 							onComplete: repeats.boatA,
 						});
 					});
-				}
+				};
 
 				TweenMax.fromTo(components.slideE.city.boat.a.element, baseBoatSpeed, {
-					x: screen.width * .92,
+					x: screen.width * 1.2 * 0.92,
 				}, {
 					x: leftEnd,
 					ease: Power0.easeNone,
@@ -1695,10 +1627,10 @@ $(document).ready(function() {
 							onComplete: repeats.boatB,
 						});
 					});
-				}
+				};
 
-				TweenMax.fromTo(components.slideE.city.boat.b.element, baseBoatSpeed * .92, {
-					x: screen.width * 1.2 * .025,
+				TweenMax.fromTo(components.slideE.city.boat.b.element, baseBoatSpeed * 0.92, {
+					x: screen.width * 1.2 * 0.025,
 				}, {
 					x: screen.width * 1.2 + rightEnd,
 					ease: Power0.easeNone,
@@ -1709,7 +1641,7 @@ $(document).ready(function() {
 					addBoatCall(4 + Math.random() * 10, function() {
 						if (!slideActive) return;
 
-						TweenMax.fromTo(components.slideE.city.boat.c.element, baseBoatSpeed * .58, {
+						TweenMax.fromTo(components.slideE.city.boat.c.element, baseBoatSpeed * 0.58, {
 							x: leftEnd,
 						}, {
 							x: screen.width * 1.2 + rightEnd,
@@ -1717,7 +1649,7 @@ $(document).ready(function() {
 							onComplete: repeats.boatC,
 						});
 					});
-				}
+				};
 
 				repeats.boatC();
 
@@ -1725,7 +1657,7 @@ $(document).ready(function() {
 					addBoatCall(4 + Math.random() * 24, function() {
 						if (!slideActive) return;
 
-						TweenMax.fromTo(components.slideE.city.boat.d.element, baseBoatSpeed * .96, {
+						TweenMax.fromTo(components.slideE.city.boat.d.element, baseBoatSpeed * 0.96, {
 							x: leftEnd,
 						}, {
 							x: screen.width * 1.2 + rightEnd,
@@ -1733,7 +1665,7 @@ $(document).ready(function() {
 							onComplete: repeats.boatD,
 						});
 					});
-				}
+				};
 
 				repeats.boatD();
 
@@ -1741,7 +1673,7 @@ $(document).ready(function() {
 					addBoatCall(18 + Math.random() * 32, function() {
 						if (!slideActive) return;
 
-						TweenMax.fromTo(components.slideE.city.boat.f.element, baseBoatSpeed * .74, {
+						TweenMax.fromTo(components.slideE.city.boat.f.element, baseBoatSpeed * 0.74, {
 							x: screen.width * 1.2 + rightEnd,
 						}, {
 							x: leftEnd,
@@ -1749,7 +1681,7 @@ $(document).ready(function() {
 							onComplete: repeats.boatF,
 						});
 					});
-				}
+				};
 
 				repeats.boatF();
 
@@ -1757,7 +1689,7 @@ $(document).ready(function() {
 					addBoatCall(6 + Math.random() * 8, function() {
 						if (!slideActive) return;
 
-						TweenMax.fromTo(components.slideE.city.boat.g.element, baseBoatSpeed * .86, {
+						TweenMax.fromTo(components.slideE.city.boat.g.element, baseBoatSpeed * 0.86, {
 							x: leftEnd,
 						}, {
 							x: screen.width * 1.2 + rightEnd,
@@ -1765,7 +1697,7 @@ $(document).ready(function() {
 							onComplete: repeats.boatG,
 						});
 					});
-				}
+				};
 
 				repeats.boatG();
 
@@ -1773,7 +1705,7 @@ $(document).ready(function() {
 					addBoatCall(14 + Math.random() * 60, function() {
 						if (!slideActive) return;
 
-						TweenMax.fromTo(components.slideE.city.boat.h.element, baseBoatSpeed * .18, {
+						TweenMax.fromTo(components.slideE.city.boat.h.element, baseBoatSpeed * 0.18, {
 							x: screen.width * 1.2 + rightEnd,
 						}, {
 							x: leftEnd,
@@ -1781,7 +1713,7 @@ $(document).ready(function() {
 							onComplete: repeats.boatH,
 						});
 					});
-				}
+				};
 
 				repeats.boatH();
 
@@ -1796,7 +1728,7 @@ $(document).ready(function() {
 				var baseTime = 60; // base balloon speed on height
 
 				TweenMax.fromTo(components.slideE.sky.balloon.element, baseTime, {
-					x: screen.width * 1.2 * .56,
+					x: screen.width * 1.2 * 0.56,
 					y: 0,
 				}, {
 					x: screen.width * 1.2 + 20,
@@ -1888,12 +1820,12 @@ $(document).ready(function() {
 						TweenMax.to([
 							components.slideE.city.complete.element,
 							components.slideE.city.reflection.element,
-						], .2, {
+						], 0.2, {
 							xPercent: targetMouseOffsets[key] / 100,
 						});
 					}
 					else if (key == "sky") {
-						TweenMax.to(components.slideE.sky.element, .2, {
+						TweenMax.to(components.slideE.sky.element, 0.2, {
 							xPercent: targetMouseOffsets[key] / 100,
 						});
 					}
@@ -1901,7 +1833,7 @@ $(document).ready(function() {
 						TweenMax.to([
 							components.slideE.city.water.element,
 							components.slideE.city.boats.element,
-						], .2, {
+						], 0.2, {
 							xPercent: targetMouseOffsets[key] / 100,
 						});
 					}
@@ -1918,13 +1850,13 @@ $(document).ready(function() {
 			targetMouseOffsets = {},
 			circleRadians = 2 * Math.PI;
 
-		observers["scroll"].push(updateActivation);
+		observers.scroll.push(updateActivation);
 
-		observers["scroll"].push(updateParallax);
+		observers.scroll.push(updateParallax);
 
-		observers["mousemove"].push(updateMouseParallax);
+		observers.mousemove.push(updateMouseParallax);
 
-		observers["resize"].push(function() {
+		observers.resize.push(function() {
 			updateParallax();
 
 			generateStars();
@@ -1938,22 +1870,22 @@ $(document).ready(function() {
 
 		function updateParallax(value, force) {
 			var offsetRanges = {
-					wanderingMan: screen.height * .1,
-					mountains: screen.height * .16,
-					sky: screen.height * .32,
+					wanderingMan: screen.height * 0.1,
+					mountains: screen.height * 0.16,
+					sky: screen.height * 0.32,
 				},
 				screenDeltaRange,
 				scrollRatio,
 				newOffsets = {},
-				duration = force ? 0 : .2;
+				duration = force ? 0 : 0.2;
 
 			if (!slideActive && !force) return;
 
-			screenDeltaRange = [screen.height * 4, screen.height * 6]
+			screenDeltaRange = [screen.height * 4, screen.height * 6];
 
 			scrollRatio = (screen.scrollPosition - screenDeltaRange[0]) / (screenDeltaRange[1] - screenDeltaRange[0]);
 
-			scrollRatio = Math.max(Math.min((scrollRatio - .5) * 2, 1), -1);
+			scrollRatio = Math.max(Math.min((scrollRatio - 0.5) * 2, 1), -1);
 
 			for (var key in offsetRanges) {
 				newOffsets[key] = Math.round(scrollRatio * offsetRanges[key]);
@@ -2005,7 +1937,7 @@ $(document).ready(function() {
 
 		function generateStars() {
 			var starCount = 0.00021637867 * screen.width * screen.height,
-				starSize = .24 * screen.vmin;
+				starSize = 0.24 * screen.vmin;
 
 			stars = [];
 
@@ -2032,7 +1964,7 @@ $(document).ready(function() {
 				var star = {
 						x: Math.random() * screen.width * 1.05,
 						y: Math.random() * Math.random() * screen.height,
-						radius: starSize * ((Math.random() * Math.random() * .9) + .1),
+						radius: starSize * ((Math.random() * Math.random() * 0.9) + 0.1),
 						opacity: 1,
 					};
 
@@ -2058,10 +1990,10 @@ $(document).ready(function() {
 
 				twinklingStars.push(star);
 
-				TweenMax.to(star, Math.random() * .72 + .2, {
+				TweenMax.to(star, Math.random() * 0.72 + 0.2, {
 					opacity: 0,
 					onComplete: function() {
-						TweenMax.to(star, Math.random() * .72 + .2, {
+						TweenMax.to(star, Math.random() * 0.72 + 0.2, {
 							opacity: 1,
 							onComplete: function() {
 								twinklingStars.splice(twinklingStars.indexOf(star), 1);
@@ -2071,7 +2003,7 @@ $(document).ready(function() {
 				});
 			}
 
-			TweenMax.delayedCall(Math.pow(Math.random(), 3) * .00005, twinkle);
+			TweenMax.delayedCall(Math.pow(Math.random(), 3) * 0.00005, twinkle);
 		}
 
 		function updateTwinkles() {
@@ -2111,17 +2043,17 @@ $(document).ready(function() {
 					targetMouseOffsets[key] = mouseOffsets[key];
 
 					if (key == "mountains") {
-						TweenMax.to(components.slideF.mountains.wrapper.element, .2, {
+						TweenMax.to(components.slideF.mountains.wrapper.element, 0.2, {
 							xPercent: targetMouseOffsets.mountains / 100,
 						});
 					}
 					else if (key == "sky") {
-						TweenMax.to(components.slideF.sky.element, .2, {
+						TweenMax.to(components.slideF.sky.element, 0.2, {
 							xPercent: targetMouseOffsets.sky / 100,
 						});
 					}
 					else if (key == "wanderingMan") {
-						TweenMax.to(components.slideF.wanderingMan.element, .2, {
+						TweenMax.to(components.slideF.wanderingMan.element, 0.2, {
 							xPercent: targetMouseOffsets.wanderingMan / 100,
 						});
 					}
@@ -2136,13 +2068,13 @@ $(document).ready(function() {
 			boxDropTimeline,
 			targetMouseOffsets = {};
 
-		observers["scroll"].push(updateActivation);
+		observers.scroll.push(updateActivation);
 
-		observers["scroll"].push(updateParallax);
+		observers.scroll.push(updateParallax);
 
-		observers["mousemove"].push(updateMouseParallax);
+		observers.mousemove.push(updateMouseParallax);
 
-		observers["resize"].push(updateParallax);
+		observers.resize.push(updateParallax);
 
 		updateActivation();
 
@@ -2189,21 +2121,21 @@ $(document).ready(function() {
 
 		function updateParallax(value, force) {
 			var offsetRanges = {
-					foreground: screen.height * .36,
-					workfloor: screen.height * .14,
+					foreground: screen.height * 0.36,
+					workfloor: screen.height * 0.14,
 				},
 				screenDeltaRange,
 				scrollRatio,
 				newOffsets = {},
-				duration = force ? 0 : .2;
+				duration = force ? 0 : 0.2;
 
 			if (!screen.visibleSlides["6"] && !force) return;
 
-			screenDeltaRange = [screen.height * 5, screen.height * 7]
+			screenDeltaRange = [screen.height * 5, screen.height * 7];
 
 			scrollRatio = (screen.scrollPosition - screenDeltaRange[0]) / (screenDeltaRange[1] - screenDeltaRange[0]);
 
-			scrollRatio = Math.max(Math.min((scrollRatio - .5) * 2, 1), -1);
+			scrollRatio = Math.max(Math.min((scrollRatio - 0.5) * 2, 1), -1);
 
 			for (var key in offsetRanges) {
 				newOffsets[key] = Math.round(scrollRatio * offsetRanges[key]);
@@ -2222,42 +2154,42 @@ $(document).ready(function() {
 		}
 
 		function activateBoxDrop() {
-			boxDropTimeline = new TimelineMax({paused: true, delay: .4, repeat: -1, repeatDelay: .8});
+			boxDropTimeline = new TimelineMax({paused: true, delay: 0.4, repeat: -1, repeatDelay: 0.8});
 
-			boxDropTimeline.fromTo(components.slideG.hand.element, .56, {
+			boxDropTimeline.fromTo(components.slideG.hand.element, 0.56, {
 				x: 84.33333 * screen.vmin,
 				y: -50.172222 * screen.vmin,
 			}, {
 				x: 0,
 				y: 0,
-				ease: Back.easeOut.config(.5)
+				ease: Back.easeOut.config(0.5)
 			}, 0);
 
-			boxDropTimeline.fromTo(components.slideG.box.element, .42, {
-				y: -.7 * screen.height,
+			boxDropTimeline.fromTo(components.slideG.box.element, 0.42, {
+				y: -0.7 * screen.height,
 			}, {
 				y: 0,
-				ease: Back.easeOut.config(.6)
-			}, .34);
+				ease: Back.easeOut.config(0.6)
+			}, 0.34);
 
-			boxDropTimeline.from(components.slideG.box.shadow.element, .3, {
+			boxDropTimeline.from(components.slideG.box.shadow.element, 0.3, {
 				opacity: 0,
-				scale: .8
-			}, .46);
+				scale: 0.8
+			}, 0.46);
 
-			boxDropTimeline.to(components.slideG.hand.element, .08, {
-				y: .22222 * screen.vmin + 2,
-			}, .61);
+			boxDropTimeline.to(components.slideG.hand.element, 0.08, {
+				y: 0.22222 * screen.vmin + 2,
+			}, 0.61);
 
-			boxDropTimeline.to(components.slideG.hand.element, .12, {
+			boxDropTimeline.to(components.slideG.hand.element, 0.12, {
 				y: 0,
-			}, .69);
+			}, 0.69);
 
 			boxDropTimeline.to([
 				components.slideG.hand.element,
 				components.slideG.box.element,
 				components.slideG.box.shadow.element,
-			], .4, {
+			], 0.4, {
 				x: screen.vmin * 84.33333,
 				y: screen.vmin * -50.172222222222,
 				ease: Power1.easeIn
@@ -2283,9 +2215,9 @@ $(document).ready(function() {
 				if (mouseOffsets[key] != targetMouseOffsets[key]) {
 					targetMouseOffsets[key] = mouseOffsets[key];
 
-					TweenMax.to(components.slideG[key].element, .2, {
+					TweenMax.to(components.slideG[key].element, 0.2, {
 						x: targetMouseOffsets[key],
-						y: targetMouseOffsets[key] * .575,
+						y: targetMouseOffsets[key] * 0.575,
 					});
 				}
 			}
@@ -2317,13 +2249,13 @@ $(document).ready(function() {
 			targetMouseOffsets = {},
 			startingCloudTimeline;
 
-		observers["scroll"].push(updateActivation);
+		observers.scroll.push(updateActivation);
 
-		observers["scroll"].push(updateParallax);
+		observers.scroll.push(updateParallax);
 
-		observers["mousemove"].push(updateMouseParallax);
+		observers.mousemove.push(updateMouseParallax);
 
-		observers["resize"].push(updateParallax);
+		observers.resize.push(updateParallax);
 
 		generateStartingClouds();
 
@@ -2369,7 +2301,7 @@ $(document).ready(function() {
 				generateStartingClouds();
 			}
 			else {
-				console.warn("Missing starting cloud timeline.")
+				console.warn("Missing starting cloud timeline.");
 			}
 
 			while (activeCars.length) {
@@ -2379,21 +2311,21 @@ $(document).ready(function() {
 
 		function updateParallax(value, force) {
 			var offsetRanges = {
-					storescape: screen.height * .24,
-					sky: screen.height * .14,
+					storescape: screen.height * 0.24,
+					sky: screen.height * 0.14,
 				},
 				screenDeltaRange,
 				scrollRatio,
 				newOffsets = {},
-				duration = force ? 0 : .2;
+				duration = force ? 0 : 0.2;
 
 			if (!screen.visibleSlides["7"] && !force) return;
 
-			screenDeltaRange = [screen.height * 6, screen.height * 8]
+			screenDeltaRange = [screen.height * 6, screen.height * 8];
 
 			scrollRatio = (screen.scrollPosition - screenDeltaRange[0]) / (screenDeltaRange[1] - screenDeltaRange[0]);
 
-			scrollRatio = Math.max(Math.min((scrollRatio - .5) * 2, 1), -1);
+			scrollRatio = Math.max(Math.min((scrollRatio - 0.5) * 2, 1), -1);
 
 			for (var key in offsetRanges) {
 				newOffsets[key] = Math.round(scrollRatio * offsetRanges[key]);
@@ -2431,7 +2363,7 @@ $(document).ready(function() {
 					typeIndex = Math.round(Math.random() * (carTypes.length - 1));
 				} while (typeIndex == previousCarIndex);
 				
-				type = carTypes[typeIndex]
+				type = carTypes[typeIndex];
 			}
 
 			previousCarIndex = carTypes.indexOf(type);
@@ -2441,7 +2373,7 @@ $(document).ready(function() {
 				items: [],
 				timeline: new TimelineMax({
 					paused: true,
-					delay: .2,
+					delay: 0.2,
 					onComplete: function() {
 						car.remove();
 					}
@@ -2469,13 +2401,13 @@ $(document).ready(function() {
 
 			activeCars.push(car);
 
-			target.x = -.55 * screen.width;
+			target.x = -0.55 * screen.width;
 
 			target.y = 0.57735026919 * -target.x;
 
 			delta = Math.sqrt(Math.pow(target.x, 2) + Math.pow(target.y, 2));
 
-			arrivalTime = delta * .003;
+			arrivalTime = delta * 0.003;
 
 			car.timeline.from(car.element, arrivalTime, {
 				x: target.x,
@@ -2487,13 +2419,13 @@ $(document).ready(function() {
 				addItem(items[idx]);
 			}
 
-			target.x = .45 * screen.width;
+			target.x = 0.45 * screen.width;
 
 			target.y = 0.57735026919 * -target.x;
 
 			delta = Math.sqrt(Math.pow(target.x, 2) + Math.pow(target.y, 2));
 
-			departureTime = delta * .001;
+			departureTime = delta * 0.001;
 
 			car.timeline.to(car.element, departureTime, {
 				x: target.x,
@@ -2512,12 +2444,12 @@ $(document).ready(function() {
 
 				car.items.push(item);
 
-				enterTime = arrivalTime - .22 + (.12 * idx);
+				enterTime = arrivalTime - 0.22 + (0.12 * idx);
 
 				car.timeline.addCallback(function() {
 					var clientRect = item[0].getBoundingClientRect(),
 						coordinate = { x: clientRect.left + clientRect.width / 2, y: screen.height },
-						center = {x: coordinate.x, y: clientRect.height / 2 + .64 * screen.height},
+						center = {x: coordinate.x, y: clientRect.height / 2 + 0.64 * screen.height},
 						topDelay = 340,
 						adjustmentRatio = screen.lesser / 900,
 						entryBurst = new mojs.Burst({
@@ -2525,7 +2457,7 @@ $(document).ready(function() {
 							left: 0, top: 0,
 							degree: 120,
 							angle: 300,
-							radius: {[adjustmentRatio * 6]:adjustmentRatio * 44},
+							radius: mapPropertyMultiply(6, 44, adjustmentRatio),
 							count: 4,
 							children: {
 								shape: "line",
@@ -2546,7 +2478,7 @@ $(document).ready(function() {
 							stroke: "white",
 							shape: "line",
 							radiusY: 0,
-							radiusX: {0: screen.height - clientRect.height - (.64 * screen.height)},
+							radiusX: {0: screen.height - clientRect.height - (0.64 * screen.height)},
 							strokeDasharray: "100% 100%",
 							strokeDashoffset: { "0%": "100%" },
 							angle: 90,
@@ -2561,10 +2493,10 @@ $(document).ready(function() {
 							parent: components.slideH.underlayEffects.element,
 							left: 0, top: 0,
 							stroke: "red",
-							strokeWidth: {[24 * adjustmentRatio]:0},
+							strokeWidth: mapPropertyMultiply(24, 0, adjustmentRatio),
 							fill: 'none',
-							scale: { .8: 1 },
-							radius: {[24 * adjustmentRatio]: 84 * adjustmentRatio},
+							scale: { 0.8: 1 },
+							radius: mapPropertyMultiply(24, 84, adjustmentRatio),
 							duration: 320,
 							easing: 'cubic.out',
 							delay: topDelay,
@@ -2573,10 +2505,10 @@ $(document).ready(function() {
 							parent: components.slideH.underlayEffects.element,
 							left: 0, top: 0,
 							stroke: "#FFF",
-							strokeWidth: {[54 * adjustmentRatio]:0},
+							strokeWidth: mapPropertyMultiply(54, 0, adjustmentRatio),
 							fill: 'none',
-							scale: { .8: 1 },
-							radius: {[24 * adjustmentRatio]: 88 * adjustmentRatio},
+							scale: { 0.8: 1 },
+							radius: mapPropertyMultiply(24, 88, adjustmentRatio),
 							duration: 320,
 							easing: 'cubic.out',
 							delay: topDelay + 60,
@@ -2584,7 +2516,7 @@ $(document).ready(function() {
 						crossBurst = new mojs.Burst({
 							parent: components.slideH.underlayEffects.element,
 							left: 0, top: 0,
-							radius: {[54 * adjustmentRatio]: 120 * adjustmentRatio},
+							radius: mapPropertyMultiply(54, 120, adjustmentRatio),
 							angle: "rand(0, 90)",
 							count: 10,
 							children: {
@@ -2594,7 +2526,7 @@ $(document).ready(function() {
 								strokeWidth: 4 * adjustmentRatio,
 								stroke: ['red', 'white'],
 								scale: { 1: 0, easing: 'quad.in' },
-								pathScale: [.8, null],
+								pathScale: [0.8, null],
 								degreeShift: [13, null],
 								duration: [500, 700],
 								easing: 'quint.out',
@@ -2613,23 +2545,23 @@ $(document).ready(function() {
 					circleB.tune(center).replay();
 
 					crossBurst.tune(center).replay();
-				}, enterTime - .15);
+				}, enterTime - 0.15);
 
-				car.timeline.from(item, .52, {
-					y: .36 * screen.height,
-					ease: Back.easeOut.config(.86),
+				car.timeline.from(item, 0.52, {
+					y: 0.36 * screen.height,
+					ease: Back.easeOut.config(0.86),
 				}, enterTime);
 
 				car.timeline.addCallback(function() {
-					wiggleProp(item, "x", -4, 4, [.18, .36]);
-					wiggleProp(item, "y", -4, 4, [.18, .36]);
-					wiggleProp(item, "rotation", -4, 4, [.14, .36]);
-				}, .48 + enterTime);
+					wiggleProp(item, "x", -4, 4, [0.18, 0.36]);
+					wiggleProp(item, "y", -4, 4, [0.18, 0.36]);
+					wiggleProp(item, "rotation", -4, 4, [0.14, 0.36]);
+				}, 0.48 + enterTime);
 
 				car.timeline.addCallback(function() {
 					TweenMax.killTweensOf(item, {y: true});
 
-					TweenMax.to(item, .52, {
+					TweenMax.to(item, 0.52, {
 						y: 16 * screen.vmin,
 						opacity: 0,
 						ease: Back.easeIn.config(1.4),
@@ -2663,7 +2595,7 @@ $(document).ready(function() {
 					set = [],
 					itemIndex;
 
-				if (Math.random() > .4) {
+				if (Math.random() > 0.4) {
 					return pickedSets[Math.round(Math.random() * (pickedSets.length - 1))];
 				}
 				else {
@@ -2699,9 +2631,9 @@ $(document).ready(function() {
 				if (mouseOffsets[key] != targetMouseOffsets[key]) {
 					targetMouseOffsets[key] = mouseOffsets[key];
 
-					TweenMax.to(components.slideH[key].element, .2, {
+					TweenMax.to(components.slideH[key].element, 0.2, {
 						x: targetMouseOffsets[key],
-						y: targetMouseOffsets[key] * .575,
+						y: targetMouseOffsets[key] * 0.575,
 					});
 				}
 			}
@@ -2772,7 +2704,7 @@ $(document).ready(function() {
 
 				properties.x = -properties.width - screen.width / 2 - 10;
 				
-				properties.y = (-.42 + Math.random() * 1.12) * screen.height;
+				properties.y = (-0.42 + Math.random() * 1.12) * screen.height;
 			}
 			else {
 				properties = {
@@ -2796,14 +2728,14 @@ $(document).ready(function() {
 
 			target.x = 1.73205080757 * (properties.y - target.y) + properties.x;
 
-			delta = Math.sqrt(Math.pow(target.x - properties.x, 2) + Math.pow(target.y - properties.y, 2))
+			delta = Math.sqrt(Math.pow(target.x - properties.x, 2) + Math.pow(target.y - properties.y, 2));
 
 			if (isStartingCloud) {
 				if (!startingCloudTimeline) {
 					startingCloudTimeline = new TimelineMax({paused: true});
 				}
 
-				startingCloudTimeline.to(cloud.element, delta * .12 * (16 / (parameters.width + 4)), {
+				startingCloudTimeline.to(cloud.element, delta * 0.12 * (16 / (parameters.width + 4)), {
 					x: target.x,
 					y: target.y,
 					ease: Power0.easeNone,
@@ -2813,7 +2745,7 @@ $(document).ready(function() {
 				}, 0);
 			}
 			else {
-				TweenMax.to(cloud.element, delta * .12 * (16 / (parameters.width + 4)), {
+				TweenMax.to(cloud.element, delta * 0.12 * (16 / (parameters.width + 4)), {
 					x: target.x,
 					y: target.y,
 					ease: Power0.easeNone,
@@ -2883,48 +2815,48 @@ $(document).ready(function() {
 				if (!entryTimeline) {
 					entryTimeline = new TimelineMax({paused: true});
 
-					entryTimeline.to(components.slideI.message.words.element[0], .8, {
+					entryTimeline.to(components.slideI.message.words.element[0], 0.8, {
 						opacity: 1
 					}, 0);
 
-					entryTimeline.to(components.slideI.message.words.element[1], .8, {
+					entryTimeline.to(components.slideI.message.words.element[1], 0.8, {
 						opacity: 1
-					}, .14);
+					}, 0.14);
 
-					// entryTimeline.to(components.slideI.message.words.element[2], .8, {
+					// entryTimeline.to(components.slideI.message.words.element[2], 0.8, {
 					// 	opacity: 1
-					// }, .28);
+					// }, 0.28);
 
-					entryTimeline.to(components.slideI.message.words.element[2], .8, {
+					entryTimeline.to(components.slideI.message.words.element[2], 0.8, {
 						opacity: 1
-					}, .3);
+					}, 0.3);
 
-					entryTimeline.to(components.slideI.message.words.element[3], .8, {
+					entryTimeline.to(components.slideI.message.words.element[3], 0.8, {
 						opacity: 1
-					}, .44);
+					}, 0.44);
 
-					entryTimeline.to(components.slideI.message.words.element[4], .8, {
+					entryTimeline.to(components.slideI.message.words.element[4], 0.8, {
 						opacity: 1
-					}, .6);
+					}, 0.6);
 
-					entryTimeline.fromTo(components.slideI.divider.element, .62, {
+					entryTimeline.fromTo(components.slideI.divider.element, 0.62, {
 						scaleY: 0,
 						opacity: 0,
 					}, {
 						scaleY: 1,
 						opacity: 1,
 						transformOrigin: "50% 0%"
-					}, .74);
+					}, 0.74);
 
-					entryTimeline.from(components.slideI.form.element, .48, {
+					entryTimeline.from(components.slideI.form.element, 0.48, {
 						x: 42,
-					}, .9);
+					}, 0.9);
 
-					entryTimeline.to(components.slideI.form.input.element, .62, {
+					entryTimeline.to(components.slideI.form.input.element, 0.62, {
 						opacity: 1,
-					}, .9);
+					}, 0.9);
 
-					entryTimeline.to(components.slideI.form.button.element, .62, {
+					entryTimeline.to(components.slideI.form.button.element, 0.62, {
 						opacity: 1,
 					}, 1.08);
 				}
@@ -2951,37 +2883,44 @@ $(document).ready(function() {
 			TweenMax.set(components.slideI.form.warning.element, {opacity: 0, yPercent: -75});
 
 			components.slideI.form.input.input.element.on({
-				input: checkInput
+				input: checkInput,
+				keypress: function(event) {
+					if (event.which !== 13) return;
+
+					attemptSubmission();
+				}
 			});
 
-			TweenMax.delayedCall(.4, checkInput);
+			TweenMax.delayedCall(0.4, checkInput);
 
 			components.slideI.form.button.element.on({
 				mouseenter: function() {
-					TweenMax.to(components.slideI.form.button.element, .24, {
+					TweenMax.to(components.slideI.form.button.element, 0.24, {
 						className: "+=clc-slide-i-content-form-button-hovered"
 					});
 				},
 				mouseleave: function() {
-					TweenMax.to(components.slideI.form.button.element, .24, {
+					TweenMax.to(components.slideI.form.button.element, 0.24, {
 						className: "-=clc-slide-i-content-form-button-hovered"
 					});
 				},
-				click: function() {
-					var inputValue = components.slideI.form.input.input.element.val();
-
-					if (components.slideI.form.submitted) return;
-
-					if (validateEmail(inputValue)) {
-						submitEmail(inputValue);
-
-						hideWarning();
-					}
-					else {
-						showWarning();
-					}
-				}
+				click: attemptSubmission
 			});
+
+			function attemptSubmission() {
+				var inputValue = components.slideI.form.input.input.element.val();
+
+				if (components.slideI.form.submitted) return;
+
+				if (validateEmail(inputValue)) {
+					submitEmail(inputValue);
+
+					hideWarning();
+				}
+				else {
+					showWarning();
+				}
+			}
 
 			function checkInput() {
 				var value = components.slideI.form.input.input.element.val();
@@ -2989,19 +2928,19 @@ $(document).ready(function() {
 				if (value.length && placeholderVisible) {
 					TweenMax.killTweensOf(components.slideI.form.input.placeholder.element, {opacity: true});
 
-					TweenMax.to(components.slideI.form.input.placeholder.element, .3, {opacity: 0});
+					TweenMax.to(components.slideI.form.input.placeholder.element, 0.3, {opacity: 0});
 
 					placeholderVisible = false;
 				}
-				else if (value.length == 0 && !placeholderVisible) {
+				else if (value.length === 0 && !placeholderVisible) {
 					TweenMax.killTweensOf(components.slideI.form.input.placeholder.element, {opacity: true});
 
-					TweenMax.to(components.slideI.form.input.placeholder.element, .3, {opacity: 1});
+					TweenMax.to(components.slideI.form.input.placeholder.element, 0.3, {opacity: 1});
 
 					placeholderVisible = true;
 				}
 
-				if (components.slideI.form.warning.shown && (value.length == 0 || validateEmail(value))) {
+				if (components.slideI.form.warning.shown && (value.length === 0 || validateEmail(value))) {
 					hideWarning();
 				}
 			}
@@ -3020,7 +2959,7 @@ $(document).ready(function() {
 						parent: components.slideI.acceptance.element, 
 						left: 0, top: 0,
 						count: 18,
-						radius: {[Math.round(100 * adjustmentRatio)] : Math.round(320 * adjustmentRatio)},
+						radius: mapPropertyMultiply(100, 320, adjustmentRatio),
 						children: {
 							shape: "line",
 							stroke: ["#E64046", "#3C3C3C", "#CF3A3F"],
@@ -3038,9 +2977,8 @@ $(document).ready(function() {
 						parent: components.slideI.acceptance.element, 
 						left: 0, top: 0,
 						count: 4,
-						radius: 0,
 						angle: 45,
-						radius: {[Math.round(40 * adjustmentRatio)] : Math.round(520 * adjustmentRatio)},
+						radius: mapPropertyMultiply(40, 520, adjustmentRatio),
 						children: {
 							shape: "line",
 							stroke: "red",
@@ -3060,14 +2998,14 @@ $(document).ready(function() {
 						fill: "none",
 						stroke: "red",
 						strokeWidth: 4 * adjustmentRatio,
-						opacity: {.25 : 0},
+						opacity: {0.25 : 0},
 						radius: 300,
 						duration: 600
 					}),
 					crossBurst = new mojs.Burst({
 						parent: components.slideI.acceptance.ring.element, 
 						left: 0, top: 0,
-						radius: {[Math.round(100 * adjustmentRatio)] : Math.round(320 * adjustmentRatio)},
+						radius: mapPropertyMultiply(100, 320, adjustmentRatio),
 						count: 32,
 						children: {
 							shape: "cross",
@@ -3086,68 +3024,68 @@ $(document).ready(function() {
 				], {pointerEvents: "none"});
 
 				if (screen.width >= 600) {
-					submitTimeline.to(components.slideI.message.element, .4, {
+					submitTimeline.to(components.slideI.message.element, 0.4, {
 						opacity: 0,
-						y: screen.height * .14,
+						y: screen.height * 0.14,
 						ease: Power2.easeIn
 					}, 0);
 
-					submitTimeline.to(components.slideI.divider.element, .4, {
+					submitTimeline.to(components.slideI.divider.element, 0.4, {
 						opacity: 0,
-						y: screen.height * .16,
+						y: screen.height * 0.16,
 						ease: Power2.easeIn
-					}, .08);
+					}, 0.08);
 
-					submitTimeline.to(components.slideI.form.input.element, .4, {
+					submitTimeline.to(components.slideI.form.input.element, 0.4, {
 						opacity: 0,
-						y: screen.height * .18,
+						y: screen.height * 0.18,
 						ease: Power2.easeIn
-					}, .16);
+					}, 0.16);
 
-					submitTimeline.to(components.slideI.form.button.element, .4, {
+					submitTimeline.to(components.slideI.form.button.element, 0.4, {
 						opacity: 0,
-						y: screen.height * .2,
+						y: screen.height * 0.2,
 						ease: Power2.easeIn
-					}, .24);
+					}, 0.24);
 				}
 				else {
-					submitTimeline.to(components.slideI.form.button.element, .4, {
+					submitTimeline.to(components.slideI.form.button.element, 0.4, {
 						opacity: 0,
-						y: screen.height * .14,
+						y: screen.height * 0.14,
 						ease: Power2.easeIn
 					}, 0);
 
-					submitTimeline.to(components.slideI.form.input.element, .4, {
+					submitTimeline.to(components.slideI.form.input.element, 0.4, {
 						opacity: 0,
-						y: screen.height * .16,
+						y: screen.height * 0.16,
 						ease: Power2.easeIn
-					}, .08);
+					}, 0.08);
 
-					submitTimeline.to(components.slideI.divider.element, .4, {
+					submitTimeline.to(components.slideI.divider.element, 0.4, {
 						opacity: 0,
-						y: screen.height * .18,
+						y: screen.height * 0.18,
 						ease: Power2.easeIn
-					}, .16);
+					}, 0.16);
 
-					submitTimeline.to(components.slideI.message.element, .4, {
+					submitTimeline.to(components.slideI.message.element, 0.4, {
 						opacity: 0,
-						y: screen.height * .2,
+						y: screen.height * 0.2,
 						ease: Power2.easeIn
-					}, .24);
+					}, 0.24);
 				}
 
-				TweenMax.set(components.slideI.email.element, {scale: .72});
+				TweenMax.set(components.slideI.email.element, {scale: 0.72});
 
-				submitTimeline.to(components.slideI.email.element, .32, {
+				submitTimeline.to(components.slideI.email.element, 0.32, {
 					scale: 1,
 					opacity: 1,
 					ease: Back.easeOut.config(1.4)
-				}, .58);
+				}, 0.58);
 
-				submitTimeline.to(components.slideI.email.element, .34, {
-					scale: .72,
+				submitTimeline.to(components.slideI.email.element, 0.34, {
+					scale: 0.72,
 					opacity: 0,
-				}, .9);
+				}, 0.9);
 
 				submitTimeline.addCallback(function() {
 					burst1.tune(center).replay();
@@ -3163,23 +3101,23 @@ $(document).ready(function() {
 					components.slideI.acceptance.rotationTimeline.to(components.slideI.acceptance.ring.element, 16, {rotation: 360, ease: Power0.easeNone});
 
 					components.slideI.acceptance.rotationTimeline.play();
-				}, .48);
+				}, 0.48);
 
-				TweenMax.set(components.slideI.acceptance.message.element, {y: -screen.height * .14});
+				TweenMax.set(components.slideI.acceptance.message.element, {y: -screen.height * 0.14});
 				
-				TweenMax.set(components.slideI.acceptance.title.element, {y: -screen.height * .16});
+				TweenMax.set(components.slideI.acceptance.title.element, {y: -screen.height * 0.16});
 
-				submitTimeline.to(components.slideI.acceptance.message.element, .48, {
+				submitTimeline.to(components.slideI.acceptance.message.element, 0.48, {
 					opacity: 1,
 					y: 0,
 					ease: Power2.easeOut
-				}, .9);
+				}, 0.9);
 
-				submitTimeline.to(components.slideI.acceptance.title.element, .48, {
+				submitTimeline.to(components.slideI.acceptance.title.element, 0.48, {
 					opacity: 1,
 					y: 0,
 					ease: Power2.easeOut
-				}, .98);
+				}, 0.98);
 
 				components.slideI.form.submitted = true;
 
@@ -3198,7 +3136,7 @@ $(document).ready(function() {
 				TweenMax.fromTo([
 					components.slideI.form.input.element,
 					components.slideI.form.button.element,
-				], .36, {
+				], 0.36, {
 					x: -1,
 				}, {
 					x: 1,
@@ -3209,7 +3147,7 @@ $(document).ready(function() {
 						randomize: false
 					}),
 					clearProps: "x"
-				}, .1);
+				}, 0.1);
 
 				if (components.slideI.form.warning.shown) return;
 
@@ -3217,7 +3155,7 @@ $(document).ready(function() {
 
 				TweenMax.killTweensOf(components.slideI.form.warning.element, {opacity: true, yPercent: true});
 
-				TweenMax.to(components.slideI.form.warning.element, .32, {
+				TweenMax.to(components.slideI.form.warning.element, 0.32, {
 					opacity: 1,
 					yPercent: 0,
 					ease: Back.easeOut.config(1.2)
@@ -3231,7 +3169,7 @@ $(document).ready(function() {
 
 				TweenMax.killTweensOf(components.slideI.form.warning.element, {opacity: true, yPercent: true});
 
-				TweenMax.to(components.slideI.form.warning.element, .32, {
+				TweenMax.to(components.slideI.form.warning.element, 0.32, {
 					opacity: 0,
 					yPercent: -75,
 					ease: Back.easeIn.config(1.2)
@@ -3248,5 +3186,13 @@ $(document).ready(function() {
 		for (var idx = 0, len = specifiedObservers.length; idx < len; idx++) {
 			specifiedObservers[idx](data);
 		}
+	}
+
+	function mapPropertyMultiply(a, b, modifier) {
+		var obj = {};
+
+		obj[a * modifier] = b * modifier;
+
+		return obj;
 	}
 });

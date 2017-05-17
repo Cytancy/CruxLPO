@@ -941,9 +941,9 @@ body {
 			&s {
 				bottom: -#{$waterHeight};
 				height: #{$waterHeight};
-				left: 0;
+				left: -10%;
 				position: absolute;
-				width: 100%;
+				width: 120%;
 				z-index: 9;
 			}
 

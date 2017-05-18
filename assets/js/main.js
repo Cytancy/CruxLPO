@@ -2960,9 +2960,10 @@ $(document).ready(function() {
 
 			function submitEmail(email) {
 				var form = $(
-						"<form method='POST' action='https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8' target='dummy-w2l-target'>" +
+						"<form method='POST' action='https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8' target='dummy-w2l-target' style='display: none;'>" +
 							"<input name='oid' type='hidden' value='00Dj0000001nzOe'>" +
 							"<input name='email' type='hidden' value='" + email + "'>" +
+							"<input id='00N0a00000CFJZi' maxlength='20' name='00N0a00000CFJZi' size='20' type='text' value='crux_lpo'/>" +
 						"</form>"
 					),
 					submitTimeline = new TimelineMax({paused: true}),

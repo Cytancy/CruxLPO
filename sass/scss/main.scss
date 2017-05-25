@@ -157,6 +157,7 @@ body {
 		@include justify-content(flex-end);
 
 		height: 44px;
+		left: 0;
 		padding: 0 12px;
 		position: absolute;
 		top: 12px;
@@ -168,7 +169,6 @@ body {
 
 		cursor: pointer;
 		height: 100%;
-		position: absolute;
 		position: relative;
 		width: 170px;
 

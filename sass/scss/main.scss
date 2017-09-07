@@ -128,18 +128,18 @@ body {
 
 	&-tagline {
 		color: $slideBColor;
-		font-family: 'futura-pt', sans-serif;
-		font-size: 2.75vmin;
+		font-family: 'proxima-nova', sans-serif;
+		font-size: 3vmin;
 		font-weight: 700;
 		height: 4vw;
 		left: 0;
-		letter-spacing: 1.05vmin;
-		line-height: 2.75vmin;
+		letter-spacing: .8vmin;
+		line-height: 3.5vmin;
 		margin: auto;
 		position: absolute;
 		right: 0;
 		text-align: center;
-		text-indent: 1vmin;
+		text-indent: .65vmin;
 		text-transform: uppercase;
 		top: calc(50% + 8.1vmin);
 		user-select: none;
@@ -1622,12 +1622,214 @@ body {
 	}
 }
 
+.clc-slide-x {
+	@include flex-direction(column);
+	@include rcm-flex-center;
+
+	background-color: #D2EFFC;
+	padding-top: 5.3333vmin;
+
+	&-title {
+		color: hsla(232, 14%, 44%, 1);
+		font-family: 'futura-pt', sans-serif;
+		font-size: 6.75vmin;
+		font-weight: 500;
+		left: 0;
+		padding: 5.5vmin 7.25vmin;
+		position: absolute;
+		text-align: left;
+		top: 0;
+		z-index: 7;
+	}
+
+	&-message {
+		color: hsla(232, 14%, 44%, 1);
+		font-family: 'proxima-nova', sans-serif;
+		font-size: 2.6vmin;
+		text-align: center;
+		font-weight: 500;
+		width: 65%;
+	}
+
+	&-points {
+		@include display-flex;
+		@include flex-direction(column);
+		@include align-items(center);
+
+		margin-top: 4.2vmin;
+		width: 100%;
+
+		&-message {
+			color: hsla(232, 14%, 44%, 1);
+			font-family: 'proxima-nova', sans-serif;
+			font-size: 2.6vmin;
+			text-align: center;
+			font-weight: 500;
+			width: 65%;
+		}
+
+		&-row {
+			@include display-flex;
+
+			margin-top: 2.6vmin;
+			width: 80%;
+
+			&-item {
+				@include align-items(center);
+				@include display-flex;
+				@include flex-direction(column);
+
+				width: 28%;
+
+				&-title {
+					color: hsla(232, 14%, 44%, 1);
+					text-transform: uppercase;
+					font-family: 'proxima-nova', sans-serif;
+					font-size: 2.6vmin;
+					font-weight: 600;
+					letter-spacing: 2px;
+					margin: 1.3vmin 0;
+				}
+
+				&-text {
+					color: hsla(232, 14%, 44%, 1);
+					font-family: 'proxima-nova', sans-serif;
+					font-size: 1.8vmin;
+				}
+
+				&-center {
+					margin: 0 auto;
+				}
+			}
+		}
+	}
+}
+
+.clc-slide-y {
+	@include flex-direction(column);
+	@include rcm-flex-center;
+
+	background-color: #1F2231;
+	padding-top: 5.3333vmin;
+
+	&-title {
+		color: #FFF;
+		font-family: 'futura-pt', sans-serif;
+		font-size: 6.75vmin;
+		font-weight: 500;
+		left: 0;
+		padding: 5.5vmin 7.25vmin;
+		position: absolute;
+		text-align: left;
+		top: 0;
+		z-index: 7;
+	}
+
+	&-message {
+		color: #FFF;
+		font-family: 'proxima-nova', sans-serif;
+		font-size: 4.44444vmin;
+		font-weight: 500;
+		width: 65%;
+	}
+}
+
+.clc-slide-z {
+	@include display-flex;
+	@include align-items(center);
+
+	background-color: hsla(358, 84%, 60%, 1);
+	padding: 48px 72px 0 72px;
+
+	&-title {
+		color: #FFF;
+		font-family: 'futura-pt', sans-serif;
+		font-size: 6.75vmin;
+		font-weight: 500;
+		left: 0;
+		padding: 5.5vmin 7.25vmin;
+		position: absolute;
+		text-align: center;
+		top: 0;
+		width: 100%;
+		z-index: 7;
+	}
+
+	&-message {
+		color: #FFF;
+		font-family: 'proxima-nova', sans-serif;
+		font-size: 4vmin;
+		font-weight: 500;
+		width: 50%;
+		padding: 2.7vmin;
+	}
+
+	&-gallery {
+		@include display-flex;
+		@include flex-direction(column);
+
+		position: relative;
+		overflow: hidden;
+		height: 100%;
+		padding: 13.3vmin;
+		margin-top: 4vmin;
+		width: 50%;
+
+		&-row {
+			@include display-flex;
+			@include flex(1 1 auto);
+			@include justify-content(space-between);
+
+			position: relative;
+			width: 100%;
+
+			&-spacer {
+				height: 8vmin;
+			}
+		}
+
+		&-item {
+			@include flex(0 0 auto);
+			@include display-flex;
+			@include flex-direction(column);
+
+			position: relative;
+			width: calc(50% - 5.33vmin);
+
+			&-portrait {
+				@include flex(1 1 auto);
+
+				position: relative;
+				background-color: hsla(0, 0%, 94%, 1);
+			}
+
+			&-name {
+				color: #FFF;
+				font-family: 'proxima-nova', sans-serif;
+				font-size: 2.667vmin;
+				left: -50%;
+				margin-top: 1.333vmin;
+				position: relative;
+				text-align: center;
+				white-space: nowrap;
+				width: 200%;
+			}
+
+			&-title {
+				color: #FFF;
+				font-family: 'proxima-nova', sans-serif;
+				font-size: 1.778vmin;
+				text-align: center;
+			}
+		}
+	}
+}
+
 .clc-slide-i {
 	@include flex-direction(column);
 	@include rcm-flex-center;
 
 	background-color: #FFF; 
-	// background-color: hsla(0, 0%, 12%, 1);
 
 	&-background {
 		@include rcm-fill;

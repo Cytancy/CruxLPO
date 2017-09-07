@@ -613,7 +613,7 @@ $(document).ready(function() {
 			e.preventDefault(); // prevent the default action (scroll / move caret)
 
 			function jumpToSlide(delta) {
-				TweenMax.to(bodyElement, 0.48, {
+				TweenMax.to(window, 0.48, {
 					scrollTo: {y: (screen.activeSlide.number + delta) * screen.height},
 					ease: Power1.easeInOut
 				});
@@ -739,7 +739,7 @@ $(document).ready(function() {
 					unclick();
 				},
 				click: function() {
-					TweenMax.to(bodyElement, 0.86, {
+					TweenMax.to(window, 0.86, {
 						scrollTo: {y: screen.height},
 						ease: Power2.easeInOut
 					});
@@ -787,7 +787,7 @@ $(document).ready(function() {
 					});
 				},
 				click: function() {
-					window.location.href = "https://dev.cruxinformatics.com/";
+					window.location.href = "/login";
 				}
 			});
 		}
@@ -819,7 +819,7 @@ $(document).ready(function() {
 				click: function() {
 					var position = screen.height * (screen.slideCount - 1);
 
-					TweenMax.to(bodyElement, 1, {
+					TweenMax.to(window, 1, {
 						scrollTo: {y: position},
 						ease: Power2.easeInOut
 					});
@@ -2802,10 +2802,10 @@ $(document).ready(function() {
 			updateActivation();
 
 			function updateActivation() {
-				if (screen.activeSlide.number == 8) {
+				if (screen.activeSlide.number == 10) {
 					activate();
 				}
-				else if (!screen.visibleSlides["8"]) {
+				else if (!screen.visibleSlides["10"]) {
 					deactivate();
 				}
 			}

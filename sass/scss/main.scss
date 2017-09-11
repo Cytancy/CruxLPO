@@ -692,551 +692,29 @@ body {
 	}
 
 	&-message {
-		color: hsla(0, 0%, 32%, 1);
-		font-family: 'futura-pt', sans-serif;
-		font-size: 9.5vmin;
-		font-weight: 500;
-		padding: 4vmin 6.25vmin;
-		text-align: center;
-		z-index: 5;
-	}
-}
-
-.clc-slide-e {
-	$waterHeight: 16.5%;
-
-	@include rcm-flex-center;
-
-	cursor: url(../img/magnifying-cursor.png), pointer;
-	background-color: hsla(198, 86%, 90.5%, 1);
-
-	&-message {
-		color: hsla(232, 14%, 44%, 1);
-		font-family: 'futura-pt', sans-serif;
-		font-size: 6.75vmin;
-		font-weight: 500;
-		left: 0;
-		padding: 5.5vmin 7.25vmin;
-		position: absolute;
-		text-align: left;
-		top: 0;
-		z-index: 7;
-	}
-
-	&-sky {
-		bottom: $waterHeight;
-		height: 100%;
-		left: 0;
-		position: absolute;
-		width: 100%;
-		z-index: 1;
-
-		&-layer {
-			left: -106.6667vh;
+		&-a, &-b {
+			color: hsla(0, 0%, 32%, 1);
+			font-family: 'futura-pt', sans-serif;
+			font-size: 7.75vmin;
+			font-weight: 500;
 			position: absolute;
-			width: 391.1111vh;
-
-			&-a {
-				bottom: -20%;
-				z-index: 5;
-			}
-
-			&-b {
-				bottom: -2%;
-				z-index: 4;
-			}
-
-			&-c {
-				bottom: 11%;
-				z-index: 3;
-			}
-		}
-
-		&-balloon {
-			position: absolute;
-			top: calc(#{$waterHeight} + 24vh);
-			left: 0;
-			width: .75vh;
-			z-index: 10;
-
-			&-shade {
-				fill: darken(desaturate($accentColor, 8%), 10%);
-			}
-
-			&-fill {
-				fill: $accentColor;
-			}
-
-			&-shine {
-				fill: lighten(desaturate($accentColor, 24%), 36%);
-			}
-		}
-	}
-
-	&-city {
-		bottom: #{$waterHeight};
-		height: 100%;
-		left: 0;
-		position: absolute;
-		width: 100%;
-		z-index: 5;
-
-		&-complete, &-reflection {
-			height: 50%;
-			left: -9999px;
-			margin: 0 auto;
-			position: absolute;
-			right: -9999px;
-		}
-
-		&-complete {
-			bottom: 0;
+			padding: 5.5vmin 7.25vmin;
 			z-index: 5;
+		}
+
+		&-a {
+			left: 0;
+			max-width: 100%;
+			top: 0;
+			width: 70vmax;
+		}
+
+		&-b {
+			bottom: 0;
+			right: 0;
+			text-align: right;
 		}
 		
-		&-reflection {
-			@include transform(scaleY(-1));
-
-			bottom: -50%;
-			opacity: .35;
-			pointer-events: none;
-			z-index: 9;
-
-			&-gradient {
-				@include background-image(linear-gradient(top, rgba(#afd3f3, 0) 20%,rgba(#afd3f3, .85) 100%));
-
-				bottom: -#{$waterHeight};
-				height: #{$waterHeight};
-				left: -9999px;
-				margin: auto;
-				position: absolute;
-				right: -9999px;
-				z-index: 9;
-			}
-		}
-
-		&-line {
-			background-color: hsl(210, 20%, 64%);
-			bottom: -1px;
-			height: 2px;
-			position: absolute;
-			width: 100%;
-			z-index: 6;
-		}
-
-		&-water {
-			$waveAHeight: 5px;
-			$waveBHeight: 5px;
-			$waveCHeight: 5px;
-			$waveDHeight: 5px;
-
-			bottom: -#{$waterHeight + 20%}; // Buffer percentage when user scrolls really fast
-			height: #{$waterHeight + 20%};
-			left: -10%;
-			position: absolute;
-			width: 120%;
-			z-index: 7;
-
-			&-wave {
-				@include display-flex;
-				@include flex-direction(column);
-
-				height: 100%;
-				left: -100%;
-				opacity: .325;
-				position: absolute;
-				top: 0;
-				width: 200%;
-
-				&-top {
-					@include flex(0 0 auto);
-
-					background-repeat: repeat-x;
-					background-size: auto 100%;
-					position: relative;
-					width: 100%;
-				}
-
-				&-fill {
-					@include flex(1 1 auto);
-
-					height: 100%;
-					position: relative;
-					background-color: hsla(208, 60%, 56%, 1);
-					width: 100%;
-				}
-
-				&-a &-top {
-					background-image: url(../img/wave-a.svg);
-					height: $waveAHeight;
-					background-position: 16px 0;
-					margin-top: #{1px - $waveAHeight};
-				}
-
-				&-b &-top {
-					background-image: url(../img/wave-a.svg);
-					height: $waveBHeight;
-					background-position: 4px 0;
-					margin-top: #{2px - $waveBHeight};
-				}
-
-				&-c &-top {
-					background-image: url(../img/wave-a.svg);
-					height: $waveCHeight;
-					background-position: 12px 0;
-					margin-top: #{3px - $waveCHeight};
-				}
-
-				&-d &-top {
-					background-image: url(../img/wave-a.svg);
-					background-position: 6px 0;
-					height: $waveDHeight;
-					margin-top: #{5px - $waveDHeight};
-				}
-			}
-		}
-
-		&-boat {
-			@include transform(translateX(-100px));
-
-			left: 0;
-			position: absolute;
-
-			&-spacer {
-				height: 100%;
-				position: relative;
-				visibility: hidden;
-			}
-
-			&-base, &-reflection, &-water {
-				background-size: 100% auto; 
-				height: 100%;
-				left: 0;
-				position: absolute;
-				width: 100%;
-			}
-
-			&-base {
-				background-position: top; 
-				top: 0;
-				z-index: 5;
-			}
-
-			&-water {
-				background-position: bottom; 
-				bottom: 0;
-				opacity: .2;
-				z-index: 4;
-			}
-
-			&-reflection {
-				@include transform(scaleY(-1));
-				@include transform-origin(50%, 100%);
-
-				opacity: .35;
-				background-position: top; 
-				z-index: 6;
-			}
-
-			&s {
-				bottom: -#{$waterHeight};
-				height: #{$waterHeight};
-				left: -10%;
-				position: absolute;
-				width: 120%;
-				z-index: 9;
-			}
-
-			&-a {
-				$break: 20%;
-
-				top: -2vh;
-				height: 4.25vh;
-				z-index: 4;
-
-				&-base, &-water, &-reflection {
-					background-image: url(../img/boat-a.png);
-				}
-
-				&-base, &-reflection {
-					height: #{100% - $break};
-				}
-
-				&-water {
-					height: $break;
-				}
-
-				&-reflection {
-					bottom: $break;
-				}
-			}
-
-			&-b {
-				$break: 16%;
-
-				top: 6.25vh;
-				height: 5vh;
-				z-index: 9;
-
-				&-base, &-water, &-reflection {
-					background-image: url(../img/boat-b.png);
-				}
-
-				&-base, &-reflection {
-					height: #{100% - $break};
-				}
-
-				&-water {
-					height: $break;
-				}
-
-				&-reflection {
-					bottom: $break;
-				}
-			}
-
-			&-c {
-				$break: 8%;
-
-				top: 12.25vh;
-				height: 2.25vh;
-				z-index: 10;
-
-				&-base, &-water, &-reflection {
-					background-image: url(../img/boat-c.png);
-				}
-
-				&-base, &-reflection {
-					height: #{100% - $break};
-				}
-
-				&-water {
-					height: $break;
-				}
-
-				&-reflection {
-					bottom: $break;
-				}
-			}
-
-			&-d {
-				$break: 19%;
-
-				top: 2.25vh;
-				height: 4vh;
-				z-index: 7;
-
-				&-base, &-water, &-reflection {
-					background-image: url(../img/boat-d.png);
-				}
-
-				&-base, &-reflection {
-					height: #{100% - $break};
-				}
-
-				&-water {
-					height: $break;
-				}
-
-				&-reflection {
-					bottom: $break;
-				}
-			}
-
-			&-f {
-				$break: 10%;
-
-				top: 2.5vh;
-				height: 2.25vh;
-				z-index: 6;
-
-				&-base, &-water, &-reflection {
-					background-image: url(../img/boat-f.png);
-				}
-
-				&-base, &-reflection {
-					height: #{100% - $break};
-				}
-
-				&-water {
-					height: $break;
-				}
-
-				&-reflection {
-					bottom: $break;
-				}
-			}
-
-			&-g {
-				$break: 12%;
-
-				top: -.5vh;
-				height: 4.25vh;
-				z-index: 5;
-
-				&-base, &-water, &-reflection {
-					background-image: url(../img/boat-g.png);
-				}
-
-				&-base, &-reflection {
-					height: #{100% - $break};
-				}
-
-				&-water {
-					height: $break;
-				}
-
-				&-reflection {
-					bottom: $break;
-				}
-			}
-
-			&-h {
-				$break: 2%;
-
-				top: 9.25vh;
-				height: 1vh;
-				z-index: 8;
-
-				&-base, &-water, &-reflection {
-					background-image: url(../img/boat-h.png);
-				}
-
-				&-base, &-reflection {
-					height: #{100% - $break};
-				}
-
-				&-water {
-					height: $break;
-				}
-
-				&-reflection {
-					bottom: $break;
-				}
-			}
-		}
-
-		&-wrapper {
-			@include rcm-fill;
-
-			overflow: hidden;
-			z-index: 2;
-		}
-	}
-
-	&-fog {
-		@include rcm-fill;
-
-		overflow: hidden;
-		z-index: 6;
-
-		&-fill {
-			@include rcm-fill;
-
-			background-color: hsla(204, 26%, 95%, .94);
-			z-index: 0;
-		}
-
-		&-cloud {
-			left: -9999px;
-			margin: auto;
-			position: absolute;
-			right: -9999px;
-			z-index: 5;
-		}
-
-		&-cloud-a {
-			transform: translateX(3vh);
-			top: 35vh;
-			height: 26vh;
-		}
-
-		&-cloud-b {
-			transform: translateX(-80vh);
-			top: -5vh;
-			height: 28vh;
-		}
-
-		&-cloud-c {
-			transform: translateX(-34vh);
-			top: 8vh;
-			height: 34vh;
-			z-index: 0;
-		}
-
-		&-cloud-d {
-			transform: translateX(16vh);
-			bottom: -2vh;
-			height: 30vh;
-			z-index: 0;
-		}
-
-		&-cloud-e {
-			transform: translateX(-72vh);
-			bottom: -2vh;
-			height: 30vh;
-			z-index: 0;
-		}
-
-		&-cloud-f {
-			transform: translateX(60vh);
-			top: -5vh;
-			height: 26vh;
-			z-index: 0;
-		}
-
-		&-cloud-g {
-			transform: translateX(34vh);
-			bottom: -4vh;
-			height: 30vh;
-		}
-
-		&-cloud-h {
-			transform: translateX(20vh);
-			bottom: 10vh;
-			height: 24vh;
-			z-index: 3;
-		}
-
-		&-cloud-i {
-			transform: translateX(62vh);
-			top: 42vh;
-			height: 24vh;
-		}
-
-		&-cloud-j {
-			transform: translateX(-60vh);
-			top: 44vh;
-			height: 28vh;
-		}
-
-		&-cloud-k {
-			transform: translateX(58vh);
-			top: 48vh;
-			height: 35vh;
-			z-index: 4;
-		}
-
-		&-cloud-l {
-			transform: translateX(58vh);
-			top: 16vh;
-			height: 34vh;
-			z-index: 3;
-		}
-
-		&-cloud-m {
-			transform: translateX(-24vh);
-			top: -8vh;
-			height: 34vh;
-			z-index: 3;
-		}
-
-		&-cloud-n {
-			transform: translateX(-72vh);
-			top: 18vh;
-			height: 38vh;
-			z-index: 3;
-		}
 	}
 }
 
@@ -1246,16 +724,28 @@ body {
 	background-color: rgb(28, 31, 46);
 
 	&-message {
-		bottom: 0;
-		color: hsla(232, 6%, 86%, 1);
-		font-family: 'futura-pt', sans-serif;
-		font-size: 6.75vmin;
-		font-weight: 500;
-		padding: 5.5vmin 7.25vmin;
-		position: absolute;
-		right: 0;
-		text-align: right;
-		z-index: 7;
+		
+
+		&-a, &-b {
+			color: hsla(232, 6%, 86%, 1);
+			font-family: 'futura-pt', sans-serif;
+			font-size: 6.75vmin;
+			font-weight: 500;
+			padding: 5.5vmin 7.25vmin;
+			position: absolute;
+			z-index: 7;
+		}
+
+		&-a {
+			left: 0;
+			top: 0;
+		}
+
+		&-b {
+			bottom: 0;
+			right: 0;
+			text-align: right;
+		}
 	}
 
 	&-sky {
@@ -2067,75 +1557,719 @@ body {
 	}
 }
 
-.clc-slide-footer {
-	@include flex(0 0 auto);
-	@include display-flex;
-	@include align-items(center);
+$cruxRed: #ED1C24;
+$maxResponseWidth: 1920px;
 
-	padding: 4vh;
-	height: 14.22222vh;
-	background-color: hsla(0, 0%, 20%, 1);
-	overflow: hidden;
+@mixin cip-vw($map) {
+	$maxedMap: null;
+
+	@each $property, $values in $map {
+		$vwValue: null;
+
+		@each $value in $values {
+			$vwValue: append($vwValue, ($value * 1vw));
+		}
+
+		#{$property}: $vwValue;
+	}
+
+	@media screen and (min-width: $maxResponseWidth) {
+		@each $property, $values in $map {
+			$maxedValue: null;
+
+			@each $value in $values {
+				$maxedValue: append($maxedValue, ($value * .01 * $maxResponseWidth));
+			}
+
+			#{$property}: $maxedValue;
+		}
+	}
+}
+
+.cip-row {
+	@include display-flex;
+	@include flex(0 0 auto);
+	@include justify-content(center);
+
 	position: relative;
 	width: 100%;
 
-	// add a pointer
-	&-left {
-		@include display-flex;
-		@include flex(1 1 auto);
-		@include flex-direction(column);
-		@include justify-content(space-between);
-		
-		height: calc(100% + .7vh);
+	&-content {
+		max-width: 1920px;
 		position: relative;
+		width: 100%;
+	}
+}
+
+.cip-hidden {
+	visibility: hidden;
+}
+
+.cip-team {
+	@include align-items(center);
+	@include flex-direction(column);
+
+	background-color: #FFF;
+	overflow-x: hidden;
+	overflow-y: visible;
+
+	.cip-row-content {
+		@include cip-vw((
+			padding-top: 4.5,
+			padding-bottom: 4.5
+		));
+
+		@include flex-direction(column);
+		@include rcm-flex-center;
 	}
 
-	&-social, &-message {
+	&-header {
 		@include flex(0 0 auto);
+
+		position: relative;
+		width: 100%;
+
+		&-title {
+			@include cip-vw((
+				font-size: 6,
+				line-height: 5.25,
+			));
+
+			background-color: #FFF;
+			font-family: 'futura-pt', sans-serif;
+			font-weight: 500;
+			text-align: center;
+			height: 100%;
+			z-index: 5;
+		}
+	}
+
+	&-message {
+		@include cip-vw((
+			font-size: 1.3125,
+			margin-top: 1.5,
+		));
+
+		font-family: 'proxima-nova', sans-serif;
+		text-align: center;
+
+		span {
+			position: relative;
+
+			&:after {
+				background-color: #000;
+				bottom: 0;
+				content: "";
+				height: 1px;
+				left: 0;
+				position: absolute;
+				width: 100%;
+			}
+		}
+	}
+
+	&-portrait {
+		&-row {
+			@include align-items(center);
+			@include cip-vw((
+				height: 15.375,
+				margin-top: 3.75,
+			));
+			@include display-flex;
+			@include justify-content(center);
+
+			width: 200%;
+		}
+
+		&-item {
+			@include align-items(center);
+			@include cip-vw((
+				margin: 0 3,
+				width: 10.5
+			));
+			@include display-flex;
+			@include flex-direction(column);
+
+			height: 100%;
+			
+			&-faded &-visual-image {
+				opacity: .5;
+			}
+
+			&-visual {
+				@include cip-vw((
+					height: 10.5
+				));
+				@include flex(0 0 auto);
+
+				background-color: #F4F4F4;
+				overflow: hidden;
+				position: relative;
+				width: 100%;
+
+				&-image {
+					@include rcm-fill;
+
+					z-index: 5;
+				}
+
+				&-cover {
+					// @include rcm-fill;
+
+					z-index: 6;
+				}
+			}
+
+			&-name {
+				@include cip-vw((
+					font-size: 1.3125,
+					letter-spacing: .03125,
+					margin-top: .75,
+				));
+				@include flex(0 0 auto);
+				@include display-flex;
+				@include justify-content(center);
+
+				font-family: 'proxima-nova', sans-serif;
+				white-space: nowrap;
+			}
+
+			&-descriptor {
+				@include cip-vw((
+					font-size: 0.875,
+				));
+				@include flex(0 0 auto);
+
+				color: #808080;
+				font-family: 'proxima-nova', sans-serif;
+				text-align: center;
+			}
+
+			&:nth-child(even) &-visual-cover {
+				background-color: $cruxRed;
+			}
+
+			&:nth-child(odd) &-visual-cover {
+				background-color: #000;
+			}
+		}
+	}
+}
+
+.cip-cpoints {
+	@include align-items(center);
+	@include flex-direction(column);
+
+	background-color: #F2F2F2;
+	overflow-x: hidden;
+	overflow-y: visible;
+
+	.cip-row-content {
+		@include cip-vw((
+			padding-top: 4.5,
+			padding-bottom: 4.5
+		));
+
+		@include flex-direction(column);
+		@include rcm-flex-center;
+	}
+
+
+	&-title {
+		@include cip-vw((
+			font-size: 4.5,
+		));
+
+		font-family: 'futura-pt', sans-serif;
+		font-weight: 500;
+		text-align: center;
+		height: 100%;
+		z-index: 5;
+	}
+
+	&-message {
+		@include cip-vw((
+			font-size: 1.3125,
+			margin-top: 1.5,
+			width: 38,
+		));
+
+		font-family: 'proxima-nova', sans-serif;
+		text-align: center;
+	}
+
+	&-info {
+		@include align-items(flex-start);
+		@include cip-vw((
+			padding: 0 4.5,
+			margin-top: 1.5,
+			margin-bottom: 1.5,
+		));
+		@include display-flex;
+		@include justify-content(center);
+
+		position: relative;
+
+		&-section {
+			@include align-items(center);
+			@include cip-vw((
+				margin: 0 4.5,
+				width: 21.25
+			));
+			@include display-flex;
+			@include flex(0 0 auto);
+			@include flex-direction(column);
+
+			&-graphic {
+				@include cip-vw((
+					height: 13.5,
+					margin-bottom: .75
+				));
+				@include flex(0 0 auto);
+
+				position: relative;
+			}
+
+			&-title {
+				@include cip-vw((
+					font-size: 1.5,
+					letter-spacing: .125,
+					margin-bottom: .625
+				));
+				@include flex(0 0 auto);
+
+				font-family: 'europa', sans-serif;
+				font-weight: 700;
+				position: relative;
+				white-space: nowrap;
+			}
+
+			&-divider {
+				@include cip-vw((
+					margin-bottom: .75
+				));
+				@include flex(0 0 auto);
+
+				background-color: $cruxRed;
+				height: 4px;
+				position: relative;
+				width: 100%;
+			}
+
+			&-message {
+				@include cip-vw((
+					font-size: 1.125
+				));
+				@include flex(0 0 auto);
+
+				font-family: 'proxima-nova', sans-serif;
+				width: 100%;
+				position: relative;
+			}
+		}
+	}
+}
+
+.cip-ppoints {
+	@include align-items(center);
+	@include background-image(linear-gradient(200deg, #51556B 0%, #221E33 100%));
+	@include flex-direction(column);
+
+	overflow-x: hidden;
+	overflow-y: visible;
+
+	.cip-row-content {
+		@include cip-vw((
+			padding-top: 4.5,
+			padding-bottom: 4.5
+		));
+
+		@include flex-direction(column);
+		@include rcm-flex-center;
+	}
+
+	&-title {
+		@include cip-vw((
+			font-size: 4.5,
+		));
+
+		color: #FFF;
+		font-family: 'futura-pt', sans-serif;
+		font-weight: 500;
+		height: 100%;
+		text-align: center;
+		z-index: 5;
+	}
+
+	&-content {
+		@include align-items(center);
+		@include cip-vw((
+			margin-bottom: 1.5,
+			margin-top: 2.25,
+			padding: 0 9,
+		));
+		@include display-flex;
+		@include justify-content(space-between);
 
 		position: relative;
 		width: 100%;
 	}
 
-	&-social {
-		@include display-flex;
-		@include align-items(center);
-		@include flex-wrap(nowrap);
+	&-graphic {
+		@include flex(1 1 auto);
 
-		height: 4.6667vh;
+		&-image {
+			position: relative;
+			width: 100%;
+		}
+	}
 
-		&-button {
-			@include flex(0 0 auto);
+	&-info {
+		@include cip-vw((
+			margin-left: 4.5,
+			width: 26.25
+		));
+		@include flex(0 0 auto);
+
+		position: relative;
+
+		&-message {
+			@include cip-vw((
+				font-size: 1.3125,
+			));
 
 			color: #FFF;
-			display: block;
-			font-size: 4vh;
-			margin-right: 4vh;
-			opacity: .75;
-			position: relative;
+			font-family: 'proxima-nova', sans-serif;
+		}
+
+		&-list {
+			@incldue display-flex;
+			@include flex-direction(column);
+
+			&-item {
+				@include cip-vw((
+					margin-top: 1.5,
+					padding-left: 1,
+				));
+				@include display-flex;
+				@include flex(0 0 auto);
+				@include flex-direction(column);
+
+				border-left: 4px solid #FFE6AE;
+				position: relative;
+
+				&-title {
+					@include cip-vw((
+						font-size: 1.5,
+						letter-spacing: .125,
+						margin-bottom: .625
+					));
+					@include flex(0 0 auto);
+
+					color: #FFF;
+					font-family: 'europa', sans-serif;
+					font-weight: 700;
+					position: relative;
+					white-space: nowrap;
+				}
+
+				&-message {
+					@include cip-vw((
+						font-size: 1.125
+					));
+					@include flex(0 0 auto);
+
+					color: #FFF;
+					font-family: 'proxima-nova', sans-serif;
+					position: relative;
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+
+.cip-cta {
+	background-color: #FFF;
+
+	.cip-row-content {
+		@include align-items(center);
+		@include cip-vw((
+			padding: 6 3
+		));
+		@include display-flex;
+		@include flex-direction(column);
+	}
+
+	&-bg {
+		@include rcm-fill;
+
+		overflow: hidden;
+		z-index: 0;
+
+		&-graphic {
+			@include cip-vw((
+				left: -55.5,
+				right: -60,
+				top: -12,
+				width: 103.5
+			));
+
+			margin: auto;
+			position: absolute;
 		}
 	}
 
 	&-message {
+		@include cip-vw((
+			font-size: 1.5,
+		));
+		@include flex(0 0 auto);
+
+		color: #000;
+		font-family: 'proxima-nova', sans-serif;
+		position: relative;
+		z-index: 5;
+	}
+
+	&-logo {
+		@include align-items(center);
+		@include cip-vw((
+			height: 9,
+			margin: 3 0,
+		));
+		@include display-flex;
+		@include flex(0 0 auto);
+		
+		position: relative;
+		z-index: 5;
+
+		svg {
+			height: 100%;
+		}
+
+		&-cru {
+			@include flex(0 0 auto);
+
+			position: relative;
+			height: 100%;
+		}
+
+		&-x {
+			@include cip-vw((
+				height: 9,
+				margin-left: 2,
+				width: 9,
+			));
+			@include flex(0 0 auto);
+
+			position: relative;
+
+			&-1, &-2 {
+				@include cip-vw((
+					height: 10.556875,
+					width: 2.159375
+				));
+
+				bottom: -20px;
+				left: -20px;
+				margin: auto;
+				overflow: hidden;
+				position: absolute;
+				right: -20px;
+				top: -20px;
+
+				&-fill, &-cover {
+					@include rcm-fill;
+				}
+
+				&-fill {
+					background-color: $cruxRed;
+					z-index: 5;
+				}
+
+				&-cover {
+					background-color: #000;
+					z-index: 6;
+				}
+			}
+
+			&-1 {
+				@include transform(rotate(-45deg));
+			}
+
+			&-2 {
+				@include transform(rotate(45deg));
+			}
+		}
+	}
+
+	&-try-button, &-talk-button {
+		@include cip-vw((
+			width: 20.25
+		));
+		@include flex(0 0 auto);
+
+		overflow: hidden;
+		position: relative;
+		z-index: 5;
+
+		&-text {
+			@include cip-vw((
+				font-size: 2.25,
+				padding: 1 1.5,
+				letter-spacing: .1875
+			));
+			@include rcm-flex-center;
+
+			background-color: #000;
+			color: #FFF;
+			font-family: 'proxima-nova', sans-serif;
+			font-weight: 600;
+			width: 100%;
+			z-index: 5;
+		}
+
+		&-cover {
+			@include rcm-fill;
+
+			background-color: $cruxRed;
+			z-index: 6;
+		}
+	}
+
+	&-try-button {
+		@include cip-vw((
+			margin-top: .75,
+			margin-bottom: 2.25
+		));
+	}
+}
+
+.cip-footer {
+	background-color: #000;
+
+	.cip-row-content {
+		@include align-items(center);
+		@include cip-vw((
+			padding: 3.75 6,
+		));
+		@include display-flex;
+		@include flex-direction(column);
+
+	}
+
+	&-whitepaper {
+		@include cip-vw((
+			height: 14.25,
+			margin-bottom: 6.75,
+			width: 36
+		));
+		@include flex(0 0 auto);
+
+		overflow: hidden;
+		position: relative;
+
+		&-content {
+			@include rcm-flex-center;
+
+			height: 100%;
+			position: relative;
+			width: 100%;
+			z-index: 5;
+		}
+
+		&-box {
+			@include box-shadow(inset 0 0 0 8px #FFF);
+			@include rcm-fill;
+
+			z-index: 4;
+		}
+
+		&-icon {
+			@include cip-vw((
+				height: 7.5
+			));
+			@include flex(0 0 auto);
+
+			position: relative;
+			z-index: 5;
+		}
+
+		&-text {
+			@include cip-vw((
+				font-size: 3,
+				margin-left: 2.25
+			));
+			@include flex(0 0 auto);
+
+			color: #FFF;
+			font-family: 'proxima-nova', sans-serif;
+			font-weight: 600;
+			position: relative;
+			z-index: 6;
+		}
+
+		&-cover {
+			@include rcm-fill;
+
+			background-color: #FFF;
+			z-index: 6;
+		}
+	}
+
+	&-social {
+		@include cip-vw((
+			height: 2.625,
+		));
+		@include display-flex;
+		@include flex(0 0 auto);
+
+		position: relative;
+		width: 100%;
+
+		&-button {
+			@include cip-vw((
+				width: 2.625,
+				margin-right: 1.5,
+			));
+			@include flex(0 0 auto);
+
+
+			height: 100%;
+			position: relative;
+		}
+	}
+
+	&-bottom {
+		@include align-items(flex-end);
+		@include cip-vw((
+			margin-bottom: 2.25,
+			margin-top: 1.5
+		));
+		@include display-flex;
+		@include flex(0 0 auto);
+
+		height: 24px;
+		position: relative;
+		width: 100%;
+	}
+
+	&-copyright {
+		@include flex(0 0 auto);
+
 		color: #FFF;
-		font-family: 'futura-pt', sans-serif;
-		font-size: 1.15vw;
-		line-height: 1.15vw;
+		font-family: 'proxima-nova', sans-serif;
+		font-size: 14px;
+		margin-right: auto;
+		position: relative;
 	}
 
 	&-logo {
 		@include flex(0 0 auto);
 
-		position: relative;
 		height: 100%;
-
-		&-letters {
-			fill: hsla(0, 0%, 100%, .98);
-		}
-
-		&-x {
-			fill: $accentColor;
-		}
+		position: relative;
 	}
 }
 
